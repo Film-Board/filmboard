@@ -17,4 +17,4 @@ sequelize.sync().then(() => {
   console.log('Database has been initalized.');
 });
 
-module.exports = {Movie};
+module.exports = {sequelize, Movie};
