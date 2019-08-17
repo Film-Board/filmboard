@@ -1,20 +1,16 @@
 const Sequelize = require('sequelize');
-const config = require('../config');
+const { DB_URL, DB_DIALECT } = require('../config');
 
 const movieModel = require('./Movie');
+const showtimeModel = require('./Showtime');
 
-const sequelize = new Sequelize(
-  config.DB_NAME,
-  config.DB_USER,
-  config.DB_PASSWORD, {
-    host: config.DB_HOST,
-    dialect: 'postgresql'
-  });
-
-const Movie = movieModel(sequelize, Sequelize);
-
-sequelize.sync().then(() => {
-  console.log('Database has been initalized.');
+const sequelize = new Sequelize(DB_URL, {
+  dialect: DB_DIALECT
 });
 
-module.exports = {sequelize, Movie};
+const Movie = movieModel(sequelize, Sequelize);
+const Showtime = showtimeModel(sequelize, Sequelize);
+
+Movie.hasMany(Showtime);
+
+module.exports = { sequelize, Movie, Showtime };

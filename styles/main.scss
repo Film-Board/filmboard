@@ -1,5 +1,28 @@
-@import 'bulma/bulma.sass';
+@import 'fonts';
 
-body {
+$yellow: #FFCD00;
+$body-background-color: #171717;
+$body-color: white;
+$strong-color: white;
+$text: white;
+$text-light: white;
+$title-color: white;
+$label-color: white;
+$body-family: 'Soin Sans Neue';
 
+@import "~bulma/sass/utilities/functions";
+@import "~bulma/bulma";
+@import "~rbx/rbx";
+
+.navbar {
+  border-radius: 20px;
+  margin-top: 1rem;
+  padding: 5px 20px;
+  box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.75);
+
+  @supports ((backdrop-filter: blur(30px))) or (-webkit-backdrop-filter: blur(30px)) {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+  }
 }

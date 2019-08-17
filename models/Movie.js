@@ -9,8 +9,7 @@ module.exports = (sequelize, type) => {
     staring: type.STRING,
     directedBy: type.STRING,
     summery: type.STRING,
-    youtubeTrailerId: type.STRING,
-    showtimes: type.ARRAY(type.DATE),
+    trailer: type.STRING,
     ticketPrice: type.FLOAT,
     concessionPrice: type.FLOAT
   });

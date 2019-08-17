@@ -1,91 +1,38 @@
-import Autosuggest from 'react-autosuggest-bulma-pure';
-
-const getSuggestions = async value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-
-  if (inputLength === 0) {
-    return [];
-  }
-
-  const movies = await (await fetch(`/api/movies/autosuggest/${inputValue}`)).json();
-
-  console.log(movies);
-
-  return movies;
-};
-
-const getSuggestionValue = suggestion => suggestion.title;
+import React from 'react';
+import { Field, Control, Button, Input, Icon } from 'rbx';
+import './styles/new-movie-search.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 class NewMovieSearch extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      value: '',
-      movieId: '',
-      suggestions: []
+      inputValue: ''
     };
-
-    this.onChange = this.onChange.bind(this);
-    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
-    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
-    this.renderSuggestion = this.renderSuggestion.bind(this);
   }
 
-  onChange(event, {newValue}) {
+  updateInputValue(event) {
     this.setState({
-      value: newValue
+      inputValue: event.target.value
     });
-  }
-
-  async onSuggestionsFetchRequested({value}) {
-    this.setState({
-      suggestions: await getSuggestions(value)
-    });
-  }
-
-  onSuggestionsClearRequested() {
-    this.setState({
-      suggestions: []
-    });
-  }
-
-  shouldRenderSuggestions(v) {
-    return v.trim().length > 2;
-  }
-
-  renderSuggestion(suggestion) {
-    this.setState({
-      movieId: suggestion.id
-    });
-
-    return (
-      <div className="tile">
-        {suggestion.title}
-      </div>
-    );
   }
 
   render() {
-    const {value, suggestions} = this.state;
-
-    const inputProps = {
-      placeholder: 'Start typing a movie\'s name to add it...',
-      value,
-      onChange: this.onChange
-    };
-
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        shouldRenderSuggestions={this.shouldRenderSuggestions}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps}
-      />
+      <Field kind="addons">
+        <Control expanded>
+          <Input value={this.state.inputValue} onChange={event => this.updateInputValue(event)} placeholder="Start typing a movie's name to add it..."/>
+        </Control>
+        <Control>
+          <Button color="success">
+            <Icon>
+              <FontAwesomeIcon icon={faSearch}/>
+            </Icon>
+          </Button>
+        </Control>
+      </Field>
     );
   }
 }
