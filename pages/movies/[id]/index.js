@@ -5,6 +5,7 @@ import { getBaseURL } from '../../../common/helpers';
 import Layout from '../../../components/layout';
 import VideoBackground from '../../../components/video-background';
 import Poster from '../../../components/poster';
+import Prices from '../../../components/movie-prices';
 import Ratings from '../../../components/movie-ratings';
 import Showtime from '../../../components/showtime';
 import './styles/show-movie.scss';
@@ -29,6 +30,7 @@ class ShowMovie extends React.Component {
                     <Section className="poster">
                       <Poster filename={this.props.poster}/>
                       <Ratings imdb={this.props.imdb} rottenTomatoes={this.props.rottenTomatoes} runtime={this.props.runtime} />
+                      <Prices ticketPrice={this.props.ticketPrice} concessionPrice={this.props.concessionPrice}/>
                     </Section>
                   </Column>
 

@@ -13,6 +13,17 @@
     min-width: 100vw;
   }
 
+  &:not(.fullscreen) {
+    video {
+      filter: blur(8px);
+
+      @supports (-moz-appearance:none) {
+        // Don't blur in Firefox
+        filter: none;
+      }
+    }
+  }
+
   .play-button {
     position: absolute;
     left: 50%;
