@@ -1,18 +1,9 @@
-.trailer-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  max-width: none;
-  width: 100%;
-  transform: scale(1.5);
-  z-index: -99;
-}
-
 .movie-details {
   background-color: #171717;
   box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.75);
   border-radius: 20px;
-  margin-top: 70vh;
+  margin-top: 60vh;
+  padding: 2rem;
   justify-content: space-around;
 
   @supports ((backdrop-filter: blur(30px))) or (-webkit-backdrop-filter: blur(30px)) {
@@ -24,4 +15,5 @@
 
 .poster {
   margin-top: -8rem;
+  padding-bottom: 0;
 }

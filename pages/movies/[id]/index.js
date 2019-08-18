@@ -3,6 +3,7 @@ import fetch from 'isomorphic-unfetch';
 import { Column, Block, Level, Container, Section, Title } from 'rbx';
 import { getBaseURL } from '../../../common/helpers';
 import Layout from '../../../components/layout';
+import VideoBackground from '../../../components/video-background';
 import Poster from '../../../components/poster';
 import Ratings from '../../../components/movie-ratings';
 import Showtime from '../../../components/showtime';
@@ -18,10 +19,7 @@ class ShowMovie extends React.Component {
   render() {
     return (
       <Layout>
-        <video autoPlay muted loop className="trailer-background">
-          <source src={`/static/videos/${this.props.trailer}?autoplay=1`} type="video/mp4"/>
-           Your browser does not support the video tag.
-        </video>
+        <VideoBackground path={`/static/videos/${this.props.trailer}`}/>
         <Section>
           <Column.Group centered>
             <Column size="full">
@@ -34,18 +32,17 @@ class ShowMovie extends React.Component {
                     </Section>
                   </Column>
 
-                  <Column narrow className="movie-summery" size="one-third">
+                  <Column className="movie-summery" size="one-third">
                     <Title className="has-text-white">{this.props.name}</Title>
                     <Block className="is-size-5">{this.props.summery}</Block>
                   </Column>
 
                   <Column narrow>
-                    <Showtime>9:30 PM, this Friday</Showtime>
-                    <Showtime>9:30 PM, this Friday</Showtime>
-                    <Showtime>9:30 PM, this Friday</Showtime>
-                    <Showtime>9:30 PM, this Friday</Showtime>
-                    <Showtime active>9:30 PM, this Friday</Showtime>
-                    <Showtime active>9:30 PM, this Friday</Showtime>
+                    {this.props.Showtimes.map(({time}) => {
+                      const t = new Date(time);
+
+                      return (<Showtime date={t} key={t}/>)
+                    })}
                   </Column>
                 </Level>
               </Container>

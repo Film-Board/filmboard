@@ -1,0 +1,62 @@
+.video-background {
+  position: fixed;
+  max-width: none;
+  min-height: 100vh;
+  min-width: 100vw;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  video {
+    max-width: none;
+    min-height: 100vh;
+    min-width: 100vw;
+  }
+
+  .play-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 4rem;
+    opacity: 0;
+  }
+
+  &.hover:not(.fullscreen) {
+    .play-button {
+      animation: breathing 2s ease-out 1 normal;
+    }
+  }
+
+  &:hover:not(.fullscreen) {
+    cursor: pointer;
+  }
+}
+
+@keyframes breathing {
+  0% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  25% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  60% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
