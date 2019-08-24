@@ -10,13 +10,13 @@ class VideoBackground extends React.Component {
     this.state = {
       hover: '',
       fullscreen: ''
-    }
+    };
 
     this.showButton = this.showButton.bind(this);
     this.hideButton = this.hideButton.bind(this);
     this.fullscreen = this.fullscreen.bind(this);
     this.onFullScreenChange = this.onFullScreenChange.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount() {
@@ -38,13 +38,13 @@ class VideoBackground extends React.Component {
   hideButton() {
     this.setState({
       hover: ''
-    })
+    });
 
     delete this.hideButtonTimeout;
   }
 
   fullscreen() {
-    const video = document.getElementById("video-background");
+    const video = document.querySelector("#video-background");
     if (video.requestFullscreen) {
       video.requestFullscreen();
     } else if (video.mozRequestFullScreen) {
@@ -57,7 +57,7 @@ class VideoBackground extends React.Component {
 
     video.muted = false;
     video.currentTime = 0;
-    video.controls = true
+    video.controls = true;
   }
 
   onFullScreenChange() {
@@ -70,17 +70,17 @@ class VideoBackground extends React.Component {
     });
 
     if (!isFull) {
-      const video = document.getElementById("video-background");
+      const video = document.querySelector("#video-background");
 
       video.muted = true;
       video.controls = false;
     }
   }
 
-  render () {
+  render() {
     return (
       <div className={`video-background ${this.state.hover} ${this.state.fullscreen}`} onMouseEnter={this.showButton} onClick={this.fullscreen}>
-        <FontAwesomeIcon icon={faPlay} className='play-button'/>
+        <FontAwesomeIcon icon={faPlay} className="play-button"/>
         <video id="video-background" autoPlay muted loop>
           <source src={this.props.path} type="video/mp4"/>
            Your browser does not support the video tag.

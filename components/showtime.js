@@ -9,22 +9,22 @@ dayjs.extend(relativeTime);
 const getWeekDay = date => {
   // Create an array containing each day, starting with Sunday.
   const weekdays = new Array(
-      "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
   );
 
   // Use the getDay() method to get the day.
   const day = date.getDay();
   // Return the element that corresponds to that index.
   return weekdays[day];
-}
+};
 
 const formatDate = date => {
-  return `${getWeekDay(date)}, ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
-}
+  return `${getWeekDay(date)}, ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+};
 
 const isFutureDate = date => {
   return date.getTime() > new Date().getTime();
-}
+};
 
 export default props => (
   <Block>
@@ -32,7 +32,7 @@ export default props => (
       <Tag size="medium" color={isFutureDate(props.date) ? 'warning' : 'black'}>
         {dayjs(props.date).fromNow()}
       </Tag>
-      <Tag size="medium" color='black'>
+      <Tag size="medium" color="black">
         {dayjs(props.date).format('MM/DD, h:m A')}
       </Tag>
     </Tag.Group>

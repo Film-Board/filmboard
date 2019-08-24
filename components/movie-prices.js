@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, Control, Tag} from 'rbx';
+import { Field, Control, Tag } from 'rbx';
 
 export default props => (
   <Field kind="group" multiline>

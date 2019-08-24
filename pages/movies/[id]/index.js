@@ -29,21 +29,21 @@ class ShowMovie extends React.Component {
                   <Column narrow>
                     <Section className="poster">
                       <Poster filename={this.props.poster}/>
-                      <Ratings imdb={this.props.imdb} rottenTomatoes={this.props.rottenTomatoes} runtime={this.props.runtime} />
+                      <Ratings imdb={this.props.imdb} rottenTomatoes={this.props.rottenTomatoes} runtime={this.props.runtime} color="white"/>
                       <Prices ticketPrice={this.props.ticketPrice} concessionPrice={this.props.concessionPrice}/>
                     </Section>
                   </Column>
 
                   <Column className="movie-summery" size="one-third">
                     <Title className="has-text-white">{this.props.name}</Title>
-                    <Block className="is-size-5">{this.props.summery}</Block>
+                    <Block className="is-size-5 has-text-grey">{this.props.summery}</Block>
                   </Column>
 
                   <Column narrow>
-                    {this.props.Showtimes.map(({time}) => {
+                    {this.props.Showtimes.map(({ time }) => {
                       const t = new Date(time);
 
-                      return (<Showtime date={t} key={t}/>)
+                      return (<Showtime date={t} key={t}/>);
                     })}
                   </Column>
                 </Level>
