@@ -4,16 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 
 export default () => (
-  <Navbar color="black" transparent>
+  <Navbar color="black">
     <Navbar.Brand>
       <Navbar.Item href="#">
-        <img
-          src="https://bulma.io/images/bulma-logo.png"
-          alt=""
-          role="presentation"
-          width="112"
-          height="28"
-        />
+        <img src="/static/images/logos/filmboard.png"/>
       </Navbar.Item>
       <Navbar.Burger />
     </Navbar.Brand>

@@ -44,8 +44,10 @@
     "react-autosuggest": "^9.4.3",
     "react-autosuggest-bulma-pure": "^9.4.3",
     "react-dom": "^16.9.0",
+    "react-mde": "^7.6.2",
     "react-youtube": "^7.9.0",
     "sequelize": "^5.15.0",
+    "showdown": "^1.9.0",
     "uuid": "^3.3.2",
     "youtube-search": "^1.1.4",
     "ytdl-core": "^0.29.5"
