@@ -44,6 +44,7 @@
     "react-autosuggest": "^9.4.3",
     "react-autosuggest-bulma-pure": "^9.4.3",
     "react-dom": "^16.9.0",
+    "react-map-gl": "^5.0.10",
     "react-mde": "^7.6.2",
     "react-youtube": "^7.9.0",
     "sequelize": "^5.15.0",

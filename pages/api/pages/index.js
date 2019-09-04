@@ -3,7 +3,6 @@ import { Page } from '../../../models';
 export default async (req, res) => {
   const {
     method,
-    query,
     body
   } = req;
 

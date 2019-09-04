@@ -1,16 +1,15 @@
 .video-background {
   position: fixed;
-  max-width: none;
-  min-height: 100vh;
-  min-width: 100vw;
+  min-height: 101vh;
+  min-width: 101vw;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 
   video {
     max-width: none;
-    min-height: 100vh;
-    min-width: 100vw;
+    min-height: 101vh;
+    min-width: 101vw;
   }
 
   &:not(.fullscreen) {

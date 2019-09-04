@@ -8,6 +8,10 @@ $body-family: 'Soin Sans Neue';
 @import "~bulma/bulma";
 @import "~rbx/rbx";
 
+body {
+  min-height: calc(100vh - 1rem);
+}
+
 .navbar {
   border-radius: 20px;
   margin-top: 1rem;

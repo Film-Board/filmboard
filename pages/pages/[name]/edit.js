@@ -14,13 +14,13 @@ class EditPage extends React.Component {
   }
 
   static async getInitialProps({ query, req }) {
-    return (await fetch(`${getBaseURL(req)}/api/pages/${query.id}`)).json();
+    return (await fetch(`${getBaseURL(req)}/api/pages/${query.name}`)).json();
   }
 
   async handleSubmit(event, state) {
     event.preventDefault();
 
-    const page = await (await fetch(`/api/pages/${this.props.id}`, {
+    const page = await (await fetch(`/api/pages/${this.props.name}`, {
       method: 'put',
       headers: {
         "Accept": 'application/json',
@@ -29,9 +29,7 @@ class EditPage extends React.Component {
       body: JSON.stringify(state)
     })).json();
 
-    console.log(page);
-
-    Router.push(`/pages/${page.id}`);
+    Router.push(`/pages/${page.name}`);
   }
 
   render() {

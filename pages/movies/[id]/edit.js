@@ -2,6 +2,7 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import uuidv4 from 'uuid/v4';
 import chrono from 'chrono-node';
+import Router from 'next/router';
 import { Section, Column, Field, Label, Title, Button, Input, Textarea, Icon, Level, Block } from 'rbx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
@@ -61,7 +62,7 @@ class EditMovie extends React.Component {
     delete data['showtimes-date'];
     delete data['showtimes-time'];
 
-    const res = await fetch(`/api/movies/${this.props.id}`,
+    await fetch(`/api/movies/${this.props.id}`,
       {
         method: 'put',
         headers: {
@@ -71,7 +72,7 @@ class EditMovie extends React.Component {
         body: JSON.stringify(data)
       });
 
-    const r = await res.json();
+    Router.push(`/movies/${this.props.id}`);
   }
 
   static async getInitialProps({ query, req }) {

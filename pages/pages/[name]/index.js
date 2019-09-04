@@ -7,7 +7,7 @@ import Layout from '../../../components/layout';
 
 class ShowPage extends React.Component {
   static async getInitialProps({ query, req }) {
-    const page = await fetch(`${getBaseURL(req)}/api/pages/${query.id}`);
+    const page = await fetch(`${getBaseURL(req)}/api/pages/${query.name}`);
 
     return page.json();
   }
