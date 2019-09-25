@@ -1,17 +1,52 @@
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Popup } from 'react-map-gl';
 import Layout from '../../components/layout';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './styles/location.scss';
 
-export default () => (
-  <Layout>
-    <ReactMapGL
-      className="map"
-      width={400}
-      height={400}
-      latitude={37.7577}
-      longitude={-122.4376}
-      zoom={8}
-    />
-  </Layout>
-);
+class Location extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      viewport: {}
+    };
+
+    this.onViewportChange = this.onViewportChange.bind(this);
+  }
+
+  onViewportChange = viewport => {
+    const { width, height, ...etc } = viewport;
+    this.setState({ viewport: etc });
+  }
+
+  render() {
+    const { viewport } = this.state;
+    return (
+      <Layout>
+        <div className="map-container">
+          <ReactMapGL
+            className="map"
+            width="100vw"
+            height="100vh"
+            latitude={47.1179}
+            longitude={-88.546}
+            zoom={16}
+            {...viewport}
+            onViewportChange={viewport => this.onViewportChange(viewport)}
+          >
+            <Popup closeButton={false} latitude={47.1179} longitude={-88.546}>
+              <address>
+                <p>135 Fisher Hall</p>
+                <p>Michigan Technological University</p>
+                <p>1400 Townsend Drive</p>
+                <p>Houghton, Michigan 49931</p>
+              </address>
+            </Popup>
+          </ReactMapGL>
+        </div>
+      </Layout>
+    );
+  }
+}
+
+export default Location;
