@@ -1,6 +1,6 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
-import { Title, Section } from 'rbx';
+import { Title, Section, Container } from 'rbx';
 import Router from 'next/router';
 import Layout from '../../../components/layout';
 import PageEditor from '../../../components/page-editor';
@@ -36,8 +36,10 @@ class EditPage extends React.Component {
     return (
       <Layout>
         <Section>
-          <Title>Edit Page</Title>
-          <PageEditor onSubmit={this.handleSubmit} name={this.props.name} content={this.props.content}/>
+          <Container>
+            <Title>Edit Page</Title>
+            <PageEditor onSubmit={this.handleSubmit} name={this.props.name} content={this.props.content}/>
+          </Container>
         </Section>
       </Layout>
     );
