@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar, Icon, Button } from 'rbx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons';
+import './styles/navbar.scss';
 
 export default () => (
   <Navbar color="black">

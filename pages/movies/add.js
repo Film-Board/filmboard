@@ -34,7 +34,7 @@ class AddMovie extends React.Component {
       <Layout>
         <Section>
           <Column.Group centered>
-            <Title className="has-text-white has-text-centered">Add a movie</Title>
+            <Title className="has-text-centered">Add a movie</Title>
           </Column.Group>
 
           <Column.Group centered>

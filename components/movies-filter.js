@@ -3,6 +3,8 @@ import { Icon, Field, Control, Input, Label, Select, Button, Column } from 'rbx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 
+import './styles/movies-filter.scss';
+
 class MoviesFilter extends React.Component {
   constructor() {
     super();

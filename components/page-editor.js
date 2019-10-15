@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactMde from "react-mde";
 import * as Showdown from "showdown";
-import { Field, Control, Input, Button } from 'rbx';
+import { Field, Control, Input, Button, Icon } from 'rbx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 import "react-mde/lib/styles/css/react-mde-all.css";
 
 const converter = new Showdown.Converter({
@@ -38,7 +40,11 @@ class PageEditor extends React.Component {
           onTabChange={tab => this.setState({ selectedTab: tab })}
           generateMarkdownPreview={markdown => Promise.resolve(converter.makeHtml(markdown))}
         />
-        <Button color="success" fullwidth>Save Page</Button>
+        <Button color="success" fullwidth>
+          <Icon size="large">
+            <FontAwesomeIcon icon={faSave} size="lg"/>
+          </Icon>
+        </Button>
       </form>
     );
   }
