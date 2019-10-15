@@ -2,7 +2,6 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Title, Section, Container } from 'rbx';
 import Router from 'next/router';
-import Layout from '../../../components/layout';
 import PageEditor from '../../../components/page-editor';
 import { getBaseURL } from '../../../common/helpers';
 
@@ -34,14 +33,14 @@ class EditPage extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <div>
         <Section>
           <Container>
             <Title>Edit Page</Title>
             <PageEditor onSubmit={this.handleSubmit} name={this.props.name} content={this.props.content}/>
           </Container>
         </Section>
-      </Layout>
+      </div>
     );
   }
 }

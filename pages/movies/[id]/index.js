@@ -2,7 +2,6 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Column, Block, Level, Container, Section, Title } from 'rbx';
 import { getBaseURL } from '../../../common/helpers';
-import Layout from '../../../components/layout';
 import VideoBackground from '../../../components/video-background';
 import Poster from '../../../components/poster';
 import Prices from '../../../components/movie-prices';
@@ -19,7 +18,7 @@ class ShowMovie extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <div>
         <VideoBackground path={`/static/videos/${this.props.trailer}`}/>
         <Section>
           <Column.Group centered>
@@ -51,7 +50,7 @@ class ShowMovie extends React.Component {
             </Column>
           </Column.Group>
         </Section>
-      </Layout>
+      </div>
     );
   }
 }

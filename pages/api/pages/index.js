@@ -14,4 +14,8 @@ export default async (req, res) => {
 
     res.json(newPage);
   }
+
+  if (method === 'GET') {
+    res.json(await Page.findAll({ attributes: { exclude: ['content'] } }));
+  }
 };

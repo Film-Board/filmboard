@@ -2,7 +2,6 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Title, Section } from 'rbx';
 import Router from 'next/router';
-import Layout from '../../components/layout';
 import PageEditor from '../../components/page-editor';
 
 class AddPage extends React.Component {
@@ -29,12 +28,10 @@ class AddPage extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <Section>
-          <Title>Add a Page</Title>
-          <PageEditor onSubmit={this.handleSubmit}/>
-        </Section>
-      </Layout>
+      <Section>
+        <Title>Add a Page</Title>
+        <PageEditor onSubmit={this.handleSubmit}/>
+      </Section>
     );
   }
 }

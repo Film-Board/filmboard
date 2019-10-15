@@ -1,7 +1,6 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Title, Column, Section } from 'rbx';
-import Layout from '../../components/layout';
 import NewMovieSearch from '../../components/new-movie-search';
 import Suggestions from '../../components/new-movie-suggestions';
 
@@ -31,7 +30,7 @@ class AddMovie extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <div>
         <Section>
           <Column.Group centered>
             <Title className="has-text-centered">Add a movie</Title>
@@ -51,7 +50,7 @@ class AddMovie extends React.Component {
             <Suggestions suggestions={this.state.suggestions}/>
           </Column.Group>
         </Section>
-      </Layout>
+      </div>
     );
   }
 }
