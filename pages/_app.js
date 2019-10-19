@@ -10,7 +10,7 @@ export default class MyApp extends App {
   static async getInitialProps(appContext) {
     const appProps = await App.getInitialProps(appContext);
 
-    const pages = await (await fetch(`${getBaseURL(appContext.ctx.req)}/api/pages`)).json();
+    const pages = await (await fetch(`${getBaseURL(appContext.ctx)}/api/pages`)).json();
 
     return { ...appProps, pages };
   }

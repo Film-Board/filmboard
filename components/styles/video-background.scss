@@ -29,6 +29,7 @@
     top: 50%;
     font-size: 4rem;
     opacity: 0;
+    color: white;
   }
 
   &.hover:not(.fullscreen) {
@@ -60,7 +61,7 @@
     -webkit-transform: scale(0.9);
     -ms-transform: scale(0.9);
     transform: scale(0.9);
-    opacity: 1;
+    opacity: 0.8;
   }
 
   100% {
