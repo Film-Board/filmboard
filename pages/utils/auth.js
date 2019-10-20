@@ -57,6 +57,8 @@ export const fetchWithAuth = async (url, options, ctx) => {
   const mergedOptions = {...options, headers};
 
   const redirectOnError = () => {
+    if (options.redirectOnError === false) throw new Error('Unauthorized.');
+
     process.browser ? Router.push('/login') : ctx.res.writeHead(301, {Location: '/login'}) && ctx.res.end();
   }
 

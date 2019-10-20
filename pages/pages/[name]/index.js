@@ -5,8 +5,8 @@ import * as Showdown from "showdown";
 import { getBaseURL } from '../../../common/helpers';
 
 class ShowPage extends React.Component {
-  static async getInitialProps({ query, req }) {
-    const page = await fetch(`${getBaseURL(req)}/api/pages/${query.name}`);
+  static async getInitialProps(ctx) {
+    const page = await fetch(`${getBaseURL(ctx)}/api/pages/${ctx.query.name}`);
 
     return page.json();
   }

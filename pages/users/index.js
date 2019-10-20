@@ -41,7 +41,7 @@ class Users extends React.Component {
     await fetchWithAuth('/api/users', {method: 'POST', body: newUser});
 
     this.toggleSaving();
-    this.setState({users})
+    this.setState({users, newEmail: ''})
   }
 
   async editUser(user) {

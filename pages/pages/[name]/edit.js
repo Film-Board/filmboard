@@ -4,6 +4,7 @@ import { Title, Section, Container } from 'rbx';
 import Router from 'next/router';
 import PageEditor from '../../../components/page-editor';
 import { getBaseURL } from '../../../common/helpers';
+import { withAuthSync, fetchWithAuth } from '../../utils/auth';
 
 class EditPage extends React.Component {
   constructor(props) {
@@ -12,23 +13,19 @@ class EditPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  static async getInitialProps({ query, req }) {
-    return (await fetch(`${getBaseURL(req)}/api/pages/${query.name}`)).json();
+  static async getInitialProps(ctx) {
+    return (await fetch(`${getBaseURL(ctx)}/api/pages/${ctx.query.name}`)).json();
   }
 
   async handleSubmit(event, state) {
     event.preventDefault();
 
-    const page = await (await fetch(`/api/pages/${this.props.name}`, {
-      method: 'put',
-      headers: {
-        "Accept": 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(state)
-    })).json();
+      const page = await fetchWithAuth(`/api/pages/${this.props.name}`, {
+        method: 'put',
+        body: state
+      });
 
-    Router.push(`/pages/${page.name}`);
+      Router.push(`/pages/${page.name}`);
   }
 
   render() {
@@ -44,4 +41,4 @@ class EditPage extends React.Component {
     );
   }
 }
-export default EditPage;
+export default withAuthSync(EditPage);

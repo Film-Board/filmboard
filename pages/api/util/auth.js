@@ -41,7 +41,7 @@ const protect = (req, res, options = {}) => {
           })
         }
 
-        resolve();
+        resolve(user);
       })
     } catch (_) {
       return res.status(401).json({error: 'server error'});
