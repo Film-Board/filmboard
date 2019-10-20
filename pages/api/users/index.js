@@ -1,10 +1,10 @@
 import { User } from '../../../models';
-import {protect} from '../util/auth';
+import { protect } from '../util/auth';
 
 export default async (req, res) => {
-  const {method, body} = req;
+  const { method, body } = req;
 
-  await protect(req, res, {permissions: ['canManageUsers']});
+  await protect(req, res, { permissions: ['canManageUsers'] });
 
   if (method === 'GET') {
     res.json(await User.findAll());
@@ -17,10 +17,10 @@ export default async (req, res) => {
   }
 
   if (method === 'PUT') {
-    res.json(await User.update(body, {where: {email: body.email}}));
+    res.json(await User.update(body, { where: { email: body.email } }));
   }
 
   if (method === 'DELETE') {
-    res.json(await User.destroy({where: {email: body.email}}))
+    res.json(await User.destroy({ where: { email: body.email } }));
   }
 };

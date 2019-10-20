@@ -20,12 +20,12 @@ class EditPage extends React.Component {
   async handleSubmit(event, state) {
     event.preventDefault();
 
-      const page = await fetchWithAuth(`/api/pages/${this.props.name}`, {
-        method: 'put',
-        body: state
-      });
+    const page = await fetchWithAuth(`/api/pages/${this.props.name}`, {
+      method: 'put',
+      body: state
+    });
 
-      Router.push(`/pages/${page.name}`);
+    Router.push(`/pages/${page.name}`);
   }
 
   render() {

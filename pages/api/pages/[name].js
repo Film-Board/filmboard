@@ -1,5 +1,5 @@
 import { Page } from '../../../models';
-import {protect} from '../util/auth';
+import { protect } from '../util/auth';
 
 export default async (req, res) => {
   const {
@@ -13,7 +13,7 @@ export default async (req, res) => {
   }
 
   if (method === 'PUT') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(req, res, { permissions: ['canEditPages'] });
 
     const page = await Page.findOne({ where: { name: query.name } });
 

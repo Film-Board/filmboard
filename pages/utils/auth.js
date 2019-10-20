@@ -2,13 +2,13 @@ import Router from 'next/router';
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import nextCookie from 'next-cookies';
-import {getBaseURL} from '../../common/helpers'
+import { getBaseURL } from '../../common/helpers';
 
 export const auth = ctx => {
-  const {token} = nextCookie(ctx);
+  const { token } = nextCookie(ctx);
 
   if (ctx.req && !token) {
-    ctx.res.writeHead(302, {Location: '/login'});
+    ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
     return;
   }
@@ -18,49 +18,49 @@ export const auth = ctx => {
   }
 
   return token;
-}
+};
 
 const getDisplayName = Component =>
-  Component.displayName || Component.name || 'Component'
+  Component.displayName || Component.name || 'Component';
 
 export const withAuthSync = WrappedComponent =>
   class extends React.Component {
     static displayName = `withAuthSync(${getDisplayName(WrappedComponent)})`
 
-    static async getInitialProps (ctx) {
-      const token = auth(ctx)
+    static async getInitialProps(ctx) {
+      const token = auth(ctx);
 
       const componentProps =
         WrappedComponent.getInitialProps &&
-        (await WrappedComponent.getInitialProps(ctx))
+        (await WrappedComponent.getInitialProps(ctx));
 
-      return { ...componentProps, token }
+      return { ...componentProps, token };
     }
 
-    render () {
-      return <WrappedComponent {...this.props} />
+    render() {
+      return <WrappedComponent {...this.props} />;
     }
-}
+  };
 
 export const fetchWithAuth = async (url, options, ctx) => {
-  const {token} = nextCookie(ctx);
+  const { token } = nextCookie(ctx);
 
   const headers = {
     Authorization: token
-  }
+  };
 
   if (typeof options.body === 'object') {
     headers['Content-Type'] = 'application/json';
     options.body = JSON.stringify(options.body);
   }
 
-  const mergedOptions = {...options, headers};
+  const mergedOptions = { ...options, headers };
 
   const redirectOnError = () => {
     if (options.redirectOnError === false) throw new Error('Unauthorized.');
 
-    process.browser ? Router.push('/login') : ctx.res.writeHead(301, {Location: '/login'}) && ctx.res.end();
-  }
+    process.browser ? Router.push('/login') : ctx.res.writeHead(301, { Location: '/login' }) && ctx.res.end();
+  };
 
   try {
     const res = await fetch(`${ctx ? getBaseURL(ctx) : ''}${url}`, mergedOptions);
@@ -70,7 +70,7 @@ export const fetchWithAuth = async (url, options, ctx) => {
     } else {
       return redirectOnError();
     }
-  } catch(_) {
+  } catch (_) {
     return redirectOnError();
   }
-}
+};

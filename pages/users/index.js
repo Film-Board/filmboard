@@ -10,7 +10,7 @@ class Users extends React.Component {
       users: [],
       newEmail: '',
       saving: false
-    }
+    };
 
     this.addUser = this.addUser.bind(this);
     this.editUser = this.editUser.bind(this);
@@ -20,34 +20,34 @@ class Users extends React.Component {
   static async getInitialProps(ctx) {
     const users = await fetchWithAuth('/api/users', {}, ctx);
 
-    return {users};
+    return { users };
   }
 
   componentDidMount() {
-    this.setState({users: this.props.users})
+    this.setState({ users: this.props.users });
   }
 
   async addUser(e) {
     e.preventDefault();
 
-    const {users, newEmail} = this.state;
+    const { users, newEmail } = this.state;
 
-    const newUser = {email: newEmail, canEditPages: true, canManageUsers: false};
+    const newUser = { email: newEmail, canEditPages: true, canManageUsers: false };
 
-    users.push(newUser)
-
-    this.toggleSaving();
-
-    await fetchWithAuth('/api/users', {method: 'POST', body: newUser});
+    users.push(newUser);
 
     this.toggleSaving();
-    this.setState({users, newEmail: ''})
+
+    await fetchWithAuth('/api/users', { method: 'POST', body: newUser });
+
+    this.toggleSaving();
+    this.setState({ users, newEmail: '' });
   }
 
   async editUser(user) {
     this.toggleSaving();
 
-    await fetchWithAuth('/api/users', {method: 'PUT', body: user});
+    await fetchWithAuth('/api/users', { method: 'PUT', body: user });
 
     this.toggleSaving();
 
@@ -60,24 +60,24 @@ class Users extends React.Component {
       return u;
     });
 
-    this.setState({users});
+    this.setState({ users });
   }
 
   async deleteUser(email) {
     this.toggleSaving();
 
-    await fetchWithAuth('/api/users', {method: 'DELETE', body: {email}});
+    await fetchWithAuth('/api/users', { method: 'DELETE', body: { email } });
 
     this.toggleSaving();
 
     // Update state
-    this.setState({users: this.state.users.filter(u => u.email !== email)})
+    this.setState({ users: this.state.users.filter(u => u.email !== email) });
   }
 
   toggleSaving() {
     this.setState({
       saving: !this.state.saving
-    })
+    });
   }
 
   render() {
@@ -94,7 +94,7 @@ class Users extends React.Component {
               <Field.Body>
                 <Field>
                   <Control>
-                    <Input type="email" required placeholder="lcook@mtu.edu" value={this.state.newEmail} onChange={e => this.setState({newEmail: e.target.value})}/>
+                    <Input type="email" required placeholder="lcook@mtu.edu" value={this.state.newEmail} onChange={e => this.setState({ newEmail: e.target.value })}/>
                   </Control>
                 </Field>
                 <Field>
@@ -119,8 +119,8 @@ class Users extends React.Component {
               {this.state.users.map((user, i) => (
                 <Table.Row key={i}>
                   <Table.Cell>{user.email}</Table.Cell>
-                  <Table.Cell><Checkbox defaultChecked={user.canEditPages} onChange={e => this.editUser({email: user.email, canEditPages: e.target.checked})}/></Table.Cell>
-                  <Table.Cell><Checkbox defaultChecked={user.canManageUsers} onChange={e => this.editUser({email: user.email, canManageUsers: e.target.checked})}/></Table.Cell>
+                  <Table.Cell><Checkbox defaultChecked={user.canEditPages} onChange={e => this.editUser({ email: user.email, canEditPages: e.target.checked })}/></Table.Cell>
+                  <Table.Cell><Checkbox defaultChecked={user.canManageUsers} onChange={e => this.editUser({ email: user.email, canManageUsers: e.target.checked })}/></Table.Cell>
                   <Table.Cell><Button color="danger" onClick={() => this.deleteUser(user.email)}>Remove</Button></Table.Cell>
                 </Table.Row>
               ))}

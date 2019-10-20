@@ -1,7 +1,7 @@
-import {protect} from './util/auth';
+import { protect } from './util/auth';
 
 export default async (req, res) => {
-  const {method} = req;
+  const { method } = req;
 
   if (method === 'POST') {
     const user = await protect(req, res);
