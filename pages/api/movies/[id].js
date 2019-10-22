@@ -3,6 +3,7 @@ import MovieDB from 'moviedb-promise';
 import download from 'download';
 import { MOVIE_DB_KEY } from '../../../config';
 import { Movie, Showtime } from '../../../models';
+import { protect } from '../util/auth';
 import { downloadTrailer } from './helpers';
 
 const imdb = promisify(require('imdb'));
@@ -16,12 +17,14 @@ export default async (req, res) => {
     method
   } = req;
 
-  if (method === 'POST') {
-    res.json(await addMovieByMovieDBId(id));
-  }
-
   if (method === 'GET') {
     res.json(await getMovieById(id));
+  }
+
+  await protect(req, res, { permissions: ['canEditPages'] });
+
+  if (method === 'POST') {
+    res.json(await addMovieByMovieDBId(id));
   }
 
   if (method === 'PUT') {

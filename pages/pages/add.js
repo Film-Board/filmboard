@@ -2,6 +2,7 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Title, Section } from 'rbx';
 import Router from 'next/router';
+import { withAuthSync, fetchWithAuth } from '../utils/auth';
 import PageEditor from '../../components/page-editor';
 
 class AddPage extends React.Component {
@@ -35,4 +36,4 @@ class AddPage extends React.Component {
     );
   }
 }
-export default AddPage;
+export default withAuthSync(AddPage);

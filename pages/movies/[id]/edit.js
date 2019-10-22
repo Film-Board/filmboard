@@ -6,6 +6,7 @@ import Router from 'next/router';
 import { Section, Column, Field, Label, Title, Button, Input, Textarea, Icon, Level, Block } from 'rbx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { withAuthSync, fetchWithAuth } from '../../utils/auth';
 import DateTimeTable from '../../../components/date-time';
 import Poster from '../../../components/poster';
 import { getBaseURL } from '../../../common/helpers';
@@ -61,21 +62,17 @@ class EditMovie extends React.Component {
     delete data['showtimes-date'];
     delete data['showtimes-time'];
 
-    await fetch(`/api/movies/${this.props.id}`,
+    await fetchWithAuth(`/api/movies/${this.props.id}`,
       {
-        method: 'put',
-        headers: {
-          "Accept": 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        method: 'PUT',
+        body: data
       });
 
     Router.push(`/movies/${this.props.id}`);
   }
 
-  static async getInitialProps({ query, req }) {
-    const movie = await (await fetch(`${getBaseURL(req)}/api/movies/${query.id}`)).json();
+  static async getInitialProps(ctx) {
+    const movie = await (await fetch(`${getBaseURL(ctx)}/api/movies/${ctx.query.id}`)).json();
 
     movie.showtimes = movie.Showtimes.map(showtime => showtime.time);
 
@@ -188,4 +185,4 @@ class EditMovie extends React.Component {
   }
 }
 
-export default EditMovie;
+export default withAuthSync(EditMovie);

@@ -10,6 +10,8 @@ $turquoise: #00bfd5;
 $text: black;
 $text-strong: black;
 $title-color: black;
+$white: #FAFAFA;
+$body-background-color: $white;
 $body-family: 'Soin Sans Neue';
 
 @import "~bulma/sass/utilities/functions";
@@ -21,5 +23,4 @@ $body-family: 'Soin Sans Neue';
 
 body {
   min-height: calc(100vh - 1rem);
-  background-color: #FAFAFA;
 }

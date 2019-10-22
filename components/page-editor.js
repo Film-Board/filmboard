@@ -18,7 +18,7 @@ class PageEditor extends React.Component {
     super(props);
 
     this.state = {
-      content: props.content || '',
+      content: props.content || 'I wore a hat!',
       name: props.name || '',
       selectedTab: 'write'
     };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Section, Table, Checkbox, Field, Control, Title, Input, Button, Label, Loader } from 'rbx';
+import { Container, Section, Table, Checkbox, Field, Control, Title, Input, Button, Label } from 'rbx';
 import { withAuthSync, fetchWithAuth } from '../utils/auth';
 
 class Users extends React.Component {

@@ -7,11 +7,12 @@ import Poster from '../../../components/poster';
 import Prices from '../../../components/movie-prices';
 import Ratings from '../../../components/movie-ratings';
 import Showtime from '../../../components/showtime';
+import EditButton from '../../../components/edit-button';
 import './styles/show-movie.scss';
 
 class ShowMovie extends React.Component {
-  static async getInitialProps({ query, req }) {
-    const movie = await fetch(`${getBaseURL(req)}/api/movies/${query.id}`);
+  static async getInitialProps(ctx) {
+    const movie = await fetch(`${getBaseURL(ctx)}/api/movies/${ctx.query.id}`);
 
     return movie.json();
   }
@@ -50,6 +51,7 @@ class ShowMovie extends React.Component {
             </Column>
           </Column.Group>
         </Section>
+        <EditButton link={`/movies/${this.props.id}/edit`}/>
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import React from 'react';
+import Router from 'next/router';
 import fetch from 'isomorphic-unfetch';
 import { Title, Column, Section } from 'rbx';
+import { withAuthSync, fetchWithAuth } from '../utils/auth';
 import NewMovieSearch from '../../components/new-movie-search';
 import Suggestions from '../../components/new-movie-suggestions';
 
@@ -9,6 +11,7 @@ class AddMovie extends React.Component {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addMovie = this.addMovie.bind(this);
     this.movieNameInput = React.createRef();
 
     this.state = {
@@ -26,6 +29,13 @@ class AddMovie extends React.Component {
     this.setState({
       suggestions
     });
+  }
+
+  async addMovie(suggestion) {
+    console.log(suggestion);
+    const movie = await fetchWithAuth(`/api/movies/${suggestion.id}`, { method: 'POST' });
+
+    Router.push(`/movies/${movie.id}/edit`);
   }
 
   render() {
@@ -47,11 +57,11 @@ class AddMovie extends React.Component {
 
         <Section>
           <Column.Group centered>
-            <Suggestions suggestions={this.state.suggestions}/>
+            <Suggestions suggestions={this.state.suggestions} onAdd={this.addMovie}/>
           </Column.Group>
         </Section>
       </div>
     );
   }
 }
-export default AddMovie;
+export default withAuthSync(AddMovie);
