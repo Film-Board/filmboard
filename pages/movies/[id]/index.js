@@ -20,7 +20,7 @@ class ShowMovie extends React.Component {
   render() {
     return (
       <div>
-        <VideoBackground path={`/static/videos/${this.props.trailer}`}/>
+        <VideoBackground path={`/static/bucket/${this.props.Trailer.File.path}`}/>
         <Section>
           <Column.Group centered>
             <Column size="full">
@@ -28,7 +28,7 @@ class ShowMovie extends React.Component {
                 <Level className="movie-details">
                   <Column narrow>
                     <Section className="poster">
-                      <Poster filename={this.props.poster}/>
+                      <Poster path={this.props.Poster.path}/>
                       <Ratings imdb={this.props.imdb} rottenTomatoes={this.props.rottenTomatoes} runtime={this.props.runtime} color="white"/>
                       <Prices ticketPrice={this.props.ticketPrice} concessionPrice={this.props.concessionPrice}/>
                     </Section>

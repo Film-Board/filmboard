@@ -3,9 +3,7 @@ import fetch from 'isomorphic-unfetch';
 import uuidv4 from 'uuid/v4';
 import chrono from 'chrono-node';
 import Router from 'next/router';
-import { Section, Column, Field, Label, Title, Button, Input, Textarea, Icon, Level, Block } from 'rbx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { Section, Column, Field, Label, Title, Button, Input, Textarea, Block, Progress, Level } from 'rbx';
 import { withAuthSync, fetchWithAuth } from '../../utils/auth';
 import DateTimeTable from '../../../components/date-time';
 import Poster from '../../../components/poster';
@@ -16,34 +14,31 @@ class EditMovie extends React.Component {
     super(props);
 
     this.state = {
-      showtimes: [],
-      isTrailerDownloaded: this.props.trailer
+      ...props,
+      showtimes: []
     };
 
-    this.updateProps = this.updateProps.bind(this);
+    this.updateTrailerProgress = this.updateTrailerProgress.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.addShowtime = this.addShowtime.bind(this);
     this.deleteShowtime = this.deleteShowtime.bind(this);
   }
 
-  async updateProps() {
-    if (this.props.trailer) return;
+  async updateTrailerProgress() {
+    if (this.state.Trailer.progress === 1) {
+      return;
+    }
 
-    const movie = await (await fetch(`/movies/${this.props.id}`)).json();
+    const movie = await (await fetch(`/api/movies/${this.props.id}`)).json();
 
-    this.props = {
-      ...this.props,
-      ...movie
-    };
+    this.setState({
+      Trailer: movie.Trailer
+    });
 
-    if (movie.trailer) {
-      this.setState({
-        isTrailerDownloaded: true
-      });
-    } else {
+    if (movie.Trailer.progress !== 1) {
       // Poll again in 2 seconds
-      setTimeout(this.updateProps, 2000);
+      setTimeout(this.updateTrailerProgress, 2000);
     }
   }
 
@@ -90,7 +85,7 @@ class EditMovie extends React.Component {
     }
 
     // Start polling to see if trailer was downloaded
-    await this.updateProps();
+    await this.updateTrailerProgress();
   }
 
   addShowtime(time) {
@@ -161,23 +156,25 @@ class EditMovie extends React.Component {
               <DateTimeTable showtimes={this.state.showtimes} name="showtimes" onShowtimeDelete={this.deleteShowtime}/>
 
               <Block>
-                <Button fullwidth type="submit" color={this.state.isTrailerDownloaded ? 'success' : 'grey'} disabled={!this.state.isTrailerDownloaded}>
-                  {this.state.isTrailerDownloaded ? 'Save Movie' : (
-                    <Level>
-                      <Icon>
-                        <FontAwesomeIcon icon={faCircleNotch} spin/>
-                      </Icon>
-                      <span>
-                    Waiting for trailer to download...
-                      </span>
-                    </Level>
-                  )}
-                </Button>
+                <Button fullwidth type="submit" color="success">Save Movie</Button>
               </Block>
             </form>
           </Column>
           <Column size={4}>
-            <Poster filename={this.props.poster}/>
+            <Block>
+              <Poster path={this.props.Poster.path}/>
+            </Block>
+
+            {this.state.Trailer.progress === 1 ? (
+              <Block>
+                <Title size={5} className="has-text-centered">Trailer processed.</Title>
+              </Block>
+            ) : (
+              <Block>
+                <Title size={5} className="has-text-centered">Processing trailer...</Title>
+                <Progress value={this.state.Trailer.progress * 100} max={100} color="warning"/>
+              </Block>
+            )}
           </Column>
         </Column.Group>
       </Section>

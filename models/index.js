@@ -20,9 +20,9 @@ const Showtime = showtimeModel(sequelize, Sequelize);
 const Trailer = trailerModel(sequelize, Sequelize);
 
 Movie.hasMany(Showtime);
-Movie.hasOne(File, {as: 'Poster'});
+Movie.hasOne(File, { as: 'Poster' });
 Movie.hasOne(Trailer);
 
 Trailer.hasOne(File);
 
-module.exports = { sequelize, File, User, Movie, Page, Showtime };
+module.exports = { sequelize, File, User, Movie, Page, Showtime, Trailer };

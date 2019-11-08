@@ -3,53 +3,79 @@ import path from 'path';
 import ytdl from 'ytdl-core';
 import ffmpeg from 'fluent-ffmpeg';
 
-const downloadTrailer = (url, destination, filename) => {
+const downloadTrailer = (model, url, destination, filename) => {
   return new Promise((resolve, reject) => {
-    const audioOutput = path.join(destination, `${filename}.m4a`);
-    const videoOutput = path.join(destination, `${filename}.mp4`);
-    const modifiedVideoOutput = path.join(destination, `${filename}-cropped.mp4`);
+    try {
+      const audioOutput = path.join(destination, `${filename}.m4a`);
+      const videoOutput = path.join(destination, `${filename}-temp.mp4`);
+      const modifiedVideoOutput = path.join(destination, `${filename}.mp4`);
 
-    // Download audio
-    ytdl(url, { filter: format => format.container === 'm4a' && !format.encoding })
-      .pipe(fs.createWriteStream(audioOutput))
-      .on('finish', () => {
-      // Download video and assemble
-        ffmpeg().input(ytdl(url, { filter: format => format.container === 'mp4' && format.resolution === '1080p' }))
-          .videoCodec('copy')
-          .input(audioOutput)
-          .audioCodec('copy')
-          .save(videoOutput)
-          .on('end', () => {
-          // Remove black bars
-            const cropCommands = [];
-            ffmpeg(videoOutput)
-              .seek(10) // Skip 10 seconds
-              .duration(2) // Analyze 2 seconds
-              .videoFilters('cropdetect')
-              .format('null')
-              .output('-')
-              .on('stderr', stdLine => {
-                const cropDimensions = /crop=.*/g.exec(stdLine);
+      // Download audio
+      ytdl(url, { filter: format => format.container === 'm4a' && !format.encoding })
+        .pipe(fs.createWriteStream(audioOutput))
+        .on('finish', () => {
+        // Update progress of download
+          model.update({ progress: 0.25 });
 
-                if (cropDimensions === null) {
-                  return;
-                }
+          // Download video and assemble
+          ffmpeg().input(ytdl(url, { filter: format => format.container === 'mp4' && format.resolution === '1080p' }))
+            .videoCodec('copy')
+            .input(audioOutput)
+            .audioCodec('copy')
+            .save(videoOutput)
+            .on('end', async () => {
+            // Update progress of download
+              model.update({ progress: 0.60 });
 
-                cropCommands.push(cropDimensions[0]);
-              })
-              .on('end', () => {
-              // Crop video
-                ffmpeg(videoOutput)
-                  .videoFilters(mode(cropCommands))
-                  .audioCodec('copy')
-                  .save(modifiedVideoOutput)
-                  .on('end', () => {
-                    resolve();
-                  });
-              })
-              .run();
-          });
-      });
+              // Crop black bars
+              await cropVideo(videoOutput, modifiedVideoOutput);
+
+              // Update progress of download
+              await model.update({ progress: 1 });
+
+              resolve();
+            });
+        });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const cropVideo = (input, out) => {
+  return new Promise((resolve, reject) => {
+    try {
+      // Remove black bars
+      const cropCommands = [];
+      ffmpeg(input)
+        .seek(10) // Skip 10 seconds
+        .duration(2) // Analyze 2 seconds
+        .videoFilters('cropdetect')
+        .format('null')
+        .output('-')
+        .on('stderr', stdLine => {
+          const cropDimensions = /crop=.*/g.exec(stdLine);
+
+          if (cropDimensions === null) {
+            return;
+          }
+
+          cropCommands.push(cropDimensions[0]);
+        })
+        .on('end', () => {
+          // Crop video
+          ffmpeg(input)
+            .videoFilters(mode(cropCommands))
+            .audioCodec('copy')
+            .save(out)
+            .on('end', () => {
+              resolve();
+            });
+        })
+        .run();
+    } catch (error) {
+      reject(error);
+    }
   });
 };
 

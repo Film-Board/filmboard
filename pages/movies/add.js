@@ -32,8 +32,7 @@ class AddMovie extends React.Component {
   }
 
   async addMovie(suggestion) {
-    console.log(suggestion);
-    const movie = await fetchWithAuth(`/api/movies/${suggestion.id}`, { method: 'POST' });
+    const movie = await fetchWithAuth(`/api/movies/add-by-movie-db/${suggestion.id}`, { method: 'POST' });
 
     Router.push(`/movies/${movie.id}/edit`);
   }
