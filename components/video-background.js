@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/video-background.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faPlay} from '@fortawesome/free-solid-svg-icons';
 
 class VideoBackground extends React.Component {
   constructor(props) {
@@ -20,9 +20,9 @@ class VideoBackground extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener("fullscreenchange", this.onFullScreenChange, false);
-    document.addEventListener("webkitfullscreenchange", this.onFullScreenChange, false);
-    document.addEventListener("mozfullscreenchange", this.onFullScreenChange, false);
+    document.addEventListener('fullscreenchange', this.onFullScreenChange, false);
+    document.addEventListener('webkitfullscreenchange', this.onFullScreenChange, false);
+    document.addEventListener('mozfullscreenchange', this.onFullScreenChange, false);
   }
 
   showButton() {
@@ -44,7 +44,7 @@ class VideoBackground extends React.Component {
   }
 
   fullscreen() {
-    const video = document.querySelector("#video-background");
+    const video = document.querySelector('#video-background');
     if (video.requestFullscreen) {
       video.requestFullscreen();
     } else if (video.mozRequestFullScreen) {
@@ -70,7 +70,7 @@ class VideoBackground extends React.Component {
     });
 
     if (!isFull) {
-      const video = document.querySelector("#video-background");
+      const video = document.querySelector('#video-background');
 
       video.muted = true;
       video.controls = false;
@@ -81,7 +81,7 @@ class VideoBackground extends React.Component {
     return (
       <div className={`video-background ${this.state.hover} ${this.state.fullscreen}`} onMouseEnter={this.showButton} onClick={this.fullscreen}>
         <FontAwesomeIcon icon={faPlay} className="play-button"/>
-        <video id="video-background" autoPlay muted loop>
+        <video autoPlay muted loop id="video-background">
           <source src={this.props.path} type="video/mp4"/>
            Your browser does not support the video tag.
         </video>

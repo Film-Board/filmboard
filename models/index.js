@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { DB_URL, DB_DIALECT } = require('../config');
+const {DB_URL, DB_DIALECT} = require('../config');
 
 const fileModel = require('./File');
 const userModel = require('./User');
@@ -20,9 +20,9 @@ const Showtime = showtimeModel(sequelize, Sequelize);
 const Trailer = trailerModel(sequelize, Sequelize);
 
 Movie.hasMany(Showtime);
-Movie.hasOne(File, { as: 'Poster' });
+Movie.hasOne(File, {as: 'Poster'});
 Movie.hasOne(Trailer);
 
 Trailer.hasOne(File);
 
-module.exports = { sequelize, File, User, Movie, Page, Showtime, Trailer };
+module.exports = {sequelize, File, User, Movie, Page, Showtime, Trailer};

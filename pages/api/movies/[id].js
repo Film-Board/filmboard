@@ -1,9 +1,9 @@
-import { Movie, Showtime, Trailer } from '../../../models';
-import { protect } from '../util/auth';
+import {Movie, Showtime, Trailer} from '../../../models';
+import {protect} from '../util/auth';
 
 export default async (req, res) => {
   const {
-    query: { id },
+    query: {id},
     body,
     method
   } = req;
@@ -12,7 +12,7 @@ export default async (req, res) => {
     res.json(await getMovieById(id));
   }
 
-  await protect(req, res, { permissions: ['canEditPages'] });
+  await protect(req, res, {permissions: ['canEditPages']});
 
   if (method === 'PUT') {
     res.json(await updateMovieAndShowtimes(id, body));
@@ -25,7 +25,7 @@ const updateMovieAndShowtimes = async (id, data) => {
   await movie.update(data);
 
   // Delete all showtimes
-  await Showtime.destroy({ where: { MovieId: id } });
+  await Showtime.destroy({where: {MovieId: id}});
 
   // Create new showtimes
   await Showtime.bulkCreate(data.showtimes.map(showtime => ({
@@ -38,12 +38,12 @@ const updateMovieAndShowtimes = async (id, data) => {
 };
 
 const getMovieById = id => {
-  return Movie.findByPk(id, { include: [
+  return Movie.findByPk(id, {include: [
     Movie.associations.Poster,
     Movie.associations.Showtimes,
     {
       model: Trailer,
       include: Trailer.associations.File
     }
-  ] });
+  ]});
 };

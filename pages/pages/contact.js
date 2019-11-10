@@ -1,6 +1,7 @@
-import { Container, Section, Column, Title, Field, Label, Control, Input, Icon, Select, Textarea, Button } from 'rbx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+import {Container, Section, Column, Title, Field, Label, Control, Input, Icon, Select, Textarea, Button} from 'rbx';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUser, faEnvelope, faPaperPlane} from '@fortawesome/free-solid-svg-icons';
 
 class Contact extends React.Component {
   render() {
@@ -18,9 +19,9 @@ class Contact extends React.Component {
                   <Field.Body>
                     <Field>
                       <Control expanded iconLeft>
-                        <Input type="text" placeholder="Name" />
+                        <Input type="text" placeholder="Name"/>
                         <Icon size="small" align="left">
-                          <FontAwesomeIcon icon={faUser} />
+                          <FontAwesomeIcon icon={faUser}/>
                         </Icon>
                       </Control>
                     </Field>
@@ -31,7 +32,7 @@ class Contact extends React.Component {
                           type="email"
                         />
                         <Icon size="small" align="left">
-                          <FontAwesomeIcon icon={faEnvelope} />
+                          <FontAwesomeIcon icon={faEnvelope}/>
                         </Icon>
                       </Control>
                     </Field>
@@ -78,7 +79,7 @@ class Contact extends React.Component {
                 <Field>
                   <Button fullwidth color="success">
                     <Icon size="small">
-                      <FontAwesomeIcon icon={faPaperPlane} />
+                      <FontAwesomeIcon icon={faPaperPlane}/>
                     </Icon>
                   </Button>
                 </Field>

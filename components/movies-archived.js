@@ -1,4 +1,5 @@
-import { Container, Title, Box, Column } from 'rbx';
+import React from 'react';
+import {Container, Title, Box, Column} from 'rbx';
 import fetch from 'isomorphic-unfetch';
 import query from 'query-string';
 import MoviesContainer from './movies-container';
@@ -15,7 +16,7 @@ class ArchivedMovies extends React.Component {
     this.handleFilter = this.handleFilter.bind(this);
   }
 
-  handleFilter = async (event, state) => {
+  async handleFilter(event, state) {
     event.preventDefault();
 
     // Get filtered movies
@@ -25,7 +26,7 @@ class ArchivedMovies extends React.Component {
 
     const movies = await (await fetch(`/api/movies/search?${query.stringify(state)}`)).json();
 
-    this.setState({ movies });
+    this.setState({movies});
   }
 
   render() {

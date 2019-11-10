@@ -1,4 +1,4 @@
-import { Movie, Showtime } from '../../../models';
+import {Movie, Showtime} from '../../../models';
 
 export default async (req, res) => {
   const {

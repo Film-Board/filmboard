@@ -1,8 +1,7 @@
 import React from 'react';
-import fetch from 'isomorphic-unfetch';
-import { Title, Section } from 'rbx';
+import {Title, Section} from 'rbx';
 import Router from 'next/router';
-import { withAuthSync, fetchWithAuth } from '../utils/auth';
+import {withAuthSync, fetchWithAuth} from '../utils/auth';
 import PageEditor from '../../components/page-editor';
 
 class AddPage extends React.Component {
@@ -15,10 +14,10 @@ class AddPage extends React.Component {
   async handleSubmit(event, state) {
     event.preventDefault();
 
-    const page = await (await fetch(`/api/pages`, {
+    const page = await (await fetchWithAuth('/api/pages', {
       method: 'post',
       headers: {
-        "Accept": 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(state)

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Icon, Field, Control, Input, Label, Select, Button, Column } from 'rbx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {Icon, Field, Control, Input, Label, Select, Button, Column} from 'rbx';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faFilter, faSearch} from '@fortawesome/free-solid-svg-icons';
 
 import './styles/movies-filter.scss';
 
@@ -23,11 +23,11 @@ class MoviesFilter extends React.Component {
   }
 
   updateFromDate(event) {
-    this.setState({ fromDate: new Date(event.target.value) });
+    this.setState({fromDate: new Date(event.target.value)});
   }
 
   updateToDate(event) {
-    this.setState({ toDate: new Date(event.target.value) });
+    this.setState({toDate: new Date(event.target.value)});
   }
 
   updateLimit(event) {
@@ -39,16 +39,16 @@ class MoviesFilter extends React.Component {
       limit = Number(event.target.value);
     }
 
-    this.setState({ limit });
+    this.setState({limit});
   }
 
   updateSearch(event) {
-    this.setState({ search: event.target.value });
+    this.setState({search: event.target.value});
   }
 
   render() {
     return (
-      <form onSubmit={() => this.props.onSubmit(event, this.state)}>
+      <form onSubmit={e => this.props.onSubmit(e, this.state)}>
         <Column.Group vcentered>
           <Column>
             <Column.Group>
@@ -90,7 +90,7 @@ class MoviesFilter extends React.Component {
                   <Control iconLeft>
                     <Input placeholder="Search" onChange={this.updateSearch}/>
                     <Icon size="small" align="left">
-                      <FontAwesomeIcon icon={faSearch} />
+                      <FontAwesomeIcon icon={faSearch}/>
                     </Icon>
                   </Control>
                 </Field>

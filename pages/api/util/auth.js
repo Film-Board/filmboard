@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import jwk from 'jwks-rsa';
-import { User } from '../../../models';
+import {User} from '../../../models';
 
 const getJWK = (header, callback) => {
   jwk({
@@ -24,19 +24,19 @@ const protect = (req, res, options = {}) => {
     jwt.verify(token, getJWK, {}, (error, decoded) => {
       try {
         if (error) {
-          return res.status(401).json({ error: error.message });
+          return reject(res.status(401).json({error: error.message}));
         }
 
         // Verify user is in database
-        User.findOne({ where: { email: decoded.email } }).then(user => {
+        User.findOne({where: {email: decoded.email}}).then(user => {
           if (user === null) {
-            return res.status(401).json({ error: 'email does not exist' });
+            return reject(res.status(401).json({error: 'email does not exist'}));
           }
 
           if (options.permissions) {
             options.permissions.forEach(permission => {
               if (user[permission] === null || !user[permission]) {
-                return res.status(401).json({ error: 'unauthorized' });
+                return reject(res.status(401).json({error: 'unauthorized'}));
               }
             });
           }
@@ -44,10 +44,10 @@ const protect = (req, res, options = {}) => {
           resolve(user);
         });
       } catch (_) {
-        return res.status(401).json({ error: 'server error' });
+        return reject(res.status(401).json({error: 'server error'}));
       }
     });
   });
 };
 
-export { protect };
+export {protect};

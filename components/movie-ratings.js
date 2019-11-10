@@ -13,6 +13,7 @@ export default props => (
     </div>
     <div className={`runtime has-text-${props.color}`}>
       <span className="hours">{(props.runtime - (props.runtime % 60)) / 60}</span>h
+      {' '}
       <span className="minutes">{props.runtime % 60}</span>m
     </div>
   </div>

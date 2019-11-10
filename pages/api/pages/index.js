@@ -1,4 +1,5 @@
-import { Page } from '../../../models';
+import {Page} from '../../../models';
+import {protect} from '../util/auth';
 
 export default async (req, res) => {
   const {
@@ -7,6 +8,8 @@ export default async (req, res) => {
   } = req;
 
   if (method === 'POST') {
+    await protect(req, res, {permissions: ['canEditPages']});
+
     const newPage = await Page.create({
       name: body.pageName,
       content: body.pageText
@@ -16,6 +19,6 @@ export default async (req, res) => {
   }
 
   if (method === 'GET') {
-    res.json(await Page.findAll({ attributes: { exclude: ['content'] } }));
+    res.json(await Page.findAll({attributes: {exclude: ['content']}}));
   }
 };

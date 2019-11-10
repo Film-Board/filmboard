@@ -1,12 +1,13 @@
-import { Title, Column, Block } from 'rbx';
-import Poster from "./poster";
+import React from 'react';
+import {Title, Column, Block} from 'rbx';
+import Poster from './poster';
 
 export default props => (
-  <Column.Group gapSize={7} centered>
-    {props.movies.map((movie, i) => (
-      <Column key={i} as="a" desktop={{ size: 'one-fifth' }} href={`/movies/${movie.id}`}>
+  <Column.Group centered gapSize={7}>
+    {props.movies.map(movie => (
+      <Column key={movie.id} as="a" desktop={{size: 'one-fifth'}} href={`/movies/${movie.id}`}>
         <Block>
-          <Poster filename={movie.poster} key={movie.poster}/>
+          <Poster key={movie.poster} filename={movie.poster}/>
         </Block>
         <Block>
           <Title size="5" className="has-text-centered has-text-weight-medium">{movie.name}</Title>

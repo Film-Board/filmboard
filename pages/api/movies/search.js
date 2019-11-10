@@ -1,12 +1,12 @@
-import { Op } from 'sequelize';
-import { Movie, Showtime, sequelize } from '../../../models';
+import {Op} from 'sequelize';
+import {Movie, Showtime, sequelize} from '../../../models';
 
 export default async (req, res) => {
-  const { query } = req;
+  const {query} = req;
 
   const options = {
     where: {},
-    include: [{ model: Showtime, as: 'Showtimes', required: true, duplicating: false }],
+    include: [{model: Showtime, as: 'Showtimes', required: true, duplicating: false}],
     order: [[Showtime, 'time', 'DESC']]
   };
 
@@ -20,7 +20,7 @@ export default async (req, res) => {
       WHERE name @@ plainto_tsquery('english', :query);
     `, {
       model: Movie,
-      replacements: { query: query.search }
+      replacements: {query: query.search}
     });
 
     filteredIds = results.map(result => result.id);

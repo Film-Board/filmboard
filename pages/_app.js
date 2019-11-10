@@ -1,9 +1,10 @@
+import React from 'react';
 import App from 'next/app';
-import { Container } from 'rbx';
+import {Container} from 'rbx';
 import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
 import Navbar from '../components/navbar';
-import { getBaseURL } from '../common/helpers';
+import {getBaseURL} from '../common/helpers';
 import '../styles/main.scss';
 
 export default class MyApp extends App {
@@ -12,11 +13,11 @@ export default class MyApp extends App {
 
     const pages = await (await fetch(`${getBaseURL(appContext.ctx)}/api/pages`)).json();
 
-    return { ...appProps, pages };
+    return {...appProps, pages};
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const {Component, pageProps} = this.props;
 
     return (
       <div>
@@ -28,7 +29,7 @@ export default class MyApp extends App {
           <Navbar pages={this.props.pages}/>
         </Container>
 
-        <Component {...pageProps} />
+        <Component {...pageProps}/>
       </div>
     );
   }

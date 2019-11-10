@@ -1,4 +1,5 @@
-import ReactMapGL, { Popup } from 'react-map-gl';
+import React from 'react';
+import ReactMapGL, {Popup} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './styles/location.scss';
 
@@ -13,13 +14,13 @@ class Location extends React.Component {
     this.onViewportChange = this.onViewportChange.bind(this);
   }
 
-  onViewportChange = viewport => {
-    const { width, height, ...etc } = viewport;
-    this.setState({ viewport: etc });
+  onViewportChange(viewport) {
+    const {width, height, ...etc} = viewport;
+    this.setState({viewport: etc});
   }
 
   render() {
-    const { viewport } = this.state;
+    const {viewport} = this.state;
     return (
       <div className="map-container">
         <ReactMapGL

@@ -1,13 +1,13 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
-import { Column, Block, Container, Section, Title } from 'rbx';
-import { getBaseURL } from '../common/helpers';
+import {Section} from 'rbx';
+import {getBaseURL} from '../common/helpers';
 import UpcomingMovies from '../components/movies-upcoming';
 import ArchivedMovies from '../components/movies-archived';
 import './styles/all-movies.scss';
 
 class AllMovies extends React.Component {
-  static async getInitialProps({ req }) {
+  static async getInitialProps({req}) {
     const movies = await (await fetch(`${getBaseURL(req)}/api/movies?limit=20`)).json();
 
     const upcoming = [];
@@ -31,7 +31,7 @@ class AllMovies extends React.Component {
       }
     });
 
-    return { movies, upcoming, archived };
+    return {movies, upcoming, archived};
   }
 
   render() {

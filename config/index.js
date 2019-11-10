@@ -1,5 +1,3 @@
-const path = require('path');
-
 const config = {
   DB_URL: process.env.DB_URL,
   DB_DIALECT: process.env.DB_DIALECT,

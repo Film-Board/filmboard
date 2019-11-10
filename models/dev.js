@@ -1,4 +1,4 @@
-const { sequelize } = require('.');
+const {sequelize} = require('.');
 
 (async () => {
   await sequelize.sync();

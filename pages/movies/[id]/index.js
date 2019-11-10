@@ -1,7 +1,7 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
-import { Column, Block, Level, Container, Section, Title } from 'rbx';
-import { getBaseURL } from '../../../common/helpers';
+import {Column, Block, Level, Container, Section, Title} from 'rbx';
+import {getBaseURL} from '../../../common/helpers';
 import VideoBackground from '../../../components/video-background';
 import Poster from '../../../components/poster';
 import Prices from '../../../components/movie-prices';
@@ -40,10 +40,10 @@ class ShowMovie extends React.Component {
                   </Column>
 
                   <Column narrow>
-                    {this.props.Showtimes.map(({ time }) => {
+                    {this.props.Showtimes.map(({time}) => {
                       const t = new Date(time);
 
-                      return (<Showtime date={t} key={t}/>);
+                      return (<Showtime key={t} date={t}/>);
                     })}
                   </Column>
                 </Level>

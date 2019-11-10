@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Section, Table, Checkbox, Field, Control, Title, Input, Button, Label } from 'rbx';
-import { withAuthSync, fetchWithAuth } from '../utils/auth';
+import {Container, Section, Table, Checkbox, Field, Control, Title, Input, Button, Label} from 'rbx';
+import {withAuthSync, fetchWithAuth} from '../utils/auth';
 
 class Users extends React.Component {
   constructor(props) {
@@ -20,64 +20,66 @@ class Users extends React.Component {
   static async getInitialProps(ctx) {
     const users = await fetchWithAuth('/api/users', {}, ctx);
 
-    return { users };
+    return {users};
   }
 
   componentDidMount() {
-    this.setState({ users: this.props.users });
+    this.setState({users: this.props.users});
   }
 
   async addUser(e) {
     e.preventDefault();
 
-    const { users, newEmail } = this.state;
+    const {users, newEmail} = this.state;
 
-    const newUser = { email: newEmail, canEditPages: true, canManageUsers: false };
+    const newUser = {email: newEmail, canEditPages: true, canManageUsers: false};
 
     users.push(newUser);
 
     this.toggleSaving();
 
-    await fetchWithAuth('/api/users', { method: 'POST', body: newUser });
+    await fetchWithAuth('/api/users', {method: 'POST', body: newUser});
 
     this.toggleSaving();
-    this.setState({ users, newEmail: '' });
+    this.setState({users, newEmail: ''});
   }
 
   async editUser(user) {
     this.toggleSaving();
 
-    await fetchWithAuth('/api/users', { method: 'PUT', body: user });
+    await fetchWithAuth('/api/users', {method: 'PUT', body: user});
 
     this.toggleSaving();
 
     // Update state
-    const users = this.state.users.map(u => {
-      if (u.email === user.email) {
-        return user;
-      }
+    this.setState(({users}) => ({
+      users: users.map(u => {
+        if (u.email === user.email) {
+          return user;
+        }
 
-      return u;
-    });
-
-    this.setState({ users });
+        return u;
+      })
+    }));
   }
 
   async deleteUser(email) {
     this.toggleSaving();
 
-    await fetchWithAuth('/api/users', { method: 'DELETE', body: { email } });
+    await fetchWithAuth('/api/users', {method: 'DELETE', body: {email}});
 
     this.toggleSaving();
 
     // Update state
-    this.setState({ users: this.state.users.filter(u => u.email !== email) });
+    this.setState(({users}) => ({
+      users: users.filter(u => u.email !== email)
+    }));
   }
 
   toggleSaving() {
-    this.setState({
-      saving: !this.state.saving
-    });
+    this.setState(({saving}) => ({
+      saving: !saving
+    }));
   }
 
   render() {
@@ -94,7 +96,7 @@ class Users extends React.Component {
               <Field.Body>
                 <Field>
                   <Control>
-                    <Input type="email" required placeholder="lcook@mtu.edu" value={this.state.newEmail} onChange={e => this.setState({ newEmail: e.target.value })}/>
+                    <Input required type="email" placeholder="lcook@mtu.edu" value={this.state.newEmail} onChange={e => this.setState({newEmail: e.target.value})}/>
                   </Control>
                 </Field>
                 <Field>
@@ -116,11 +118,11 @@ class Users extends React.Component {
               </Table.Row>
             </Table.Head>
             <Table.Body>
-              {this.state.users.map((user, i) => (
-                <Table.Row key={i}>
+              {this.state.users.map(user => (
+                <Table.Row key={user.id}>
                   <Table.Cell>{user.email}</Table.Cell>
-                  <Table.Cell><Checkbox defaultChecked={user.canEditPages} onChange={e => this.editUser({ email: user.email, canEditPages: e.target.checked })}/></Table.Cell>
-                  <Table.Cell><Checkbox defaultChecked={user.canManageUsers} onChange={e => this.editUser({ email: user.email, canManageUsers: e.target.checked })}/></Table.Cell>
+                  <Table.Cell><Checkbox defaultChecked={user.canEditPages} onChange={e => this.editUser({email: user.email, canEditPages: e.target.checked})}/></Table.Cell>
+                  <Table.Cell><Checkbox defaultChecked={user.canManageUsers} onChange={e => this.editUser({email: user.email, canManageUsers: e.target.checked})}/></Table.Cell>
                   <Table.Cell><Button color="danger" onClick={() => this.deleteUser(user.email)}>Remove</Button></Table.Cell>
                 </Table.Row>
               ))}

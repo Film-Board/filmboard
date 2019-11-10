@@ -1,4 +1,5 @@
-import { Container, Title } from 'rbx';
+import React from 'react';
+import {Container, Title} from 'rbx';
 import MoviesContainer from './movies-container';
 
 export default props => (

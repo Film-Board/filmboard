@@ -1,8 +1,8 @@
 import React from 'react';
-import { Field, Control, Tag } from 'rbx';
+import {Field, Control, Tag} from 'rbx';
 
 export default props => (
-  <Field kind="group" multiline>
+  <Field multiline kind="group">
     <Control>
       <Tag.Group gapless>
         <Tag color="warning" className="has-text-weight-bold">${props.ticketPrice}</Tag>

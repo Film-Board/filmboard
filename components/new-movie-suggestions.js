@@ -1,7 +1,7 @@
 import React from 'react';
-import { Table, Icon, Button, Box } from 'rbx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import {Table, Icon, Button, Box} from 'rbx';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 
 class Suggestions extends React.Component {
   render() {
@@ -10,8 +10,8 @@ class Suggestions extends React.Component {
         <Box>
           <Table striped>
             <Table.Body>
-              {this.props.suggestions.map((suggestion, i) => (
-                <Table.Row key={i}>
+              {this.props.suggestions.map(suggestion => (
+                <Table.Row key={suggestion.title}>
                   <Table.Cell>{suggestion.title}</Table.Cell>
                   <Table.Cell>{new Date(suggestion.release_date).getFullYear()}</Table.Cell>
                   <Table.Cell>

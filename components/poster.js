@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'rbx';
+import {Image} from 'rbx';
 import './styles/poster.scss';
 
 export default props => (

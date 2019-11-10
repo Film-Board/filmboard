@@ -1,10 +1,10 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
-import { Title, Section, Container } from 'rbx';
+import {Title, Section, Container} from 'rbx';
 import Router from 'next/router';
 import PageEditor from '../../../components/page-editor';
-import { getBaseURL } from '../../../common/helpers';
-import { withAuthSync, fetchWithAuth } from '../../utils/auth';
+import {getBaseURL} from '../../../common/helpers';
+import {withAuthSync, fetchWithAuth} from '../../utils/auth';
 
 class EditPage extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class EditPage extends React.Component {
         <Section>
           <Container>
             <Title>Edit Page</Title>
-            <PageEditor onSubmit={this.handleSubmit} name={this.props.name} content={this.props.content}/>
+            <PageEditor name={this.props.name} content={this.props.content} onSubmit={this.handleSubmit}/>
           </Container>
         </Section>
       </div>

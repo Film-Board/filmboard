@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactMde from "react-mde";
-import * as Showdown from "showdown";
-import { Field, Control, Input, Button, Icon } from 'rbx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave } from '@fortawesome/free-solid-svg-icons';
-import "react-mde/lib/styles/css/react-mde-all.css";
+import ReactMde from 'react-mde';
+import * as Showdown from 'showdown';
+import {Field, Control, Input, Button, Icon} from 'rbx';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faSave} from '@fortawesome/free-solid-svg-icons';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 
 const converter = new Showdown.Converter({
   tables: true,
@@ -29,18 +29,18 @@ class PageEditor extends React.Component {
       <form onSubmit={event => this.props.onSubmit(event, this.state)}>
         <Field>
           <Control>
-            <Input placeholder="Page name" value={this.state.name} onChange={event => this.setState({ name: event.target.value })}/>
+            <Input placeholder="Page name" value={this.state.name} onChange={event => this.setState({name: event.target.value})}/>
           </Control>
         </Field>
         <ReactMde
           className="content"
           value={this.state.content}
-          onChange={text => this.setState({ content: text })}
           selectedTab={this.state.selectedTab}
-          onTabChange={tab => this.setState({ selectedTab: tab })}
           generateMarkdownPreview={markdown => Promise.resolve(converter.makeHtml(markdown))}
+          onChange={text => this.setState({content: text})}
+          onTabChange={tab => this.setState({selectedTab: tab})}
         />
-        <Button color="success" fullwidth>
+        <Button fullwidth color="success">
           <Icon size="large">
             <FontAwesomeIcon icon={faSave} size="lg"/>
           </Icon>

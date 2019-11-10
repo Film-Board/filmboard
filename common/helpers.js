@@ -5,4 +5,4 @@ const getBaseURL = ctx => {
   return `${protocol}://${host}`;
 };
 
-export { getBaseURL };
+export {getBaseURL};

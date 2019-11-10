@@ -1,5 +1,5 @@
-import { Page } from '../../../models';
-import { protect } from '../util/auth';
+import {Page} from '../../../models';
+import {protect} from '../util/auth';
 
 export default async (req, res) => {
   const {
@@ -9,13 +9,13 @@ export default async (req, res) => {
   } = req;
 
   if (method === 'GET') {
-    res.json(await Page.findOne({ where: { name: query.name } }));
+    res.json(await Page.findOne({where: {name: query.name}}));
   }
 
   if (method === 'PUT') {
-    await protect(req, res, { permissions: ['canEditPages'] });
+    await protect(req, res, {permissions: ['canEditPages']});
 
-    const page = await Page.findOne({ where: { name: query.name } });
+    const page = await Page.findOne({where: {name: query.name}});
 
     await page.update({
       name: body.name,

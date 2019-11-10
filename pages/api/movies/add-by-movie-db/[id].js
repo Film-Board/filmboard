@@ -1,11 +1,11 @@
-import { promisify } from 'util';
+import {promisify} from 'util';
 import MovieDB from 'moviedb-promise';
 import download from 'download';
-import { hash } from '../../util/random';
-import { MOVIE_DB_KEY, BUCKET_PATH } from '../../../../config';
-import { Movie, File, Showtime, Trailer } from '../../../../models';
-import { protect } from '../../util/auth';
-import { downloadTrailer } from '../helpers';
+import {hash} from '../../util/random';
+import {MOVIE_DB_KEY, BUCKET_PATH} from '../../../../config';
+import {Movie, File, Trailer} from '../../../../models';
+import {protect} from '../../util/auth';
+import {downloadTrailer} from '../helpers';
 
 const imdb = promisify(require('imdb'));
 
@@ -13,11 +13,11 @@ const moviedb = new MovieDB(MOVIE_DB_KEY);
 
 export default async (req, res) => {
   const {
-    query: { id },
+    query: {id},
     method
   } = req;
 
-  await protect(req, res, { permissions: ['canEditPages'] });
+  await protect(req, res, {permissions: ['canEditPages']});
 
   if (method === 'POST') {
     res.json(await addMovieByMovieDBId(id));
@@ -29,8 +29,8 @@ const addMovieByMovieDBId = async movieId => {
 
   // Get movie details
   const [movie, movieCredits, movieDBConfig] = await Promise.all([
-    moviedb.movieInfo({ id: movieId }),
-    moviedb.movieCredits({ id: movieId }),
+    moviedb.movieInfo({id: movieId}),
+    moviedb.movieCredits({id: movieId}),
     moviedb.configuration()
   ]);
 
@@ -55,16 +55,16 @@ const addMovieByMovieDBId = async movieId => {
   const posterHash = hash();
   const posterPath = `${posterHash}.${movie.poster_path.split('.')[1]}`;
 
-  const [imdbMovie, { results: videos }] = await Promise.all([
+  const [imdbMovie, {results: videos}] = await Promise.all([
     imdb(movie.imdb_id),
-    moviedb.movieVideos({ id: movieId }),
+    moviedb.movieVideos({id: movieId}),
     download(`${movieDBConfig.images.base_url}original/${movie.poster_path}`, BUCKET_PATH, {
       filename: posterPath
     })
   ]);
 
   // Add Poster record
-  const poster = await File.create({ path: posterPath, hash: posterHash });
+  const poster = await File.create({path: posterPath, hash: posterHash});
 
   let youtubeTrailerId = '';
 
@@ -83,7 +83,7 @@ const addMovieByMovieDBId = async movieId => {
   const trailerHash = hash();
   let trailerFile;
   try {
-    trailerFile = await File.create({ hash: trailerHash, path: `${trailerHash}.mp4` });
+    trailerFile = await File.create({hash: trailerHash, path: `${trailerHash}.mp4`});
   } catch (error) {
     console.log(error);
   }

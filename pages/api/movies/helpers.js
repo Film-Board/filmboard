@@ -3,7 +3,7 @@ import path from 'path';
 import ytdl from 'ytdl-core';
 import ffmpeg from 'fluent-ffmpeg';
 
-const downloadTrailer = (model, url, destination, filename) => {
+export const downloadTrailer = (model, url, destination, filename) => {
   return new Promise((resolve, reject) => {
     try {
       const audioOutput = path.join(destination, `${filename}.m4a`);
@@ -11,27 +11,27 @@ const downloadTrailer = (model, url, destination, filename) => {
       const modifiedVideoOutput = path.join(destination, `${filename}.mp4`);
 
       // Download audio
-      ytdl(url, { filter: format => format.container === 'm4a' && !format.encoding })
+      ytdl(url, {filter: format => format.container === 'm4a' && !format.encoding})
         .pipe(fs.createWriteStream(audioOutput))
         .on('finish', () => {
         // Update progress of download
-          model.update({ progress: 0.25 });
+          model.update({progress: 0.25});
 
           // Download video and assemble
-          ffmpeg().input(ytdl(url, { filter: format => format.container === 'mp4' && format.resolution === '1080p' }))
+          ffmpeg().input(ytdl(url, {filter: format => format.container === 'mp4' && format.resolution === '1080p'}))
             .videoCodec('copy')
             .input(audioOutput)
             .audioCodec('copy')
             .save(videoOutput)
             .on('end', async () => {
             // Update progress of download
-              model.update({ progress: 0.60 });
+              model.update({progress: 0.60});
 
               // Crop black bars
               await cropVideo(videoOutput, modifiedVideoOutput);
 
               // Update progress of download
-              await model.update({ progress: 1 });
+              await model.update({progress: 1});
 
               resolve();
             });
@@ -85,5 +85,3 @@ function mode(arr) {
         arr.filter(v => v === b).length
   ).pop();
 }
-
-module.exports = { downloadTrailer };

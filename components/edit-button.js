@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button, Icon } from 'rbx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import {Button, Icon} from 'rbx';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEdit} from '@fortawesome/free-solid-svg-icons';
 import cookie from 'js-cookie';
 import './styles/edit-button.scss';
 
@@ -18,7 +18,7 @@ class EditButton extends React.Component {
     if (cookie.get('user')) {
       const user = JSON.parse(cookie.get('user'));
 
-      this.setState({ showButton: user.canEditPages === true });
+      this.setState({showButton: user.canEditPages === true});
     }
   }
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Navbar, Icon, Button } from 'rbx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons';
+import {Navbar, Icon, Button} from 'rbx';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faInstagram, faTwitter, faFacebookF} from '@fortawesome/free-brands-svg-icons';
 import './styles/navbar.scss';
 
 class Bar extends React.Component {
@@ -12,7 +12,7 @@ class Bar extends React.Component {
           <Navbar.Item href="#">
             <img src="/static/images/logos/filmboard.png"/>
           </Navbar.Item>
-          <Navbar.Burger />
+          <Navbar.Burger/>
         </Navbar.Brand>
         <Navbar.Menu>
           <Navbar.Segment align="start">
