@@ -3,7 +3,7 @@ import fetch from 'isomorphic-unfetch';
 import uuidv4 from 'uuid/v4';
 import chrono from 'chrono-node';
 import Router from 'next/router';
-import {Section, Column, Field, Label, Title, Button, Input, Textarea, Block, Progress, Level} from 'rbx';
+import {Section, Column, Field, Label, Title, Button, Input, Textarea, Block, Progress, Level, Control, Icon, Checkbox} from 'rbx';
 import {withAuthSync, fetchWithAuth} from '../../utils/auth';
 import DateTimeTable from '../../../components/date-time';
 import Poster from '../../../components/poster';
@@ -128,40 +128,85 @@ class EditMovie extends React.Component {
         <Column.Group centered>
           <Column size={4}>
             <form onSubmit={this.handleSubmit}>
-              <Field>
-                <Label>Name</Label>
-                <Input name="name" placeholder="Black Panther" defaultValue={this.props.name}/>
-              </Field>
-              <Field>
-                <Label>IMDB</Label>
-                <Input type="number" name="imdb" placeholder="7.0" defaultValue={this.props.imdb}/>
-              </Field>
-              <Field>
-                <Label>Rotten Tomatoes</Label>
-                <Input type="number" name="rotten-tomatoes" placeholder="70%" defaultValue={this.props.rottenTomatoes}/>
-              </Field>
-              <Field>
-                <Label>Runtime (minutes)</Label>
-                <Input type="number" name="runtime" placeholder="104" defaultValue={this.props.runtime}/>
-              </Field>
-              <Field>
-                <Label>Staring</Label>
-                <Input name="staring" placeholder="104" defaultValue={this.props.staring}/>
-              </Field>
-              <Field>
-                <Label>Directed by</Label>
-                <Input name="directedBy" placeholder="104" defaultValue={this.props.directedBy}/>
-              </Field>
-              <Field>
-                <Label>Summery</Label>
-                <Textarea placeholder="104" name="summery" defaultValue={this.props.summery}/>
-              </Field>
-
-              <Title size={3}>Showtimes</Title>
               <Block>
-                <Button color="success" onClick={this.addShowtime}>Add Showtime</Button>
+                <Title size={4}>Details</Title>
+
+                <Field>
+                  <Label>Name</Label>
+                  <Input name="name" placeholder="Black Panther" defaultValue={this.props.name}/>
+                </Field>
+                <Field>
+                  <Label>IMDB</Label>
+                  <Input type="number" name="imdb" placeholder="7.0" defaultValue={this.props.imdb}/>
+                </Field>
+                <Field>
+                  <Label>Rotten Tomatoes</Label>
+                  <Input type="number" name="rotten-tomatoes" placeholder="70%" defaultValue={this.props.rottenTomatoes}/>
+                </Field>
+                <Field>
+                  <Label>Runtime (minutes)</Label>
+                  <Input type="number" name="runtime" placeholder="104" defaultValue={this.props.runtime}/>
+                </Field>
+                <Field>
+                  <Label>Staring</Label>
+                  <Input name="staring" placeholder="Me" defaultValue={this.props.staring}/>
+                </Field>
+                <Field>
+                  <Label>Directed by</Label>
+                  <Input name="directedBy" placeholder="My pet" defaultValue={this.props.directedBy}/>
+                </Field>
+                <Field>
+                  <Label>Summery</Label>
+                  <Textarea placeholder="¯\_(ツ)_/¯" name="summery" defaultValue={this.props.summery}/>
+                </Field>
               </Block>
-              <DateTimeTable showtimes={this.state.showtimes} name="showtimes" onShowtimeDelete={this.deleteShowtime}/>
+
+              <Block>
+                <Title size={4}>Showtimes</Title>
+                <Button color="success" onClick={this.addShowtime}>Add Showtime</Button>
+                <DateTimeTable showtimes={this.state.showtimes} name="showtimes" onShowtimeDelete={this.deleteShowtime}/>
+              </Block>
+
+              <Block>
+                <Title size={4}>Pricing</Title>
+
+                <Field horizontal>
+                  <Field.Label size="normal">
+                    <Label>Tickets</Label>
+                  </Field.Label>
+                  <Field.Body>
+                    <Field>
+                      <Control iconLeft>
+                        <Input placeholder="3" name="ticketPrice" defaultValue={3}/>
+                        <Icon size="small" align="left">
+                          $
+                        </Icon>
+                      </Control>
+                    </Field>
+                  </Field.Body>
+                </Field>
+
+                <Field horizontal>
+                  <Field.Label size="normal">
+                    <Label>Concessions</Label>
+                  </Field.Label>
+                  <Field.Body>
+                    <Field>
+                      <Control iconLeft>
+                        <Input placeholder="1" name="concessionPrice" defaultValue={1}/>
+                        <Icon size="small" align="left">
+                          $
+                        </Icon>
+                      </Control>
+                    </Field>
+                  </Field.Body>
+                </Field>
+              </Block>
+
+              <Block>
+                <span><b>Hidden? </b></span>
+                <Checkbox name="hidden" checked={this.state.hidden} onChange={e => this.setState({hidden: e.target.checked})}/>
+              </Block>
 
               <Level>
                 <Button type="submit" color="success">Save Movie</Button>

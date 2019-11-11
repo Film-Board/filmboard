@@ -8,6 +8,10 @@ module.exports = (sequelize, type) => {
     directedBy: type.STRING,
     summery: type.STRING,
     ticketPrice: type.FLOAT,
-    concessionPrice: type.FLOAT
+    concessionPrice: type.FLOAT,
+    hidden: {
+      type: type.BOOLEAN,
+      defaultValue: true
+    }
   });
 };
