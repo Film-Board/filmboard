@@ -4,7 +4,11 @@ const config = {
   MOVIE_DB_KEY: process.env.MOVIE_DB_KEY,
   YOUTUBE_KEY: process.env.YOUTUBE_KEY,
   IS_PRODUCTION: process.env.NODE_ENV === 'production',
-  BUCKET_PATH: process.env.BUCKET_PATH
+  BUCKET_PATH: process.env.BUCKET_PATH,
+  SMTP_HOST: process.env.SMTP_HOST,
+  SMTP_USER: process.env.SMTP_USER,
+  SMTP_PASSWORD: process.env.SMTP_PASSWORD,
+  CONTACT_EMAIL: process.env.CONTACT_EMAIL
 };
 
 module.exports = config;
