@@ -37,6 +37,8 @@ class ShowMovie extends React.Component {
                   <Column className="movie-summery" size="one-third">
                     <Title className="has-text-white">{this.props.name}</Title>
                     <Block className="is-size-5 has-text-grey">{this.props.summery}</Block>
+                    <div className="has-text-grey"><b className="has-text-white">Staring</b>: {this.props.staring}</div>
+                    <div className="has-text-grey"><b className="has-text-white">Directed by</b>: {this.props.directedBy}</div>
                   </Column>
 
                   <Column narrow>
