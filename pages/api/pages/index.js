@@ -11,8 +11,8 @@ export default async (req, res) => {
     await protect(req, res, {permissions: ['canEditPages']});
 
     const newPage = await Page.create({
-      name: body.pageName,
-      content: body.pageText
+      name: body.name,
+      content: body.content
     });
 
     res.json(newPage);

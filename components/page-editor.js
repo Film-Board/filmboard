@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactMde from 'react-mde';
 import * as Showdown from 'showdown';
-import {Field, Control, Input, Button, Icon} from 'rbx';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSave} from '@fortawesome/free-solid-svg-icons';
+import {Field, Control, Input, Button, Level} from 'rbx';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 
 const converter = new Showdown.Converter({
@@ -40,13 +38,27 @@ class PageEditor extends React.Component {
           onChange={text => this.setState({content: text})}
           onTabChange={tab => this.setState({selectedTab: tab})}
         />
-        <Button fullwidth color="success">
-          <Icon size="large">
-            <FontAwesomeIcon icon={faSave} size="lg"/>
-          </Icon>
-        </Button>
+        <Level>
+          <Button color="success">
+          Save
+          </Button>
+          {this.props.removable ?
+            <Button color="danger" onClick={e => {
+              e.preventDefault();
+              this.props.onDelete();
+            }}
+            >
+        Delete
+            </Button> :
+            <div/>}
+        </Level>
       </form>
     );
   }
 }
+
+PageEditor.defaultProps = {
+  removable: true
+};
+
 export default PageEditor;

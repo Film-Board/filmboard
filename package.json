@@ -92,6 +92,9 @@
       ],
       "react/prop-types": [
         "ignore"
+      ],
+      "react/static-property-placement": [
+        "property assignment"
       ]
     }
   }

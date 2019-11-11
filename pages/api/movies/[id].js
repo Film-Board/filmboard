@@ -12,10 +12,18 @@ export default async (req, res) => {
     res.json(await getMovieById(id));
   }
 
-  await protect(req, res, {permissions: ['canEditPages']});
-
   if (method === 'PUT') {
+    await protect(req, res, {permissions: ['canEditPages']});
+
     res.json(await updateMovieAndShowtimes(id, body));
+  }
+
+  if (method === 'DELETE') {
+    await protect(req, res, {permissions: ['canEditPages']});
+
+    await Movie.destroy({where: {id}});
+
+    res.json({});
   }
 };
 

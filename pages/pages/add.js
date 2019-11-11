@@ -14,23 +14,19 @@ class AddPage extends React.Component {
   async handleSubmit(event, state) {
     event.preventDefault();
 
-    const page = await (await fetchWithAuth('/api/pages', {
+    const page = await fetchWithAuth('/api/pages', {
       method: 'post',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(state)
-    })).json();
+      body: state
+    });
 
-    Router.push(`/pages/${page.id}`);
+    Router.push(`/pages/${page.name}`);
   }
 
   render() {
     return (
       <Section>
         <Title>Add a Page</Title>
-        <PageEditor onSubmit={this.handleSubmit}/>
+        <PageEditor removable={false} onSubmit={this.handleSubmit}/>
       </Section>
     );
   }

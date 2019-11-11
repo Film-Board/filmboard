@@ -3,7 +3,7 @@ import fetch from 'isomorphic-unfetch';
 import uuidv4 from 'uuid/v4';
 import chrono from 'chrono-node';
 import Router from 'next/router';
-import {Section, Column, Field, Label, Title, Button, Input, Textarea, Block, Progress} from 'rbx';
+import {Section, Column, Field, Label, Title, Button, Input, Textarea, Block, Progress, Level} from 'rbx';
 import {withAuthSync, fetchWithAuth} from '../../utils/auth';
 import DateTimeTable from '../../../components/date-time';
 import Poster from '../../../components/poster';
@@ -64,6 +64,14 @@ class EditMovie extends React.Component {
       });
 
     Router.push(`/movies/${this.props.id}`);
+  }
+
+  async handleDelete() {
+    await fetchWithAuth(`/api/movies/${this.props.id}`, {
+      method: 'DELETE'
+    });
+
+    Router.push('/');
   }
 
   static async getInitialProps(ctx) {
@@ -155,9 +163,15 @@ class EditMovie extends React.Component {
               </Block>
               <DateTimeTable showtimes={this.state.showtimes} name="showtimes" onShowtimeDelete={this.deleteShowtime}/>
 
-              <Block>
-                <Button fullwidth type="submit" color="success">Save Movie</Button>
-              </Block>
+              <Level>
+                <Button type="submit" color="success">Save Movie</Button>
+                <Button color="danger" onClick={e => {
+                  e.preventDefault();
+                  this.handleDelete();
+                }}
+                >Delete Movie
+                </Button>
+              </Level>
             </form>
           </Column>
           <Column size={4}>

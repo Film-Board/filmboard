@@ -24,4 +24,12 @@ export default async (req, res) => {
 
     res.json(page);
   }
+
+  if (method === 'DELETE') {
+    await protect(req, res, {permissions: ['canEditPages']});
+
+    await Page.destroy({where: {name: query.name}});
+
+    res.json({});
+  }
 };

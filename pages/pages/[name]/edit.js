@@ -11,6 +11,7 @@ class EditPage extends React.Component {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -28,13 +29,21 @@ class EditPage extends React.Component {
     Router.push(`/pages/${page.name}`);
   }
 
+  async handleDelete() {
+    await fetchWithAuth(`/api/pages/${this.props.name}`, {
+      method: 'delete'
+    });
+
+    Router.push('/');
+  }
+
   render() {
     return (
       <div>
         <Section>
           <Container>
             <Title>Edit Page</Title>
-            <PageEditor name={this.props.name} content={this.props.content} onSubmit={this.handleSubmit}/>
+            <PageEditor name={this.props.name} content={this.props.content} onSubmit={this.handleSubmit} onDelete={this.handleDelete}/>
           </Container>
         </Section>
       </div>
