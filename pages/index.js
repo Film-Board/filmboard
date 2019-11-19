@@ -10,7 +10,7 @@ class Homepage extends React.Component {
   static async getInitialProps(ctx) {
     const filterPeriod = 14 * 24 * 60 * 60; // In seconds
     const now = new Date();
-    const filterCutoff = new Date(now.getTime() + filterPeriod * 1000);
+    const filterCutoff = new Date(now.getTime() + (filterPeriod * 1000));
 
     const movies = await (await fetch(`${getBaseURL(ctx)}/api/movies?limit=5`)).json();
 
