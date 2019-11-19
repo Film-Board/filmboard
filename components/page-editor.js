@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMde from 'react-mde';
 import * as Showdown from 'showdown';
-import {Field, Control, Input, Button, Level} from 'rbx';
+import {Field, Control, Input, Button, Level, Label, Select} from 'rbx';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 
 const converter = new Showdown.Converter({
@@ -16,18 +16,50 @@ class PageEditor extends React.Component {
     super(props);
 
     this.state = {
+      category: props.category || 'None',
       content: props.content || 'I wore a hat!',
       name: props.name || '',
       selectedTab: 'write'
     };
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+
+    this.props.onSubmit(event, this.state);
   }
 
   render() {
     return (
-      <form onSubmit={event => this.props.onSubmit(event, this.state)}>
+      <form onSubmit={this.onSubmit}>
         <Field>
+          <Label>Name</Label>
           <Control>
             <Input placeholder="Page name" value={this.state.name} onChange={event => this.setState({name: event.target.value})}/>
+          </Control>
+        </Field>
+        <Field>
+          <Label>Category</Label>
+          <Control expanded>
+            <Level>
+              <Level.Item align="left">
+                <Select.Container>
+                  <Select value={this.state.category} onChange={e => this.setState({category: e.target.value})}>
+                    <Select.Option>None</Select.Option>
+                    {
+                      this.props.categories.map(category => (
+                        <Select.Option key={category.id}>{category.name}</Select.Option>
+                      ))
+                    }
+                  </Select>
+                </Select.Container>
+              </Level.Item>
+              <Level.Item align="left">
+                <Button as="a" href="/pages/categories/edit" color="info">Edit Categories</Button>
+              </Level.Item>
+            </Level>
           </Control>
         </Field>
         <ReactMde

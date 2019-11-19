@@ -15,7 +15,15 @@ class EditPage extends React.Component {
   }
 
   static async getInitialProps(ctx) {
-    return (await fetch(`${getBaseURL(ctx)}/api/pages/${ctx.query.name}`)).json();
+    const [props, categories] = await Promise.all([
+      ((await fetch(`${getBaseURL(ctx)}/api/pages/${ctx.query.name}`)).json()),
+      ((await fetch(`${getBaseURL(ctx)}/api/pages/categories`)).json())
+    ]);
+
+    return {
+      ...props,
+      categories
+    };
   }
 
   async handleSubmit(event, state) {
@@ -43,7 +51,7 @@ class EditPage extends React.Component {
         <Section>
           <Container>
             <Title>Edit Page</Title>
-            <PageEditor name={this.props.name} content={this.props.content} onSubmit={this.handleSubmit} onDelete={this.handleDelete}/>
+            <PageEditor name={this.props.name} content={this.props.content} categories={this.props.categories} category={this.props.PageCategory.name} onSubmit={this.handleSubmit} onDelete={this.handleDelete}/>
           </Container>
         </Section>
       </div>

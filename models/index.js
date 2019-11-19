@@ -28,5 +28,6 @@ Movie.hasOne(Trailer);
 Trailer.hasOne(File);
 
 PageCategory.hasMany(Page);
+Page.belongsTo(PageCategory);
 
 module.exports = {sequelize, File, User, Movie, Page, PageCategory, Showtime, Trailer};

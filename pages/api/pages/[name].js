@@ -1,4 +1,4 @@
-import {Page} from '../../../models';
+import {Page, PageCategory} from '../../../models';
 import {protect} from '../util/auth';
 
 export default async (req, res) => {
@@ -9,7 +9,7 @@ export default async (req, res) => {
   } = req;
 
   if (method === 'GET') {
-    res.json(await Page.findOne({where: {name: query.name}}));
+    res.json(await Page.findOne({where: {name: query.name}, include: {all: true}}));
   }
 
   if (method === 'PUT') {
@@ -17,10 +17,21 @@ export default async (req, res) => {
 
     const page = await Page.findOne({where: {name: query.name}});
 
-    await page.update({
+    const updateQuery = {
       name: body.name,
       content: body.content
-    });
+    };
+
+    if (body.category === 'None') {
+      updateQuery.PageCategoryId = null;
+    } else if (typeof body.category === 'string') {
+      // Find category
+      const category = await PageCategory.findOne({where: {name: body.category}});
+
+      updateQuery.PageCategoryId = category.id;
+    }
+
+    await page.update(updateQuery);
 
     res.json(page);
   }
