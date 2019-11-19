@@ -5,6 +5,7 @@ const fileModel = require('./File');
 const userModel = require('./User');
 const movieModel = require('./Movie');
 const pageModel = require('./Page');
+const pageCategoryModel = require('./PageCategory');
 const showtimeModel = require('./Showtime');
 const trailerModel = require('./Trailer');
 
@@ -16,6 +17,7 @@ const File = fileModel(sequelize, Sequelize);
 const User = userModel(sequelize, Sequelize);
 const Movie = movieModel(sequelize, Sequelize);
 const Page = pageModel(sequelize, Sequelize);
+const PageCategory = pageCategoryModel(sequelize, Sequelize);
 const Showtime = showtimeModel(sequelize, Sequelize);
 const Trailer = trailerModel(sequelize, Sequelize);
 
@@ -25,4 +27,6 @@ Movie.hasOne(Trailer);
 
 Trailer.hasOne(File);
 
-module.exports = {sequelize, File, User, Movie, Page, Showtime, Trailer};
+PageCategory.hasMany(Page);
+
+module.exports = {sequelize, File, User, Movie, Page, PageCategory, Showtime, Trailer};

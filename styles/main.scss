@@ -14,6 +14,8 @@ $white: #FAFAFA;
 $body-background-color: $white;
 $body-family: 'Soin Sans Neue';
 
+$success: $yellow;
+
 @import "~bulma/sass/utilities/functions";
 @import "~bulma/bulma";
 @import "~rbx/rbx";

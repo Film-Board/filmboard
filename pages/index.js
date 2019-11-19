@@ -1,9 +1,9 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
+import {Section, Title} from 'rbx';
 import {getBaseURL} from '../common/helpers';
 import MovieHero from '../components/movie-hero';
 import MoviesContainer from '../components/movies-container';
-import {Section, Title} from 'rbx';
 import './styles/index.scss';
 
 class Homepage extends React.Component {
@@ -12,10 +12,10 @@ class Homepage extends React.Component {
     const now = new Date();
     const filterCutoff = new Date(now.getTime() + filterPeriod * 1000);
 
-    let movies = await (await fetch(`${getBaseURL(ctx)}/api/movies?limit=5`)).json();
+    const movies = await (await fetch(`${getBaseURL(ctx)}/api/movies?limit=5`)).json();
 
     let upcomingMovies = [];
-    let currentMovies = [];
+    const currentMovies = [];
 
     movies.forEach(movie => {
       if (movie.Showtimes.length === 0) {
@@ -80,7 +80,7 @@ class Homepage extends React.Component {
               <Title>Now Showing</Title>
               <MoviesContainer movies={this.props.currentMovies}/>
             </Section>
-          ) : (<div></div>)
+          ) : (<div/>)
         }
         {
           this.props.upcomingMovies.length > 0 ? (
@@ -88,10 +88,10 @@ class Homepage extends React.Component {
               <Title>Upcoming Movies</Title>
               <MoviesContainer movies={this.props.upcomingMovies}/>
             </Section>
-          ) : (<div></div>)
+          ) : (<div/>)
         }
       </div>
-    )
+    );
   }
 }
 
