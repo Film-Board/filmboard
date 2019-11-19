@@ -1,0 +1,9 @@
+.movie-tile {
+  .poster-container {
+    transition: all 0.2s ease-in-out;
+  }
+
+  .poster-container:hover {
+    transform: scale(1.08);
+  }
+}

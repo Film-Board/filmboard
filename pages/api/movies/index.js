@@ -1,4 +1,4 @@
-import {Movie, Showtime} from '../../../models';
+import {Movie, Showtime, Trailer} from '../../../models';
 
 export default async (req, res) => {
   const {
@@ -11,7 +11,14 @@ export default async (req, res) => {
   if (method === 'GET') {
     res.json(await Movie.findAll({
       limit,
-      include: Movie.associations.Showtimes,
+      include: [
+        Movie.associations.Poster,
+        Movie.associations.Showtimes,
+        {
+          model: Trailer,
+          include: Trailer.associations.File
+        }
+      ],
       order: [[Showtime, 'time', 'DESC']]
     }));
   }
