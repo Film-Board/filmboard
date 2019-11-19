@@ -141,7 +141,7 @@ class EditMovie extends React.Component {
                 </Field>
                 <Field>
                   <Label>Rotten Tomatoes</Label>
-                  <Input type="number" name="rotten-tomatoes" placeholder="70%" defaultValue={this.props.rottenTomatoes}/>
+                  <Input type="number" name="rottenTomatoes" placeholder="70%" defaultValue={this.props.rottenTomatoes}/>
                 </Field>
                 <Field>
                   <Label>Runtime (minutes)</Label>
