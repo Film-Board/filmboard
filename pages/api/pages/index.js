@@ -19,6 +19,6 @@ export default async (req, res) => {
   }
 
   if (method === 'GET') {
-    res.json(await Page.findAll({attributes: {exclude: ['content']}}));
+    res.json(await Page.findAll({attributes: {exclude: ['content']}, include: {all: true}}));
   }
 };

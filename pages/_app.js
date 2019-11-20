@@ -11,7 +11,7 @@ export default class MyApp extends App {
   static async getInitialProps(appContext) {
     const appProps = await App.getInitialProps(appContext);
 
-    const pages = await (await fetch(`${getBaseURL(appContext.ctx)}/api/pages`)).json();
+    const pages = await (await fetch(`${getBaseURL(appContext.ctx)}/api/pages/navbar`)).json();
 
     return {...appProps, pages};
   }
@@ -26,7 +26,7 @@ export default class MyApp extends App {
           <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
         </Head>
         <Container>
-          <Navbar pages={this.props.pages}/>
+          <Navbar pages={this.props.pages.pages} folders={this.props.pages.folders}/>
         </Container>
 
         <Component {...pageProps}/>

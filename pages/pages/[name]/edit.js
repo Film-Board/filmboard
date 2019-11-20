@@ -51,7 +51,7 @@ class EditPage extends React.Component {
         <Section>
           <Container>
             <Title>Edit Page</Title>
-            <PageEditor name={this.props.name} content={this.props.content} categories={this.props.categories} category={this.props.PageCategory.name} onSubmit={this.handleSubmit} onDelete={this.handleDelete}/>
+            <PageEditor name={this.props.name} content={this.props.content} categories={this.props.categories} category={this.props.PageCategoryId ? this.props.PageCategory.name : 'None'} onSubmit={this.handleSubmit} onDelete={this.handleDelete}/>
           </Container>
         </Section>
       </div>

@@ -9,7 +9,7 @@ class Bar extends React.Component {
     return (
       <Navbar color="black">
         <Navbar.Brand>
-          <Navbar.Item href="#">
+          <Navbar.Item href="/">
             <img src="/static/images/logos/filmboard.png"/>
           </Navbar.Item>
           <Navbar.Burger/>
@@ -18,9 +18,22 @@ class Bar extends React.Component {
           <Navbar.Segment align="start">
             {this.props.pages.map(page => {
               return (
-                <Navbar.Item key={page.id} href={`/pages/${page.name}`}>{page.name}</Navbar.Item>
+                <Navbar.Item key={page.name} href={`/pages/${page.name}`}>{page.name}</Navbar.Item>
               );
             })}
+
+            {Object.keys(this.props.folders).map(category => (
+              <Navbar.Item key={category} dropdown>
+                <Navbar.Link>{category}</Navbar.Link>
+                <Navbar.Dropdown>
+                  {
+                    this.props.folders[category].map(page => (
+                      <Navbar.Item key={page.id} href={`/pages/${page.name}`}>{page.name}</Navbar.Item>
+                    ))
+                  }
+                </Navbar.Dropdown>
+              </Navbar.Item>
+            ))}
           </Navbar.Segment>
 
           <Navbar.Segment align="end">
