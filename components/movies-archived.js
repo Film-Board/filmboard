@@ -32,7 +32,7 @@ class ArchivedMovies extends React.Component {
   render() {
     return (
       <Container>
-        <Title size={1}>Archived</Title>
+        <Title size={1}>Past Movies</Title>
 
         <Column.Group centered>
           <Column size="half">
