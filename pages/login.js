@@ -4,8 +4,8 @@ import Link from 'next/link';
 import cookie from 'js-cookie';
 import {Section} from 'rbx';
 import GoogleLogin from 'react-google-login';
-import {fetchWithAuth} from './utils/auth';
 import {GOOGLE_CLIENT_ID} from '../config';
+import {fetchWithAuth} from './utils/auth';
 
 class LoginButton extends React.Component {
   constructor(props) {

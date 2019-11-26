@@ -4,7 +4,7 @@ import fetch from 'isomorphic-unfetch';
 import nextCookie from 'next-cookies';
 import {getBaseURL} from '../../common/helpers';
 
-const redirectOnError = (ctx) => {
+const redirectOnError = ctx => {
   if (process.browser) {
     Router.push(`/login?redirect=${Router.asPath}`);
   } else {

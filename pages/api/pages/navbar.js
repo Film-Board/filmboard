@@ -15,6 +15,9 @@ export default async (req, res) => {
       },
       {
         name: 'Location'
+      },
+      {
+        name: 'Movies'
       }
     ];
 
