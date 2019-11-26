@@ -1,6 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
-import {Section, Title} from 'rbx';
+import {Section, Title, Column} from 'rbx';
 import {getBaseURL} from '../common/helpers';
 import MovieHero from '../components/movie-hero';
 import MoviesContainer from '../components/movies-container';
@@ -71,9 +72,28 @@ class Homepage extends React.Component {
   render() {
     return (
       <div>
-        <Section>
-          <MovieHero {...this.props.heroMovie}/>
-        </Section>
+        {
+          Object.keys(this.props.heroMovie).length === 0 ? (
+            <Section>
+              <Column.Group centered>
+                <Column size="half" className="has-text-centered">
+                  <Title size={3}>We&aposre not currently showing any movies.</Title>
+                  <Title size={5}>
+                    <Link href="/movies">
+                      <a>Here are </a>
+                    </Link>
+
+                    some past movies we&aposve shown.
+                  </Title>
+                </Column>
+              </Column.Group>
+            </Section>
+          ) : (
+            <Section>
+              <MovieHero {...this.props.heroMovie}/>
+            </Section>
+          )
+        }
         {
           this.props.currentMovies.length > 0 ? (
             <Section>
