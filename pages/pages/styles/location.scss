@@ -4,4 +4,13 @@
   position: absolute;
   left: 0;
   top: 0;
+
+  .mapboxgl-popup {
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    cursor: default;
+  }
 }
