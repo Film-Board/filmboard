@@ -5,6 +5,7 @@ import cookie from 'js-cookie';
 import {Section} from 'rbx';
 import GoogleLogin from 'react-google-login';
 import {fetchWithAuth} from './utils/auth';
+import {GOOGLE_CLIENT_ID} from '../config';
 
 class LoginButton extends React.Component {
   constructor(props) {
@@ -41,8 +42,7 @@ class LoginButton extends React.Component {
     return (
       <Section>
         <GoogleLogin
-          // TODO: yeah... this should be in an env var
-          clientId="377683111950-606bk3n3bvma1f8f26d24tce5a6d3925.apps.googleusercontent.com"
+          clientId={GOOGLE_CLIENT_ID}
           buttonText="Login"
           cookiePolicy="single_host_origin"
           onSuccess={this.checkLogin}

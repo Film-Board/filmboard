@@ -4,17 +4,20 @@ import fetch from 'isomorphic-unfetch';
 import nextCookie from 'next-cookies';
 import {getBaseURL} from '../../common/helpers';
 
+const redirectOnError = (ctx) => {
+  if (process.browser) {
+    Router.push(`/login?redirect=${Router.asPath}`);
+  } else {
+    ctx.res.writeHead(301, {Location: `/login?redirect=${ctx.req.url}`});
+    ctx.res.end();
+  }
+};
+
 export const auth = ctx => {
   const {token} = nextCookie(ctx);
 
-  if (ctx.req && !token) {
-    ctx.res.writeHead(302, {Location: '/login'});
-    ctx.res.end();
-    return;
-  }
-
   if (!token) {
-    Router.push('/login');
+    return redirectOnError(ctx);
   }
 
   return token;
@@ -58,18 +61,6 @@ export const fetchWithAuth = async (url, options, ctx) => {
   }
 
   const mergedOptions = {...options, headers};
-
-  const redirectOnError = () => {
-    if (options.redirectOnError === false) {
-      throw new Error('Unauthorized.');
-    }
-
-    if (process.browser) {
-      Router.push('/login');
-    } else {
-      ctx.res.writeHead(301, {Location: '/login'});
-    }
-  };
 
   try {
     const res = await fetch(`${ctx ? getBaseURL(ctx) : ''}${url}`, mergedOptions);
