@@ -69,9 +69,23 @@ export const fetchWithAuth = async (url, options, ctx) => {
       return res.json();
     }
 
-    return redirectOnError();
-  } catch (_) {
-    return redirectOnError();
+    if (options.redirectOnError) {
+      return redirectOnError();
+    }
+
+    // Attempt to parse response
+    let j = {};
+    try {
+      j = await res.json();
+    } catch (_) {}
+
+    throw new Error(Object.keys(j) === 0 ? 'Bad response.' : j.error);
+  } catch (error) {
+    if (options.redirectOnError) {
+      return redirectOnError();
+    }
+
+    throw error;
   }
 };
 

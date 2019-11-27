@@ -12,6 +12,10 @@ class LoginButton extends React.Component {
     super(props);
 
     this.checkLogin = this.checkLogin.bind(this);
+
+    this.state = {
+      errorMessage: ''
+    };
   }
 
   async checkLogin({tokenId}) {
@@ -25,9 +29,8 @@ class LoginButton extends React.Component {
 
       // Callback
       this.props.onLogin();
-    } catch (_) {
-      // TODO: better UX
-      console.log('bad user');
+    } catch (error) {
+      this.setState({errorMessage: error.message});
       cookie.remove('token');
     }
   }
@@ -37,6 +40,11 @@ class LoginButton extends React.Component {
       <Section>
         <Column.Group>
           <Column className="has-text-centered">
+            {this.state.errorMessage === '' ? (
+              <div/>
+            ) : (
+              <Title size={3}>{this.state.errorMessage}</Title>
+            )}
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Login"
