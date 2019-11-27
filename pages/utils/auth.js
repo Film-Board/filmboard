@@ -74,3 +74,25 @@ export const fetchWithAuth = async (url, options, ctx) => {
     return redirectOnError();
   }
 };
+
+export const optimisticAuthFetch = async (url, options, ctx) => {
+  const {token} = nextCookie(ctx);
+  const headers = {};
+
+  if (token) {
+    headers.Authorization = token;
+  }
+
+  if (typeof options.body === 'object') {
+    headers['Content-Type'] = 'application/json';
+    options.body = JSON.stringify(options.body);
+  }
+
+  const mergedOptions = {...options, headers};
+
+  const res = await fetch(`${ctx ? getBaseURL(ctx) : ''}${url}`, mergedOptions);
+
+  if (res.ok) {
+    return res.json();
+  }
+};
