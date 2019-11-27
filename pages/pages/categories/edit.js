@@ -2,7 +2,7 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import {Section, Container, Column, Title, Table, Button, Field, Control, Input} from 'rbx';
 import {getBaseURL} from '../../../common/helpers';
-import {withAuthSync, fetchWithAuth} from '../../utils/auth';
+import {withAuthSync, fetchWithAuth} from '../../../components/lib/auth';
 
 class EditCategories extends React.Component {
   constructor(props) {

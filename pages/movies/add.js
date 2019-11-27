@@ -2,7 +2,7 @@ import React from 'react';
 import Router from 'next/router';
 import fetch from 'isomorphic-unfetch';
 import {Title, Column, Section} from 'rbx';
-import {withAuthSync, fetchWithAuth} from '../utils/auth';
+import {withAuthSync, fetchWithAuth} from '../../components/lib/auth';
 import NewMovieSearch from '../../components/new-movie-search';
 import Suggestions from '../../components/new-movie-suggestions';
 

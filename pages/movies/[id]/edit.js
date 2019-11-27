@@ -4,10 +4,10 @@ import uuidv4 from 'uuid/v4';
 import chrono from 'chrono-node';
 import Router from 'next/router';
 import {Section, Column, Field, Label, Title, Button, Input, Textarea, Block, Progress, Level, Control, Icon, Checkbox} from 'rbx';
-import {withAuthSync, fetchWithAuth} from '../../utils/auth';
 import DateTimeTable from '../../../components/date-time';
 import Poster from '../../../components/poster';
 import {getBaseURL} from '../../../common/helpers';
+import {withAuthSync, fetchWithAuth} from '../../../components/lib/auth';
 
 class EditMovie extends React.Component {
   constructor(props) {

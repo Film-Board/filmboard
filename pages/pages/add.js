@@ -1,7 +1,7 @@
 import React from 'react';
 import {Title, Section} from 'rbx';
 import Router from 'next/router';
-import {withAuthSync, fetchWithAuth} from '../utils/auth';
+import {withAuthSync, fetchWithAuth} from '../../components/lib/auth';
 import PageEditor from '../../components/page-editor';
 
 class AddPage extends React.Component {

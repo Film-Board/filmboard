@@ -1,6 +1,6 @@
 import React from 'react';
 import {Section} from 'rbx';
-import {optimisticAuthFetch} from '../utils/auth';
+import {optimisticAuthFetch} from '../../components/lib/auth';
 import UpcomingMovies from '../../components/movies-upcoming';
 import ArchivedMovies from '../../components/movies-archived';
 import './styles/all-movies.scss';

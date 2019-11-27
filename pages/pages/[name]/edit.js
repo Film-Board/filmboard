@@ -4,7 +4,7 @@ import {Title, Section, Container} from 'rbx';
 import Router from 'next/router';
 import PageEditor from '../../../components/page-editor';
 import {getBaseURL} from '../../../common/helpers';
-import {withAuthSync, fetchWithAuth} from '../../utils/auth';
+import {withAuthSync, fetchWithAuth} from '../../../components/lib/auth';
 
 class EditPage extends React.Component {
   constructor(props) {
