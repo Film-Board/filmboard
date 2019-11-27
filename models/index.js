@@ -22,10 +22,9 @@ const Showtime = showtimeModel(sequelize, Sequelize);
 const Trailer = trailerModel(sequelize, Sequelize);
 
 Movie.hasMany(Showtime);
-Movie.hasOne(File, {as: 'Poster'});
-Movie.hasOne(Trailer);
-
-Trailer.hasOne(File);
+Movie.belongsTo(File, {as: 'Poster'});
+Movie.belongsTo(Trailer);
+Trailer.belongsTo(File);
 
 PageCategory.hasMany(Page);
 Page.belongsTo(PageCategory);

@@ -52,6 +52,8 @@ class EditMovie extends React.Component {
       return chrono.parseDate(`${showtimeDate} ${rawData.getAll('showtimes-time')[i]}`);
     });
 
+    data.hidden = this.state.hidden;
+
     // Showtimes are in array, this
     // is not relevent.
     delete data['showtimes-date'];
@@ -163,7 +165,7 @@ class EditMovie extends React.Component {
 
               <Block>
                 <Title size={4}>Showtimes</Title>
-                <Button color="success" onClick={this.addShowtime}>Add Showtime</Button>
+                <Button color="success" type="button" onClick={this.addShowtime}>Add Showtime</Button>
                 <DateTimeTable showtimes={this.state.showtimes} name="showtimes" onShowtimeDelete={this.deleteShowtime}/>
               </Block>
 

@@ -76,7 +76,7 @@ class Login extends React.Component {
 
     return (
       <div>
-        You&apos;re already logged in.  Want to <Link href="/logout">logout</Link>?
+        You&apos;re already logged in.  Want to <Link href="/logout"><a>logout</a></Link>?
       </div>
     );
   }

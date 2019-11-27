@@ -33,6 +33,7 @@
     "express-session": "^1.16.2",
     "finale-rest": "^1.0.6",
     "fluent-ffmpeg": "^2.1.2",
+    "hasha": "^5.1.0",
     "hoist-non-react-statics": "^3.3.0",
     "imdb": "^1.1.0",
     "isomorphic-unfetch": "^3.0.0",

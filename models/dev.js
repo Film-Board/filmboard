@@ -1,5 +1,5 @@
 const {sequelize} = require('.');
 
 (async () => {
-  await sequelize.sync();
+  await sequelize.sync({force: true});
 })();

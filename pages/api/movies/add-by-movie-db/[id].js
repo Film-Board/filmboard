@@ -1,7 +1,9 @@
 import {promisify} from 'util';
+import fs from 'fs';
+import path from 'path';
 import MovieDB from 'moviedb-promise';
 import download from 'download';
-import {hash} from '../../util/random';
+import hasha from 'hasha';
 import {MOVIE_DB_KEY, BUCKET_PATH} from '../../../../config';
 import {Movie, File, Trailer} from '../../../../models';
 import {protect} from '../../util/auth';
@@ -52,19 +54,25 @@ const addMovieByMovieDBId = async movieId => {
     }, '');
 
   // Get IMDB results, potential trailers, and download the poster
-  const posterHash = hash();
+  const posterHash = hasha(movie.poster_path);
   const posterPath = `${posterHash}.${movie.poster_path.split('.')[1]}`;
+  let poster = {};
+
+  if (fs.existsSync(path.join(BUCKET_PATH, posterPath))) {
+    poster = await File.findOne({where: {hash: posterHash}});
+  } else {
+    // Add Poster record
+    poster = await File.create({path: posterPath, hash: posterHash});
+
+    await download(`${movieDBConfig.images.base_url}original/${movie.poster_path}`, BUCKET_PATH, {
+      filename: posterPath
+    });
+  }
 
   const [imdbMovie, {results: videos}] = await Promise.all([
     imdb(movie.imdb_id),
-    moviedb.movieVideos({id: movieId}),
-    download(`${movieDBConfig.images.base_url}original/${movie.poster_path}`, BUCKET_PATH, {
-      filename: posterPath
-    })
+    moviedb.movieVideos({id: movieId})
   ]);
-
-  // Add Poster record
-  const poster = await File.create({path: posterPath, hash: posterHash});
 
   let youtubeTrailerId = '';
 
@@ -79,23 +87,26 @@ const addMovieByMovieDBId = async movieId => {
 
   const insertedMovie = await Movie.create(movieToInsert);
 
-  const trailer = await Trailer.create({});
-  const trailerHash = hash();
-  let trailerFile;
-  try {
-    trailerFile = await File.create({hash: trailerHash, path: `${trailerHash}.mp4`});
-  } catch (error) {
-    console.log(error);
+  const trailerHash = hasha(youtubeTrailerId);
+  const trailerPath = `${trailerHash}.mp4`;
+
+  let trailer;
+  if (fs.existsSync(path.join(BUCKET_PATH, trailerPath))) {
+    const trailerFile = await File.findOne({where: {hash: trailerHash}});
+    trailer = await Trailer.findOne({where: {FileId: trailerFile.id}});
+  } else {
+    const trailerFile = await File.create({hash: trailerHash, path: trailerPath});
+    trailer = await Trailer.create({});
+    await trailer.setFile(trailerFile);
+
+    // Kick off trailer download process
+    downloadTrailer(trailer, youtubeTrailerId, BUCKET_PATH, trailerHash);
   }
 
   await Promise.all([
     insertedMovie.setPoster(poster),
-    insertedMovie.setTrailer(trailer),
-    trailer.setFile(trailerFile)
+    insertedMovie.setTrailer(trailer)
   ]);
-
-  // Kick off trailer download process
-  downloadTrailer(trailer, youtubeTrailerId, BUCKET_PATH, trailerHash);
 
   return insertedMovie;
 };
