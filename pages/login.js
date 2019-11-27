@@ -2,7 +2,7 @@ import React from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
 import cookie from 'js-cookie';
-import {Section} from 'rbx';
+import {Section, Column, Title} from 'rbx';
 import GoogleLogin from 'react-google-login';
 import {GOOGLE_CLIENT_ID} from '../config';
 import {fetchWithAuth} from './utils/auth';
@@ -41,12 +41,16 @@ class LoginButton extends React.Component {
   render() {
     return (
       <Section>
-        <GoogleLogin
-          clientId={GOOGLE_CLIENT_ID}
-          buttonText="Login"
-          cookiePolicy="single_host_origin"
-          onSuccess={this.checkLogin}
-        />
+        <Column.Group>
+          <Column className="has-text-centered">
+            <GoogleLogin
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              cookiePolicy="single_host_origin"
+              onSuccess={this.checkLogin}
+            />
+          </Column>
+        </Column.Group>
       </Section>
     );
   }
@@ -75,9 +79,14 @@ class Login extends React.Component {
     }
 
     return (
-      <div>
-        You&apos;re already logged in.  Want to <Link href="/logout"><a>logout</a></Link>?
-      </div>
+      <Section>
+        <Column.Group centered>
+          <Column className="has-text-centered">
+            <Title size={3}>You&apos;re already logged in.</Title>
+            <Title size={5}>Want to <Link href="/logout"><a>logout</a></Link>?</Title>
+          </Column>
+        </Column.Group>
+      </Section>
     );
   }
 }
