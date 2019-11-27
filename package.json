@@ -59,6 +59,7 @@
     "react-map-gl": "^5.0.10",
     "react-mde": "^7.6.2",
     "react-youtube": "^7.9.0",
+    "rottentomatoes-data": "^2.1.8",
     "sequelize": "^5.15.0",
     "showdown": "^1.9.0",
     "uuid": "^3.3.2",

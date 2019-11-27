@@ -2,6 +2,7 @@ import {promisify} from 'util';
 import fs from 'fs';
 import path from 'path';
 import MovieDB from 'moviedb-promise';
+import fetchRTdata from 'rottentomatoes-data';
 import download from 'download';
 import hasha from 'hasha';
 import {MOVIE_DB_KEY, BUCKET_PATH} from '../../../../config';
@@ -69,10 +70,17 @@ const addMovieByMovieDBId = async movieId => {
     });
   }
 
-  const [imdbMovie, {results: videos}] = await Promise.all([
+  const [imdbMovie, {results: videos}, tomatoes] = await Promise.all([
     imdb(movie.imdb_id),
-    moviedb.movieVideos({id: movieId})
+    moviedb.movieVideos({id: movieId}),
+    fetchRTdata(movie.title)
   ]);
+
+  if (tomatoes.ok) {
+    movieToInsert.rottenTomatoes = tomatoes.movie.meterScore;
+  } else {
+    movieToInsert.rottenTomatoes = 0;
+  }
 
   let youtubeTrailerId = '';
 
