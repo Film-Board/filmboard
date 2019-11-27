@@ -23,10 +23,13 @@ export default async (req, res) => {
       return res.status(401).json({error: 'User is not authorized.'});
     }
 
-    user.picture = decodedToken.picture;
-
     // Issue new JWT
-    const newToken = sign({user});
+    const newToken = sign({
+      user: {
+        ...user.get({plain: true}),
+        picture: decodedToken.picture
+      }
+    });
 
     return res.json({token: newToken});
   }

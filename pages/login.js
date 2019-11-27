@@ -70,6 +70,8 @@ class Login extends React.Component {
   }
 
   onLogin() {
+    this.props.onLoginChange();
+
     Router.push(this.props.redirect);
   }
 
