@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import jwk from 'jwks-rsa';
-import {User} from '../../../models';
+import {SIGNING_SECRET} from '../../../config';
 
-const getJWK = (header, callback) => {
+const getGoogleJWK = (header, callback) => {
   jwk({
     cache: true,
     jwksUri: 'https://www.googleapis.com/oauth2/v3/certs'
@@ -44,49 +44,48 @@ const protect = (req, res, options = {sendResponse: true}) => {
   const token = getToken(req);
 
   return new Promise((resolve, reject) => {
-    jwt.verify(token, getJWK, {}, (error, decoded) => {
-      try {
-        if (error) {
-          if (sendResponse) {
-            return reject(res.status(401).json({error: error.message}));
-          }
-
-          return reject(error);
+    jwt.verify(token, SIGNING_SECRET, {}, (error, decoded) => {
+      if (error) {
+        if (sendResponse) {
+          return reject(res.status(401).json({error: error.message}));
         }
 
-        // Verify user is in database
-        User.findOne({where: {email: decoded.email}}).then(user => {
-          if (user === null) {
+        return reject(error);
+      }
+
+      const {user} = decoded;
+
+      if (options.permissions) {
+        options.permissions.forEach(permission => {
+          if (user[permission] === null || !user[permission]) {
             if (sendResponse) {
-              return reject(res.status(401).json({error: 'email does not exist'}));
+              return reject(res.status(401).json({error: 'Unauthorized.'}));
             }
 
-            return reject(new Error('email does not exist'));
+            return reject(new Error('Unauthorized.'));
           }
-
-          if (options.permissions) {
-            options.permissions.forEach(permission => {
-              if (user[permission] === null || !user[permission]) {
-                if (sendResponse) {
-                  return reject(res.status(401).json({error: 'unauthorized'}));
-                }
-
-                return reject(new Error('unauthorized'));
-              }
-            });
-          }
-
-          resolve(user);
         });
-      } catch (error2) {
-        if (sendResponse) {
-          return reject(res.status(401).json({error: 'server error'}));
-        }
-
-        return reject(error2);
       }
+
+      resolve();
     });
   });
 };
 
-export {protect};
+const isGoogleJWTValid = token => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, getGoogleJWK, {}, (error, decoded) => {
+      if (error) {
+        return reject(error);
+      }
+
+      return resolve(decoded);
+    });
+  });
+};
+
+const sign = data => {
+  return jwt.sign(data, SIGNING_SECRET, {expiresIn: '24h'});
+};
+
+export {getToken, protect, isGoogleJWTValid, sign};

@@ -15,19 +15,13 @@ class LoginButton extends React.Component {
   }
 
   async checkLogin({tokenId}) {
-    cookie.set('token', tokenId, {expires: 2});
+    cookie.set('token', tokenId, {expires: 1});
 
-    // Check login
+    // Check login & get issued JWT
     try {
-      const user = await fetchWithAuth('/api/login', {method: 'post', redirectOnError: false});
+      const {token} = await fetchWithAuth('/api/login', {method: 'post', redirectOnError: false});
 
-      // Save user locally
-      // Note: this is a bit of a weird solution for storing permissions client-side.
-      // Ideally, the JWT we get from Google would be sent to our server, which would then
-      // issue a custom JWT containing anything we need to store client-side (i.e. permission objects).
-      // Then we could decode the stored JWT locally.
-      // However, that sounds like a lot of work, and I don't want to consume anymore caffine tonight.
-      cookie.set('user', JSON.stringify(user));
+      cookie.set('token', token, {expires: 1});
 
       // Callback
       this.props.onLogin();

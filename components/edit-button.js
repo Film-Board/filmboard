@@ -14,9 +14,21 @@ class EditButton extends React.Component {
     };
   }
 
+  parseJWT(token) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+  }
+
   componentDidMount() {
-    if (cookie.get('user')) {
-      const user = JSON.parse(cookie.get('user'));
+    const token = cookie.get('token');
+
+    if (token) {
+      const {user} = this.parseJWT(token);
 
       this.setState({showButton: user.canEditPages === true});
     }

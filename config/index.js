@@ -9,7 +9,8 @@ const config = {
   SMTP_USER: process.env.SMTP_USER,
   SMTP_PASSWORD: process.env.SMTP_PASSWORD,
   CONTACT_EMAIL: process.env.CONTACT_EMAIL,
-  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  SIGNING_SECRET: process.env.SIGNING_SECRET
 };
 
 module.exports = config;
