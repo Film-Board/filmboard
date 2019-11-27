@@ -11,13 +11,16 @@ export default async (req, res) => {
     // Hoist/lower pages by hierarchy
     const topLevelPages = [
       {
-        name: 'Contact'
+        name: 'Contact',
+        href: '/pages/contact'
       },
       {
-        name: 'Location'
+        name: 'Location',
+        href: '/pages/location'
       },
       {
-        name: 'Movies'
+        name: 'Movies',
+        href: '/movies'
       }
     ];
 

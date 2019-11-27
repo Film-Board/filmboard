@@ -18,7 +18,7 @@ class Bar extends React.Component {
           <Navbar.Segment align="start">
             {this.props.pages.map(page => {
               return (
-                <Navbar.Item key={page.name} href={`/pages/${page.name}`}>{page.name}</Navbar.Item>
+                <Navbar.Item key={page.name} href={page.href ? page.href : `/pages/${page.name}`}>{page.name}</Navbar.Item>
               );
             })}
 
