@@ -45,3 +45,7 @@ footer {
 .dark-background {
   background-color: #111111;
 }
+
+.title:not(.default-capitalization) {
+  text-transform: lowercase;
+}

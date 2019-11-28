@@ -2,6 +2,7 @@
   border-radius: 10px;
   padding: 0 20px;
   box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.5);
+  text-transform: lowercase;
 
   &.transparent {
     @supports ((backdrop-filter: blur(30px))) or (-webkit-backdrop-filter: blur(30px)) {

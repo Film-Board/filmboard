@@ -23,7 +23,7 @@ class NewMovieSearch extends React.Component {
     return (
       <Field kind="addons">
         <Control expanded>
-          <Input value={this.state.inputValue} placeholder="Start typing a movie's name to add it..." onChange={event => this.updateInputValue(event)}/>
+          <Input value={this.state.inputValue} placeholder="an interesting title..." onChange={event => this.updateInputValue(event)}/>
         </Control>
         <Control>
           <Button color="success">

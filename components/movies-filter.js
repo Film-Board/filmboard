@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon, Field, Control, Input, Label, Select, Button, Column} from 'rbx';
+import {Icon, Field, Control, Input, Select, Button, Column} from 'rbx';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFilter, faSearch} from '@fortawesome/free-solid-svg-icons';
 
@@ -51,26 +51,22 @@ class MoviesFilter extends React.Component {
       <form onSubmit={e => this.props.onSubmit(e, this.state)}>
         <Column.Group vcentered>
           <Column>
-            <Column.Group>
+            <Column.Group centered vcentered>
               <Column>
-                <Field>
-                  <Label>From</Label>
-                  <Control>
-                    <Input type="date" onChange={this.updateFromDate}/>
+                <Field expanded>
+                  <Control iconLeft>
+                    <Input placeholder="search" onChange={this.updateSearch}/>
+                    <Icon size="small" align="left">
+                      <FontAwesomeIcon icon={faSearch}/>
+                    </Icon>
                   </Control>
                 </Field>
               </Column>
               <Column>
-                <Field>
-                  <Label>To</Label>
+                <Field kind="addons">
                   <Control>
-                    <Input type="date" onChange={this.updateToDate}/>
+                    <Button static>limit to</Button>
                   </Control>
-                </Field>
-              </Column>
-              <Column>
-                <Field>
-                  <Label># to show</Label>
                   <Control>
                     <Select.Container>
                       <Select onChange={this.updateLimit}>
@@ -84,29 +80,39 @@ class MoviesFilter extends React.Component {
                 </Field>
               </Column>
             </Column.Group>
-            <Column.Group centered>
+            <Column.Group centered vcentered>
               <Column>
-                <Field expanded>
-                  <Control iconLeft>
-                    <Input placeholder="Search" onChange={this.updateSearch}/>
-                    <Icon size="small" align="left">
-                      <FontAwesomeIcon icon={faSearch}/>
-                    </Icon>
+                <Field kind="addons">
+                  <Control>
+                    <Button static>from</Button>
+                  </Control>
+                  <Control>
+                    <Input type="date" onChange={this.updateFromDate}/>
+                  </Control>
+                </Field>
+              </Column>
+              <Column>
+                <Field kind="addons">
+                  <Control>
+                    <Button static>to</Button>
+                  </Control>
+                  <Control>
+                    <Input type="date" onChange={this.updateToDate}/>
                   </Control>
                 </Field>
               </Column>
             </Column.Group>
           </Column>
           <Column>
-            <Field>
-              <Control>
+            <Column.Group centered vcentered>
+              <Column narrow>
                 <Button size="large" color="black">
                   <Icon color="warning">
                     <FontAwesomeIcon icon={faFilter}/>
                   </Icon>
                 </Button>
-              </Control>
-            </Field>
+              </Column>
+            </Column.Group>
           </Column>
         </Column.Group>
       </form>

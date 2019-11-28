@@ -52,12 +52,12 @@ export default class MyApp extends App {
 
           <footer className="has-text-grey">
             <Level>
-              <Level.Item align="left">Copyright {new Date().getFullYear()} &copy;.</Level.Item>
+              <Level.Item align="left">copyright {new Date().getFullYear()} &copy;</Level.Item>
               {
                 this.state.loggedInUser ? (
-                  <Level.Item align="right"><Link href="/logout"><a>Logout</a></Link></Level.Item>
+                  <Level.Item align="right"><Link href="/logout"><a>logout</a></Link></Level.Item>
                 ) : (
-                  <Level.Item align="right"><Link href="/login"><a>Login</a></Link></Level.Item>
+                  <Level.Item align="right"><Link href="/login"><a>login</a></Link></Level.Item>
                 )
               }
             </Level>

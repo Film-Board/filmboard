@@ -74,12 +74,12 @@ class Contact extends React.Component {
               >
                 <Field horizontal>
                   <Field.Label size="normal">
-                    <Label>From</Label>
+                    <Label>from</Label>
                   </Field.Label>
                   <Field.Body>
                     <Field>
                       <Control expanded iconLeft>
-                        <Input type="text" placeholder="Name" value={this.state.fromName} onChange={e => this.setState({fromName: e.target.value})}/>
+                        <Input type="text" placeholder="name" value={this.state.fromName} onChange={e => this.setState({fromName: e.target.value})}/>
                         <Icon size="small" align="left">
                           <FontAwesomeIcon icon={faUser}/>
                         </Icon>
@@ -88,7 +88,7 @@ class Contact extends React.Component {
                     <Field>
                       <Control expanded iconLeft>
                         <Input
-                          placeholder="Email"
+                          placeholder="email"
                           type="email"
                           value={this.state.fromEmail} onChange={e => this.setState({fromEmail: e.target.value})}
                         />
@@ -101,7 +101,7 @@ class Contact extends React.Component {
                 </Field>
                 <Field horizontal>
                   <Field.Label size="normal">
-                    <Label>Subject</Label>
+                    <Label>subject</Label>
                   </Field.Label>
                   <Field.Body>
                     <Field>
@@ -120,19 +120,19 @@ class Contact extends React.Component {
                     </Field>
                     <Field>
                       <Control>
-                        <Input placeholder="Subject" value={this.state.subjectName} onChange={e => this.setState({subjectName: e.target.value})}/>
+                        <Input placeholder="booking a 'wear a hat' ad" value={this.state.subjectName} onChange={e => this.setState({subjectName: e.target.value})}/>
                       </Control>
                     </Field>
                   </Field.Body>
                 </Field>
                 <Field horizontal>
                   <Field.Label size="normal">
-                    <Label>Message</Label>
+                    <Label>message</Label>
                   </Field.Label>
                   <Field.Body>
                     <Field>
                       <Control>
-                        <Textarea placeholder="How can we help?" value={this.state.message} onChange={e => this.setState({message: e.target.value})}/>
+                        <Textarea placeholder="how can we help?" value={this.state.message} onChange={e => this.setState({message: e.target.value})}/>
                       </Control>
                     </Field>
                   </Field.Body>

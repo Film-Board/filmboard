@@ -27,10 +27,10 @@ class MovieHero extends React.Component {
                   </Column>
 
                   <Column className="movie-summery" size="one-third">
-                    <Title className="has-text-white">{this.props.name}</Title>
+                    <Title className="has-text-white default-capitalization">{this.props.name}</Title>
                     <Block className="is-size-5 has-text-grey">{this.props.summery}</Block>
-                    <div className="has-text-grey"><b className="has-text-white">Staring</b>: {this.props.staring}</div>
-                    <div className="has-text-grey"><b className="has-text-white">Directed by</b>: {this.props.directedBy}</div>
+                    <div className="has-text-grey"><b className="has-text-white">staring</b>: {this.props.staring}</div>
+                    <div className="has-text-grey"><b className="has-text-white">directed by</b>: {this.props.directedBy}</div>
                   </Column>
 
                   <Column narrow>
