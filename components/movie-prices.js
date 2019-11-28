@@ -5,7 +5,7 @@ export default props => (
   <Field multiline kind="group">
     <Control>
       <Tag.Group gapless>
-        <Tag color="warning" className="has-text-weight-bold">${props.ticketPrice}</Tag>
+        <Tag color={props.ticketPrice === 0 ? 'info' : 'warning'} className="has-text-weight-bold">{props.ticketPrice === 0 ? 'FREE' : `$${props.ticketPrice}`}</Tag>
         <Tag color="black">tickets</Tag>
       </Tag.Group>
     </Control>

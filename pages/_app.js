@@ -44,7 +44,7 @@ export default class MyApp extends App {
         <div className={`page-container ${Component.darkBackground ? 'dark-background' : ''}`}>
           <div className="content-wrap">
             <Container>
-              <Navbar pages={this.props.pages.pages} folders={this.props.pages.folders} loggedInUser={this.state.loggedInUser ? this.state.loggedInUser.user : undefined}/>
+              <Navbar pages={this.props.pages.pages} folders={this.props.pages.folders} loggedInUser={this.state.loggedInUser ? this.state.loggedInUser.user : undefined} transparent={Component.transparentNav}/>
             </Container>
 
             <Component {...pageProps} onLoginChange={this.onLoginChange}/>

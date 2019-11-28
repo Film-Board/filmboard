@@ -120,5 +120,6 @@ class Homepage extends React.Component {
 }
 
 Homepage.darkBackground = true;
+Homepage.transparentNav = true;
 
 export default Homepage;

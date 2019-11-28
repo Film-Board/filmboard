@@ -27,6 +27,8 @@ class Location extends React.Component {
           className="map"
           width="100vw"
           height="100vh"
+          top="0"
+          left="0"
           latitude={47.1179}
           longitude={-88.546}
           zoom={16}
@@ -46,5 +48,7 @@ class Location extends React.Component {
     );
   }
 }
+
+Location.transparentNav = true;
 
 export default Location;

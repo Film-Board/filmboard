@@ -8,10 +8,10 @@ import './styles/navbar.scss';
 class Bar extends React.Component {
   render() {
     return (
-      <Navbar color="black">
+      <Navbar color="black" className={this.props.transparent ? 'transparent' : ''}>
         <Navbar.Brand>
           <Link passHref href="/">
-            <Navbar.Item>
+            <Navbar.Item className="navbar-logo">
               <img src="/static/images/logos/filmboard.png"/>
             </Navbar.Item>
           </Link>
@@ -71,20 +71,20 @@ class Bar extends React.Component {
                 <div/>
               )
             }
-            <Navbar.Item as="div">
+            <Navbar.Item as="div" className="social-buttons">
               <Button.Group>
-                <Button as="a" className="is-link is-warning" href="https://www.instagram.com/film_board/" target="_blank">
-                  <Icon size="large" color="black" backgroundColor="warning">
+                <Button as="a" color="warning" href="https://www.instagram.com/film_board/" target="_blank">
+                  <Icon size="large" color="black">
                     <FontAwesomeIcon icon={faInstagram} size="lg"/>
                   </Icon>
                 </Button>
-                <Button as="a" className="is-link is-warning" href="https://twitter.com/filmboard" target="_blank">
-                  <Icon size="large" color="black" backgroundColor="warning">
+                <Button as="a" color="warning" href="https://twitter.com/filmboard" target="_blank">
+                  <Icon size="large" color="black">
                     <FontAwesomeIcon icon={faTwitter} size="lg"/>
                   </Icon>
                 </Button>
-                <Button as="a" className="is-link is-warning" href="https://www.facebook.com/filmboard" target="_blank">
-                  <Icon size="large" color="warning" backgroundColor="black">
+                <Button as="a" color="warning" href="https://www.facebook.com/filmboard" target="_blank">
+                  <Icon size="large" color="black">
                     <FontAwesomeIcon icon={faFacebookF} size="lg"/>
                   </Icon>
                 </Button>

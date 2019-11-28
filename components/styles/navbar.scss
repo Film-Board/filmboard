@@ -3,13 +3,28 @@
   padding: 0 20px;
   box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.5);
 
-  @supports ((backdrop-filter: blur(30px))) or (-webkit-backdrop-filter: blur(30px)) {
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+  &.transparent {
+    @supports ((backdrop-filter: blur(30px))) or (-webkit-backdrop-filter: blur(30px)) {
+      background-color: rgba(0, 0, 0, 0.6) !important;
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+
+      .navbar-item:hover:not(.social-buttons):not(.navbar-logo) {
+        background-color: rgba(0, 0, 0, 0.3) !important;
+      }
+    }
+
   }
 
   .navbar-brand {
     margin: 0.5rem;
+
+    .navbar-item:hover {
+      background-color: transparent !important;
+    }
+  }
+
+  .social-buttons:hover {
+    background-color: transparent !important;
   }
 }

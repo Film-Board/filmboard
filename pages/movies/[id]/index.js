@@ -16,5 +16,6 @@ class ShowMovie extends React.Component {
 }
 
 ShowMovie.darkBackground = true;
+ShowMovie.transparentNav = true;
 
 export default ShowMovie;
