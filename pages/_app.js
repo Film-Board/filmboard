@@ -41,7 +41,7 @@ export default class MyApp extends App {
           <title>Filmboard</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
         </Head>
-        <div className="page-container">
+        <div className={`page-container ${Component.darkBackground ? 'dark-background' : ''}`}>
           <div className="content-wrap">
             <Container>
               <Navbar pages={this.props.pages.pages} folders={this.props.pages.folders} loggedInUser={this.state.loggedInUser ? this.state.loggedInUser.user : undefined}/>

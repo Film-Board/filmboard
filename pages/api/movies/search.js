@@ -6,7 +6,7 @@ export default async (req, res) => {
 
   const options = {
     where: {},
-    include: [{model: Showtime, as: 'Showtimes', required: true, duplicating: false}],
+    include: {all: true},
     order: [[Showtime, 'time', 'DESC']]
   };
 

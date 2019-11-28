@@ -15,7 +15,7 @@ export default props => (
             </Block>
           ) : (<div/>)}
           <Block>
-            <Title size="5" className="has-text-centered has-text-weight-medium">{movie.name}</Title>
+            <Title size="5" className={`has-text-centered has-text-weight-medium ${props.color ? `has-text-${props.color}` : ''}`}>{movie.name}</Title>
           </Block>
         </Column>
       </Link>

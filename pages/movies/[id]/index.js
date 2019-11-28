@@ -15,4 +15,6 @@ class ShowMovie extends React.Component {
   }
 }
 
+ShowMovie.darkBackground = true;
+
 export default ShowMovie;

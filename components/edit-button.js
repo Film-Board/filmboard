@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import {Button, Icon} from 'rbx';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEdit} from '@fortawesome/free-solid-svg-icons';
@@ -27,11 +28,13 @@ class EditButton extends React.Component {
   render() {
     if (this.state.showButton) {
       return (
-        <Button color="warning" className="edit-button" as="a" href={this.props.link}>
-          <Icon>
-            <FontAwesomeIcon icon={faEdit} color="black"/>
-          </Icon>
-        </Button>
+        <Link passHref href={this.props.link}>
+          <Button color="warning" className="edit-button" as="a">
+            <Icon>
+              <FontAwesomeIcon icon={faEdit} color="black"/>
+            </Icon>
+          </Button>
+        </Link>
       );
     }
 

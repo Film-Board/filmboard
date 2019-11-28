@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
-import {Section, Title, Column} from 'rbx';
+import {Section, Title, Column, Container} from 'rbx';
 import {getBaseURL} from '../common/helpers';
 import MovieHero from '../components/movie-hero';
 import MoviesContainer from '../components/movies-container';
@@ -77,8 +77,8 @@ class Homepage extends React.Component {
             <Section>
               <Column.Group centered>
                 <Column size="half" className="has-text-centered">
-                  <Title size={3}>We&#39;re not currently showing any movies.</Title>
-                  <Title size={5}>
+                  <Title size={3} className="has-text-white">We&#39;re not currently showing any movies.</Title>
+                  <Title size={5} className="has-text-white">
                     <Link href="/movies">
                       <a>Here are </a>
                     </Link>
@@ -97,16 +97,20 @@ class Homepage extends React.Component {
         {
           this.props.currentMovies.length > 0 ? (
             <Section>
-              <Title>Now Showing</Title>
-              <MoviesContainer movies={this.props.currentMovies}/>
+              <Container>
+                <Title className="has-text-white">Now Showing</Title>
+                <MoviesContainer movies={this.props.currentMovies}/>
+              </Container>
             </Section>
           ) : (<div/>)
         }
         {
           this.props.upcomingMovies.length > 0 ? (
             <Section>
-              <Title>Upcoming Movies</Title>
-              <MoviesContainer movies={this.props.upcomingMovies}/>
+              <Container>
+                <Title className="has-text-white">Upcoming Movies</Title>
+                <MoviesContainer movies={this.props.upcomingMovies} color="white"/>
+              </Container>
             </Section>
           ) : (<div/>)
         }
@@ -114,5 +118,7 @@ class Homepage extends React.Component {
     );
   }
 }
+
+Homepage.darkBackground = true;
 
 export default Homepage;
