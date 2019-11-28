@@ -1,6 +1,7 @@
 import React from 'react';
 import App from 'next/app';
-import {Container} from 'rbx';
+import Link from 'next/link';
+import {Container, Level} from 'rbx';
 import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
 import Navbar from '../components/navbar';
@@ -40,11 +41,28 @@ export default class MyApp extends App {
           <title>Filmboard</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
         </Head>
-        <Container>
-          <Navbar pages={this.props.pages.pages} folders={this.props.pages.folders} loggedInUser={this.state.loggedInUser ? this.state.loggedInUser.user : undefined}/>
-        </Container>
+        <div className="page-container">
+          <div className="content-wrap">
+            <Container>
+              <Navbar pages={this.props.pages.pages} folders={this.props.pages.folders} loggedInUser={this.state.loggedInUser ? this.state.loggedInUser.user : undefined}/>
+            </Container>
 
-        <Component {...pageProps} onLoginChange={this.onLoginChange}/>
+            <Component {...pageProps} onLoginChange={this.onLoginChange}/>
+          </div>
+
+          <footer className="has-text-grey">
+            <Level>
+              <Level.Item align="left">Copyright {new Date().getFullYear()} &copy;.</Level.Item>
+              {
+                this.state.loggedInUser ? (
+                  <Level.Item align="right"><Link href="/logout"><a>Logout</a></Link></Level.Item>
+                ) : (
+                  <Level.Item align="right"><Link href="/login"><a>Login</a></Link></Level.Item>
+                )
+              }
+            </Level>
+          </footer>
+        </div>
       </div>
     );
   }

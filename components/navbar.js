@@ -10,7 +10,7 @@ class Bar extends React.Component {
     return (
       <Navbar color="black">
         <Navbar.Brand>
-          <Link href="/">
+          <Link passHref href="/">
             <Navbar.Item>
               <img src="/static/images/logos/filmboard.png"/>
             </Navbar.Item>
@@ -23,7 +23,7 @@ class Bar extends React.Component {
               const link = page.href ? page.href : `/pages/${page.name}`;
 
               return (
-                <Link key={page.name} href={link}><Navbar.Item>{page.name}</Navbar.Item></Link>
+                <Link key={page.name} passHref href={link}><Navbar.Item>{page.name}</Navbar.Item></Link>
               );
             })}
 
@@ -33,7 +33,7 @@ class Bar extends React.Component {
                 <Navbar.Dropdown>
                   {
                     this.props.folders[category].map(page => (
-                      <Link key={page.id} href={`/pages/${page.name}`}><Navbar.Item>{page.name}</Navbar.Item></Link>
+                      <Link key={page.id} passHref href={`/pages/${page.name}`}><Navbar.Item>{page.name}</Navbar.Item></Link>
                     ))
                   }
                 </Navbar.Dropdown>
@@ -55,19 +55,16 @@ class Bar extends React.Component {
                     {
                       this.props.loggedInUser.canEditPages ? (
                         <div>
-                          <Link href="/pages/add"><Navbar.Item>Add a Page</Navbar.Item></Link>
-                          <Link href="/movies/add"><Navbar.Item>Add a Movie</Navbar.Item></Link>
+                          <Link passHref href="/pages/add"><Navbar.Item>Add a Page</Navbar.Item></Link>
+                          <Link passHref href="/movies/add"><Navbar.Item>Add a Movie</Navbar.Item></Link>
                         </div>
                       ) : (<div/>)
                     }
                     {
                       this.props.loggedInUser.canManageUsers ? (
-                        <Link href="/users"><Navbar.Item>Manage Users</Navbar.Item></Link>
+                        <Link passHref href="/users"><Navbar.Item>Manage Users</Navbar.Item></Link>
                       ) : (<div/>)
                     }
-
-                    <Navbar.Divider/>
-                    <Link href="/logout"><Navbar.Item>Logout</Navbar.Item></Link>
                   </Navbar.Dropdown>
                 </Navbar.Item>
               ) : (
