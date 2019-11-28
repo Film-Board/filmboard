@@ -3,7 +3,7 @@ import fetch from 'isomorphic-unfetch';
 import uuidv4 from 'uuid/v4';
 import chrono from 'chrono-node';
 import Router from 'next/router';
-import {Section, Column, Field, Label, Title, Button, Input, Textarea, Block, Progress, Level, Control, Icon, Checkbox} from 'rbx';
+import {Section, Container, Column, Field, Label, Title, Button, Input, Textarea, Block, Progress, Level, Control, Icon, Checkbox} from 'rbx';
 import DateTimeTable from '../../../components/date-time';
 import Poster from '../../../components/poster';
 import {getBaseURL} from '../../../common/helpers';
@@ -124,120 +124,124 @@ class EditMovie extends React.Component {
   render() {
     return (
       <Section>
-        <Column.Group centered>
-          <Title>Edit Movie</Title>
-        </Column.Group>
-        <Column.Group centered>
-          <Column size={4}>
-            <form onSubmit={this.handleSubmit}>
-              <Block>
-                <Title size={4}>Details</Title>
+        <Container>
+          <Column.Group centered>
+            <Column>
+              <Title className="has-text-centered">Edit Movie</Title>
+            </Column>
+          </Column.Group>
+          <Column.Group centered>
+            <Column size={4}>
+              <form onSubmit={this.handleSubmit}>
+                <Block>
+                  <Title size={4}>Details</Title>
 
-                <Field>
-                  <Label>Name</Label>
-                  <Input name="name" placeholder="Black Panther" defaultValue={this.props.name}/>
-                </Field>
-                <Field>
-                  <Label>IMDB</Label>
-                  <Input type="number" name="imdb" placeholder="7.0" defaultValue={this.props.imdb}/>
-                </Field>
-                <Field>
-                  <Label>Rotten Tomatoes</Label>
-                  <Input type="number" name="rottenTomatoes" placeholder="70%" defaultValue={this.props.rottenTomatoes}/>
-                </Field>
-                <Field>
-                  <Label>Runtime (minutes)</Label>
-                  <Input type="number" name="runtime" placeholder="104" defaultValue={this.props.runtime}/>
-                </Field>
-                <Field>
-                  <Label>Staring</Label>
-                  <Input name="staring" placeholder="Me" defaultValue={this.props.staring}/>
-                </Field>
-                <Field>
-                  <Label>Directed by</Label>
-                  <Input name="directedBy" placeholder="My pet" defaultValue={this.props.directedBy}/>
-                </Field>
-                <Field>
-                  <Label>Summery</Label>
-                  <Textarea placeholder="¯\_(ツ)_/¯" name="summery" defaultValue={this.props.summery}/>
-                </Field>
-              </Block>
+                  <Field>
+                    <Label>Name</Label>
+                    <Input name="name" placeholder="Black Panther" defaultValue={this.props.name}/>
+                  </Field>
+                  <Field>
+                    <Label>IMDB</Label>
+                    <Input type="number" name="imdb" placeholder="7.0" defaultValue={this.props.imdb}/>
+                  </Field>
+                  <Field>
+                    <Label>Rotten Tomatoes</Label>
+                    <Input type="number" name="rottenTomatoes" placeholder="70%" defaultValue={this.props.rottenTomatoes}/>
+                  </Field>
+                  <Field>
+                    <Label>Runtime (minutes)</Label>
+                    <Input type="number" name="runtime" placeholder="104" defaultValue={this.props.runtime}/>
+                  </Field>
+                  <Field>
+                    <Label>Staring</Label>
+                    <Input name="staring" placeholder="Me" defaultValue={this.props.staring}/>
+                  </Field>
+                  <Field>
+                    <Label>Directed by</Label>
+                    <Input name="directedBy" placeholder="My pet" defaultValue={this.props.directedBy}/>
+                  </Field>
+                  <Field>
+                    <Label>Summery</Label>
+                    <Textarea placeholder="¯\_(ツ)_/¯" name="summery" defaultValue={this.props.summery}/>
+                  </Field>
+                </Block>
 
-              <Block>
-                <Title size={4}>Showtimes</Title>
-                <Button color="success" type="button" onClick={this.addShowtime}>Add Showtime</Button>
-                <DateTimeTable showtimes={this.state.showtimes} name="showtimes" onShowtimeDelete={this.deleteShowtime}/>
-              </Block>
+                <Block>
+                  <Title size={4}>Showtimes</Title>
+                  <Button color="success" type="button" onClick={this.addShowtime}>Add Showtime</Button>
+                  <DateTimeTable showtimes={this.state.showtimes} name="showtimes" onShowtimeDelete={this.deleteShowtime}/>
+                </Block>
 
-              <Block>
-                <Title size={4}>Pricing</Title>
+                <Block>
+                  <Title size={4}>Pricing</Title>
 
-                <Field horizontal>
-                  <Field.Label size="normal">
-                    <Label>Tickets</Label>
-                  </Field.Label>
-                  <Field.Body>
-                    <Field>
-                      <Control iconLeft>
-                        <Input placeholder="3" name="ticketPrice" defaultValue={3}/>
-                        <Icon size="small" align="left">
+                  <Field horizontal>
+                    <Field.Label size="normal">
+                      <Label>Tickets</Label>
+                    </Field.Label>
+                    <Field.Body>
+                      <Field>
+                        <Control iconLeft>
+                          <Input placeholder="3" name="ticketPrice" defaultValue={3}/>
+                          <Icon size="small" align="left">
                           $
-                        </Icon>
-                      </Control>
-                    </Field>
-                  </Field.Body>
-                </Field>
+                          </Icon>
+                        </Control>
+                      </Field>
+                    </Field.Body>
+                  </Field>
 
-                <Field horizontal>
-                  <Field.Label size="normal">
-                    <Label>Concessions</Label>
-                  </Field.Label>
-                  <Field.Body>
-                    <Field>
-                      <Control iconLeft>
-                        <Input placeholder="1" name="concessionPrice" defaultValue={1}/>
-                        <Icon size="small" align="left">
+                  <Field horizontal>
+                    <Field.Label size="normal">
+                      <Label>Concessions</Label>
+                    </Field.Label>
+                    <Field.Body>
+                      <Field>
+                        <Control iconLeft>
+                          <Input placeholder="1" name="concessionPrice" defaultValue={1}/>
+                          <Icon size="small" align="left">
                           $
-                        </Icon>
-                      </Control>
-                    </Field>
-                  </Field.Body>
-                </Field>
+                          </Icon>
+                        </Control>
+                      </Field>
+                    </Field.Body>
+                  </Field>
+                </Block>
+
+                <Block>
+                  <span><b>Hidden? </b></span>
+                  <Checkbox name="hidden" checked={this.state.hidden} onChange={e => this.setState({hidden: e.target.checked})}/>
+                </Block>
+
+                <Level>
+                  <Button type="submit" color="success">Save Movie</Button>
+                  <Button color="danger" onClick={e => {
+                    e.preventDefault();
+                    this.handleDelete();
+                  }}
+                  >Delete Movie
+                  </Button>
+                </Level>
+              </form>
+            </Column>
+            <Column size={4}>
+              <Block>
+                <Poster path={this.props.Poster.path}/>
               </Block>
 
-              <Block>
-                <span><b>Hidden? </b></span>
-                <Checkbox name="hidden" checked={this.state.hidden} onChange={e => this.setState({hidden: e.target.checked})}/>
-              </Block>
-
-              <Level>
-                <Button type="submit" color="success">Save Movie</Button>
-                <Button color="danger" onClick={e => {
-                  e.preventDefault();
-                  this.handleDelete();
-                }}
-                >Delete Movie
-                </Button>
-              </Level>
-            </form>
-          </Column>
-          <Column size={4}>
-            <Block>
-              <Poster path={this.props.Poster.path}/>
-            </Block>
-
-            {this.state.Trailer.progress === 1 ? (
-              <Block>
-                <Title size={5} className="has-text-centered">Trailer processed.</Title>
-              </Block>
-            ) : (
-              <Block>
-                <Title size={5} className="has-text-centered">Processing trailer...</Title>
-                <Progress value={this.state.Trailer.progress * 100} max={100} color="warning"/>
-              </Block>
-            )}
-          </Column>
-        </Column.Group>
+              {this.state.Trailer.progress === 1 ? (
+                <Block>
+                  <Title size={5} className="has-text-centered">Trailer processed.</Title>
+                </Block>
+              ) : (
+                <Block>
+                  <Title size={5} className="has-text-centered">Processing trailer...</Title>
+                  <Progress value={this.state.Trailer.progress * 100} max={100} color="warning"/>
+                </Block>
+              )}
+            </Column>
+          </Column.Group>
+        </Container>
       </Section>
     );
   }
