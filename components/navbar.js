@@ -15,7 +15,7 @@ class Bar extends React.Component {
               <img src="/static/images/logos/filmboard.png"/>
             </Navbar.Item>
           </Link>
-          <Navbar.Burger/>
+          <Navbar.Burger id="navbar-burger"/>
         </Navbar.Brand>
         <Navbar.Menu>
           <Navbar.Segment align="start">

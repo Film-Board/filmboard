@@ -1,6 +1,7 @@
 .navbar {
   border-radius: 10px;
   padding: 0 20px;
+  margin: 0 20px;
   box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.5);
   text-transform: lowercase;
 
@@ -10,8 +11,12 @@
       backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
 
-      .navbar-item:hover:not(.social-buttons):not(.navbar-logo) {
+      .navbar-item:hover:not(.social-buttons):not(.navbar-logo):not(.navbar-burger) {
         background-color: rgba(0, 0, 0, 0.3) !important;
+      }
+
+      .navbar-menu {
+        box-shadow: none;
       }
     }
 
@@ -27,5 +32,17 @@
 
   .social-buttons:hover {
     background-color: transparent !important;
+  }
+
+  .navbar-menu {
+    background-color: transparent;
+
+    .navbar-item {
+      color: #FAFAFA;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
   }
 }

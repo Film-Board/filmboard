@@ -1,6 +1,7 @@
 import React from 'react';
 import App from 'next/app';
 import Link from 'next/link';
+import Router from 'next/router';
 import {Container, Level} from 'rbx';
 import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
@@ -32,6 +33,13 @@ export default class MyApp extends App {
     this.setState({loggedInUser: parseToken()});
   }
 
+  componentDidMount() {
+    // Close navbar before navigating to new page
+    Router.events.on('routeChangeStart', () => {
+      document.querySelector('#navbar-burger').click();
+    });
+  }
+
   render() {
     const {Component, pageProps} = this.props;
 
@@ -51,7 +59,7 @@ export default class MyApp extends App {
           </div>
 
           <footer className="has-text-grey">
-            <Level>
+            <Level breakpoint="mobile">
               <Level.Item align="left">copyright {new Date().getFullYear()} &copy;</Level.Item>
               {
                 this.state.loggedInUser ? (

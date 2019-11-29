@@ -45,6 +45,18 @@ class VideoBackground extends React.Component {
 
   fullscreen() {
     const video = document.querySelector('#video-background');
+
+    video.muted = false;
+    video.removeAttribute('playsinline');
+    video.currentTime = 0;
+    video.controls = true;
+
+    if (video.enterFullscreen) {
+      video.enterFullscreen();
+    } else if (video.webkitEnterFullscreen) {
+      video.webkitEnterFullscreen();
+    }
+
     if (video.requestFullscreen) {
       video.requestFullscreen();
     } else if (video.mozRequestFullScreen) {
@@ -55,9 +67,7 @@ class VideoBackground extends React.Component {
       video.msRequestFullscreen();
     }
 
-    video.muted = false;
-    video.currentTime = 0;
-    video.controls = true;
+    video.play();
   }
 
   onFullScreenChange() {
@@ -74,14 +84,16 @@ class VideoBackground extends React.Component {
 
       video.muted = true;
       video.controls = false;
+      video.setAttribute('playsinline', null);
+      video.play();
     }
   }
 
   render() {
     return (
-      <div className={`video-background ${this.state.hover} ${this.state.fullscreen}`} onMouseEnter={this.showButton} onClick={this.fullscreen}>
+      <div className={`video-background ${this.state.hover} ${this.state.fullscreen}`} onMouseEnter={this.showButton}>
         <FontAwesomeIcon icon={faPlay} className="play-button"/>
-        <video autoPlay muted loop id="video-background">
+        <video autoPlay muted playsInline loop id="video-background" onClick={this.fullscreen}>
           <source src={this.props.path} type="video/mp4"/>
            Your browser does not support the video tag.
         </video>

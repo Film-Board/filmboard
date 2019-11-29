@@ -2,7 +2,7 @@
   background-color: #111111;
   box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.75);
   border-radius: 20px;
-  margin-top: 60vh;
+  margin-top: 70vh;
   padding: 2rem;
   justify-content: space-around;
 
@@ -14,6 +14,12 @@
 }
 
 .poster {
-  margin-top: -8rem;
+  margin-top: -5rem;
   padding-bottom: 0;
+
+  @media screen and (orientation:landscape) and (max-device-width: 768px) {
+    max-width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

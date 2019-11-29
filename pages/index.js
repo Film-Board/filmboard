@@ -89,9 +89,7 @@ class Homepage extends React.Component {
               </Column.Group>
             </Section>
           ) : (
-            <Section>
-              <MovieHero {...this.props.heroMovie}/>
-            </Section>
+            <MovieHero {...this.props.heroMovie}/>
           )
         }
         {
