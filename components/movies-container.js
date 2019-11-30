@@ -11,7 +11,7 @@ const desktopColumn = {size: 'one-fifth'};
 export default props => (
   <Column.Group multiline centered tablet={{gapSize: 7}}>
     {props.movies.map(movie => (
-      <Link key={movie.id} passHref href={`/movies/${movie.id}`}>
+      <Link key={movie.id} passHref href="/movies/[id]" as={`/movies/${movie.id}`}>
         <Column as="a" className="movie-tile" desktop={desktopColumn} tablet={tabletColumn} mobile={mobileColumn}>
           {movie.Poster ? (
             <Block>

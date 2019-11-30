@@ -28,7 +28,7 @@ class EditButton extends React.Component {
   render() {
     if (this.state.showButton) {
       return (
-        <Link passHref href={this.props.link}>
+        <Link passHref href={this.props.href} as={this.props.as}>
           <Button color="warning" className="edit-button" as="a">
             <Icon>
               <FontAwesomeIcon icon={faEdit} color="black"/>

@@ -18,7 +18,7 @@ class ShowPage extends React.Component {
         <Container>
           <Content dangerouslySetInnerHTML={{__html: new Showdown.Converter().makeHtml(this.props.content)}}/>
         </Container>
-        <EditButton link={`/pages/${this.props.name}/edit`}/>
+        <EditButton as={`/pages/${this.props.name}/edit`} href="/pages/[name]/edit"/>
       </Section>
     );
   }

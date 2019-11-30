@@ -47,7 +47,7 @@ class MovieHero extends React.Component {
           </Column.Group>
         </Container>
 
-        <EditButton link={`/movies/${this.props.id}/edit`}/>
+        <EditButton as={`/movies/${this.props.id}/edit`} href="/movies/[id]/edit"/>
       </div>
     );
   }
