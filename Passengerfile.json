@@ -1,4 +1,7 @@
 {
   "app_type": "node",
-  "startup_file": "server.js"
+  "startup_file": "server.js",
+  "envvars": {
+    "NODE_ENV": "production"
+  }
 }
