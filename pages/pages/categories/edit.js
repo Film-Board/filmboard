@@ -19,8 +19,6 @@ class EditCategories extends React.Component {
   static async getInitialProps(ctx) {
     const categories = await (await fetch(`${getBaseURL(ctx)}/api/pages/categories`)).json();
 
-    console.log(categories);
-
     return {categories};
   }
 
