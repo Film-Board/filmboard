@@ -39,7 +39,7 @@ const addMovieByMovieDBId = async movieId => {
 
   movieToInsert.name = movie.title;
   movieToInsert.runtime = movie.runtime;
-  movieToInsert.poster = movie.poster_path.substring(1);
+  movieToInsert.poster = movie.poster_path.slice(1);
 
   movieToInsert.directedBy = (movieCredits.crew.find(crewMember => crewMember.job === 'Director')).name;
 

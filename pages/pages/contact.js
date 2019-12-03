@@ -77,24 +77,32 @@ class Contact extends React.Component {
                     <Label>from</Label>
                   </Field.Label>
                   <Field.Body>
-                    <Field>
-                      <Control expanded iconLeft>
+                    <Field kind="addons">
+                      <Control>
+                        <Button static>
+                          <Icon size="small" align="left">
+                            <FontAwesomeIcon icon={faUser}/>
+                          </Icon>
+                        </Button>
+                      </Control>
+                      <Control expanded>
                         <Input type="text" placeholder="name" value={this.state.fromName} onChange={e => this.setState({fromName: e.target.value})}/>
-                        <Icon size="small" align="left">
-                          <FontAwesomeIcon icon={faUser}/>
-                        </Icon>
                       </Control>
                     </Field>
-                    <Field>
-                      <Control expanded iconLeft>
+                    <Field kind="addons">
+                      <Control>
+                        <Button static>
+                          <Icon size="small" align="left">
+                            <FontAwesomeIcon icon={faEnvelope}/>
+                          </Icon>
+                        </Button>
+                      </Control>
+                      <Control expanded>
                         <Input
                           placeholder="email"
                           type="email"
                           value={this.state.fromEmail} onChange={e => this.setState({fromEmail: e.target.value})}
                         />
-                        <Icon size="small" align="left">
-                          <FontAwesomeIcon icon={faEnvelope}/>
-                        </Icon>
                       </Control>
                     </Field>
                   </Field.Body>

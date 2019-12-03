@@ -40,7 +40,7 @@ export default class MyApp extends App {
 
       console.log(burger.className);
 
-      if (burger.className.indexOf('is-active') !== -1) {
+      if (burger.className.includes('is-active')) {
         burger.click();
       }
     });

@@ -25,7 +25,7 @@ export const downloadTrailer = (model, url, destination, filename) => {
             .save(videoOutput)
             .on('end', async () => {
             // Update progress of download
-              model.update({progress: 0.60});
+              model.update({progress: 0.6});
 
               // Crop black bars
               await cropVideo(videoOutput, modifiedVideoOutput);

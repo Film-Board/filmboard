@@ -12,18 +12,18 @@
     "test": "yarn run lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.21",
-    "@fortawesome/free-brands-svg-icons": "^5.10.1",
-    "@fortawesome/free-solid-svg-icons": "^5.10.1",
-    "@fortawesome/react-fontawesome": "^0.1.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-brands-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.7",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
-    "bulma": "^0.7.5",
+    "bulma": "^0.8.0",
     "chrono-node": "^1.3.11",
     "cleave.js": "^1.5.3",
     "clone": "^2.1.2",
     "cors": "^2.8.5",
-    "dayjs": "^1.8.15",
+    "dayjs": "^1.8.17",
     "dotenv-webpack": "^1.7.0",
     "download": "^7.1.0",
     "express": "^4.17.1",
@@ -34,40 +34,40 @@
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.6.0",
-    "mapbox-gl": "^1.5.0",
-    "moviedb-promise": "^1.4.1",
-    "next": "^9.0.3",
-    "next-cookies": "^1.1.3",
+    "mapbox-gl": "^1.5.1",
+    "moviedb-promise": "^1.4.2",
+    "next": "^9.1.4",
+    "next-cookies": "^2.0.3",
     "node-sass": "^4.13.0",
     "nodemailer": "^6.3.1",
-    "pg": "^7.12.1",
-    "query-string": "^6.8.2",
+    "pg": "^7.14.0",
+    "query-string": "^6.9.0",
     "rbx": "^2.2.0",
-    "react": "^16.9.0",
+    "react": "^16.12.0",
     "react-autosuggest": "^9.4.3",
     "react-autosuggest-bulma-pure": "^9.4.3",
-    "react-dom": "^16.9.0",
-    "react-google-login": "^5.0.5",
-    "react-map-gl": "^5.0.10",
+    "react-dom": "^16.12.0",
+    "react-google-login": "^5.0.7",
+    "react-map-gl": "^5.1.3",
     "react-mde": "^7.6.2",
     "react-youtube": "^7.9.0",
     "rottentomatoes-data": "^2.1.8",
-    "sequelize": "^5.15.0",
-    "showdown": "^1.9.0",
-    "uuid": "^3.3.2",
+    "sequelize": "^5.21.2",
+    "showdown": "^1.9.1",
+    "uuid": "^3.3.3",
     "webpack": "^4.41.2",
     "youtube-search": "^1.1.4",
-    "ytdl-core": "^0.29.5"
+    "ytdl-core": "^1.0.3"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.2",
-    "del": "^5.0.0",
-    "eslint": "^6.7.1",
+    "babel-eslint": "^10.0.3",
+    "del": "^5.1.0",
+    "eslint": "^6.7.2",
     "eslint-config-xo-react": "^0.20.0",
-    "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^2.2.0",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
     "husky": "^3.1.0",
-    "xo": "^0.24.0"
+    "xo": "^0.25.3"
   },
   "husky": {
     "hooks": {
@@ -83,19 +83,19 @@
     ],
     "rules": {
       "unicorn/filename-case": [
-        "ignore"
+        0
       ],
       "import/no-unassigned-import": [
-        "ignore"
+        0
       ],
       "react/state-in-constructor": [
-        "always"
+        0
       ],
       "react/prop-types": [
-        "ignore"
+        0
       ],
       "react/static-property-placement": [
-        "property assignment"
+        0
       ]
     }
   }
