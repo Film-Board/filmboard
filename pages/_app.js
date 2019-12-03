@@ -70,6 +70,20 @@ export default class MyApp extends App {
           <meta name="msapplication-TileColor" content="#000000"/>
           <meta name="msapplication-TileImage" content="/static/images/favicon/ms-icon-144x144.png"/>
           <meta name="theme-color" content="#000000"/>
+
+          <style type="text/css" dangerouslySetInnerHTML={{__html: `
+            @font-face {
+              font-family: 'Soin Sans Neue';
+              src: url('/static/fonts/SoinSansNeue-Bold.otf') format('opentype');
+              font-weight: 600;
+            }
+
+            @font-face {
+              font-family: 'Soin Sans Neue';
+              src: url('/static/fonts/SoinSansNeue-Roman.otf') format('opentype');
+            }
+          `}}
+          />
         </Head>
         <div className={`page-container ${Component.darkBackground ? 'dark-background' : ''}`}>
           <div className="content-wrap">

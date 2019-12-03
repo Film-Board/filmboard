@@ -96,6 +96,9 @@
       ],
       "react/static-property-placement": [
         0
+      ],
+      "react/no-danger": [
+        0
       ]
     }
   }
