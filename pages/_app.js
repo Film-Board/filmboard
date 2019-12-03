@@ -84,7 +84,9 @@ export default class MyApp extends App {
 
           <footer className="has-text-grey">
             <Level breakpoint="mobile">
-              <Level.Item align="left">copyright {new Date().getFullYear()} &copy;</Level.Item>
+              <Level.Item align="left">
+                <span>made by <a href="https://maxisom.me" target="_blank" rel="noopener noreferrer">max isom</a></span>
+              </Level.Item>
               {
                 this.state.loggedInUser ? (
                   <Level.Item align="right"><Link href="/logout"><a>logout</a></Link></Level.Item>
