@@ -53,12 +53,16 @@ class MoviesFilter extends React.Component {
           <Column>
             <Column.Group centered vcentered>
               <Column>
-                <Field expanded>
-                  <Control iconLeft>
+                <Field expanded kind="addons">
+                  <Control>
+                    <Button static>
+                      <Icon size="small" align="left">
+                        <FontAwesomeIcon icon={faSearch}/>
+                      </Icon>
+                    </Button>
+                  </Control>
+                  <Control>
                     <Input placeholder="search" onChange={this.updateSearch}/>
-                    <Icon size="small" align="left">
-                      <FontAwesomeIcon icon={faSearch}/>
-                    </Icon>
                   </Control>
                 </Field>
               </Column>
