@@ -11,14 +11,14 @@ export const downloadTrailer = (model, url, destination, filename) => {
       const modifiedVideoOutput = path.join(destination, `${filename}.mp4`);
 
       // Download audio
-      ytdl(url, {filter: format => format.container === 'm4a' && !format.encoding})
+      ytdl(url, {quality: 'highestaudio'})
         .pipe(fs.createWriteStream(audioOutput))
         .on('finish', () => {
         // Update progress of download
           model.update({progress: 0.25});
 
           // Download video and assemble
-          ffmpeg().input(ytdl(url, {filter: format => format.container === 'mp4' && format.resolution === '1080p'}))
+          ffmpeg().input(ytdl(url, {quality: 'highestvideo', filter: format => format.container === 'mp4'}))
             .videoCodec('copy')
             .input(audioOutput)
             .audioCodec('copy')

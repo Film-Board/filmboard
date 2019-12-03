@@ -30,7 +30,7 @@ class EditMovie extends React.Component {
       return;
     }
 
-    const movie = await (await fetch(`/api/movies/${this.props.id}`)).json();
+    const movie = await fetchWithAuth(`/api/movies/${this.props.id}`, {});
 
     this.setState({
       Trailer: movie.Trailer
