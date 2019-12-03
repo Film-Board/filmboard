@@ -2,6 +2,7 @@ import Router from 'next/router';
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import nextCookie from 'next-cookies';
+import browserCookies from 'js-cookie';
 import {getBaseURL} from '../../common/helpers';
 
 const redirectOnError = ctx => {
@@ -49,7 +50,13 @@ export const withAuthSync = WrappedComponent => {
 };
 
 export const fetchWithAuth = async (url, options, ctx) => {
-  const {token} = nextCookie(ctx);
+  let token;
+
+  if (ctx) {
+    ({token} = nextCookie(ctx));
+  } else {
+    token = browserCookies.get('token');
+  }
 
   const headers = {
     Authorization: token
