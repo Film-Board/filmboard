@@ -3,6 +3,10 @@ FROM node:12-slim
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+RUN npm i ffbinaries -g
+
+RUN ffbinaries -o=/usr/local/bin
+
 COPY package.json /usr/src/app
 COPY yarn.lock /usr/src/app
 
