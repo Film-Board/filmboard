@@ -1,6 +1,7 @@
 import {promisify} from 'util';
 import fs from 'fs';
 import path from 'path';
+import sharp from 'sharp';
 import MovieDB from 'moviedb-promise';
 import fetchRTdata from 'rottentomatoes-data';
 import download from 'download';
@@ -56,7 +57,7 @@ const addMovieByMovieDBId = async movieId => {
 
   // Get IMDB results, potential trailers, and download the poster
   const posterHash = hasha(movie.poster_path);
-  const posterPath = `${posterHash}.${movie.poster_path.split('.')[1]}`;
+  const posterPath = `${posterHash}.jpeg`;
   let poster = {};
 
   if (fs.existsSync(path.join(BUCKET_PATH, posterPath))) {
@@ -65,8 +66,17 @@ const addMovieByMovieDBId = async movieId => {
     // Add Poster record
     poster = await File.create({path: posterPath, hash: posterHash});
 
-    await download(`${movieDBConfig.images.base_url}original/${movie.poster_path}`, BUCKET_PATH, {
-      filename: posterPath
+    // Download and resize poster
+    await new Promise((resolve, reject) => {
+      try {
+        download(`${movieDBConfig.images.base_url}original/${movie.poster_path}`).pipe(
+          sharp()
+            .resize(440, 720, {fit: 'inside'})
+            .jpeg()
+        ).pipe(fs.createWriteStream(path.join(BUCKET_PATH, posterPath))).on('finish', () => resolve());
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 

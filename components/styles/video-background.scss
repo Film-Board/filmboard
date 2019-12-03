@@ -26,12 +26,19 @@
 
   .play-button {
     position: absolute;
+
+    // Fallback for older browsers
     left: 45%;
     top: 45%;
-    width: 10%;
+
+    left: calc(50% - 5rem);
+    top: calc(50% - 5rem);
+
     opacity: 0;
     color: white;
     z-index: 10;
+    height: 10rem !important;
+    width: 10rem !important;
   }
 
   &.hover:not(.fullscreen) {

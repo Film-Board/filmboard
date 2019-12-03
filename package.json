@@ -53,6 +53,7 @@
     "react-youtube": "^7.9.0",
     "rottentomatoes-data": "^2.1.8",
     "sequelize": "^5.21.2",
+    "sharp": "^0.23.3",
     "showdown": "^1.9.1",
     "uuid": "^3.3.3",
     "webpack": "^4.41.2",
