@@ -36,7 +36,13 @@ export default class MyApp extends App {
   componentDidMount() {
     // Close navbar before navigating to new page
     Router.events.on('routeChangeStart', () => {
-      document.querySelector('#navbar-burger').click();
+      const burger = document.querySelector('#navbar-burger');
+
+      console.log(burger.className);
+
+      if (burger.className.indexOf('is-active') !== -1) {
+        burger.click();
+      }
     });
   }
 
