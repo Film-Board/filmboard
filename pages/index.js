@@ -5,7 +5,6 @@ import {Section, Title, Column, Container} from 'rbx';
 import {getBaseURL} from '../common/helpers';
 import MovieHero from '../components/movie-hero';
 import MoviesContainer from '../components/movies-container';
-import './styles/index.scss';
 
 class Homepage extends React.Component {
   static async getInitialProps(ctx) {

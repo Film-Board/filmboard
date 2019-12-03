@@ -38,8 +38,6 @@ export default class MyApp extends App {
     Router.events.on('routeChangeStart', () => {
       const burger = document.querySelector('#navbar-burger');
 
-      console.log(burger.className);
-
       if (burger.className.includes('is-active')) {
         burger.click();
       }

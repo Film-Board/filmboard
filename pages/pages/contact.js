@@ -53,7 +53,7 @@ class Contact extends React.Component {
         return 'Sent!';
       default:
         return (
-          <Icon size="small">
+          <Icon>
             <FontAwesomeIcon icon={faPaperPlane}/>
           </Icon>
         );
