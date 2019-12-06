@@ -15,7 +15,8 @@ class AddMovie extends React.Component {
     this.movieNameInput = React.createRef();
 
     this.state = {
-      suggestions: []
+      suggestions: [],
+      movieAdding: ''
     };
   }
 
@@ -32,7 +33,11 @@ class AddMovie extends React.Component {
   }
 
   async addMovie(suggestion) {
+    this.setState({movieAdding: suggestion.title});
+
     const movie = await fetchWithAuth(`/api/movies/add-by-movie-db/${suggestion.id}`, {method: 'POST'});
+
+    this.setState({movieAdding: ''});
 
     Router.push(`/movies/${movie.id}/edit`);
   }
@@ -55,7 +60,7 @@ class AddMovie extends React.Component {
             </Column.Group>
 
             <Column.Group centered>
-              <Suggestions suggestions={this.state.suggestions} onAdd={this.addMovie}/>
+              <Suggestions suggestions={this.state.suggestions} adding={this.state.movieAdding} onAdd={this.addMovie}/>
             </Column.Group>
           </Container>
         </Section>
