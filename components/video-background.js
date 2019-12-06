@@ -23,6 +23,10 @@ class VideoBackground extends React.Component {
     document.addEventListener('fullscreenchange', this.onFullScreenChange, false);
     document.addEventListener('webkitfullscreenchange', this.onFullScreenChange, false);
     document.addEventListener('mozfullscreenchange', this.onFullScreenChange, false);
+
+    const video = document.querySelector('#video-background');
+
+    video.addEventListener('webkitendfullscreen', this.onFullScreenChange, false);
   }
 
   showButton() {
@@ -43,7 +47,11 @@ class VideoBackground extends React.Component {
     delete this.hideButtonTimeout;
   }
 
-  fullscreen() {
+  async fullscreen() {
+    if (this.state.fullscreen) {
+      return;
+    }
+
     const video = document.querySelector('#video-background');
 
     video.muted = false;
@@ -51,32 +59,45 @@ class VideoBackground extends React.Component {
     video.currentTime = 0;
     video.controls = true;
 
-    if (video.enterFullscreen) {
-      video.enterFullscreen();
-    } else if (video.webkitEnterFullscreen) {
-      video.webkitEnterFullscreen();
-    }
-
     if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.mozRequestFullScreen) {
-      video.mozRequestFullScreen();
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) {
-      video.msRequestFullscreen();
+      await video.requestFullscreen();
+      await video.play();
+      return;
     }
 
-    video.play();
+    if (video.mozRequestFullScreen) {
+      await video.mozRequestFullScreen();
+      await video.play();
+      return;
+    }
+
+    if (video.webkitRequestFullscreen) {
+      await video.webkitRequestFullscreen();
+      await video.play();
+      return;
+    }
+
+    if (video.msRequestFullscreen) {
+      await video.msRequestFullscreen();
+      await video.play();
+      return;
+    }
+
+    if (video.enterFullscreen) {
+      await video.enterFullscreen();
+      await video.play();
+    } else if (video.webkitEnterFullscreen) {
+      await video.webkitEnterFullscreen();
+      await video.play();
+    }
   }
 
-  onFullScreenChange() {
+  async onFullScreenChange() {
     const fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
-
-    const isFull = fullscreenElement !== undefined;
+    const isFull = fullscreenElement !== null && fullscreenElement !== undefined;
 
     this.setState({
-      fullscreen: (isFull ? 'fullscreen' : '')
+      fullscreen: isFull
     });
 
     if (!isFull) {
@@ -84,15 +105,15 @@ class VideoBackground extends React.Component {
 
       video.muted = true;
       video.controls = false;
-      video.setAttribute('playsinline', null);
-      video.play();
+      video.setAttribute('playsinline', true);
+      await video.play();
     }
   }
 
   render() {
     return (
-      <div className={`video-background ${this.state.hover} ${this.state.fullscreen}`} onMouseEnter={this.showButton}>
-        <FontAwesomeIcon icon={faPlay} className="play-button"/>
+      <div className={`video-background ${this.state.hover} ${this.state.fullscreen ? 'fullscreen' : ''}`} onMouseEnter={this.showButton}>
+        <FontAwesomeIcon icon={faPlay} className="play-button" onClick={this.fullscreen}/>
         <video autoPlay muted playsInline loop id="video-background" onClick={this.fullscreen}>
           <source src={this.props.path} type="video/mp4"/>
            Your browser does not support the video tag.

@@ -22,6 +22,10 @@ $success: $yellow;
 @import "custom/box";
 @import "custom/icons";
 
+html, body {
+  font-display: swap;
+}
+
 .page-container {
   position: relative;
   min-height: 100vh;
