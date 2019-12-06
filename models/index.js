@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const {DB_URL, DB_DIALECT} = require('../config');
+const {DB_URL} = require('../config');
 
 const fileModel = require('./File');
 const userModel = require('./User');
@@ -10,7 +10,7 @@ const showtimeModel = require('./Showtime');
 const trailerModel = require('./Trailer');
 
 const sequelize = new Sequelize(DB_URL, {
-  dialect: DB_DIALECT
+  dialect: 'postgresql'
 });
 
 const File = fileModel(sequelize, Sequelize);
