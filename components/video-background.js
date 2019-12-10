@@ -16,7 +16,6 @@ class VideoBackground extends React.Component {
     this.hideButton = this.hideButton.bind(this);
     this.fullscreen = this.fullscreen.bind(this);
     this.onFullScreenChange = this.onFullScreenChange.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +26,16 @@ class VideoBackground extends React.Component {
     const video = document.querySelector('#video-background');
 
     video.addEventListener('webkitendfullscreen', this.onFullScreenChange, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('fullscreenchange', this.onFullScreenChange, false);
+    document.removeEventListener('webkitfullscreenchange', this.onFullScreenChange, false);
+    document.removeEventListener('mozfullscreenchange', this.onFullScreenChange, false);
+
+    const video = document.querySelector('#video-background');
+
+    video.removeEventListener('webkitendfullscreen', this.onFullScreenChange, false);
   }
 
   showButton() {

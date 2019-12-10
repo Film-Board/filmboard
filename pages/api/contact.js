@@ -25,7 +25,7 @@ export default async (req, res) => {
       from: `"Contact Form" <${SMTP_USER}>`, // Sender address
       replyTo: `"${body.fromName}" <${body.fromEmail}>`,
       to: CONTACT_EMAIL, // List of receivers
-      subject: `${body.subjectCategory}: ${body.subjectName}`, // Subject line
+      subject: `[Contact Form] ${body.subjectCategory}: ${body.subjectName}`, // Subject line
       text: body.message // Plain text body
     });
 
