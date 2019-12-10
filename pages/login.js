@@ -23,11 +23,15 @@ class LoginButton extends React.Component {
 
     // Check login & get issued JWT
     try {
-      const {token} = await (await fetch('/api/login', {method: 'post', redirectOnError: false, headers: {
+      const res = await (await fetch('/api/login', {method: 'post', redirectOnError: false, headers: {
         Authorization: tokenId
       }})).json();
 
-      cookie.set('token', token, {expires: 1});
+      if (res.error) {
+        throw new Error(res.error);
+      }
+
+      cookie.set('token', res.token, {expires: 1});
 
       // Callback
       this.props.onLogin();
