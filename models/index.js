@@ -3,6 +3,7 @@ const {DB_URL} = require('../config');
 
 const fileModel = require('./File');
 const userModel = require('./User');
+const keystoreModel = require('./Keystore');
 const movieModel = require('./Movie');
 const pageModel = require('./Page');
 const pageCategoryModel = require('./PageCategory');
@@ -15,6 +16,7 @@ const sequelize = new Sequelize(DB_URL, {
 
 const File = fileModel(sequelize, Sequelize);
 const User = userModel(sequelize, Sequelize);
+const Keystore = keystoreModel(sequelize, Sequelize);
 const Movie = movieModel(sequelize, Sequelize);
 const Page = pageModel(sequelize, Sequelize);
 const PageCategory = pageCategoryModel(sequelize, Sequelize);
@@ -29,4 +31,14 @@ Trailer.belongsTo(File);
 PageCategory.hasMany(Page);
 Page.belongsTo(PageCategory);
 
-module.exports = {sequelize, File, User, Movie, Page, PageCategory, Showtime, Trailer};
+module.exports = {
+  sequelize,
+  File,
+  User,
+  Keystore,
+  Movie,
+  Page,
+  PageCategory,
+  Showtime,
+  Trailer
+};

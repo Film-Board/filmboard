@@ -12,7 +12,15 @@ class Homepage extends React.Component {
     const now = new Date();
     const filterCutoff = new Date(now.getTime() + (filterPeriod * 1000));
 
-    const movies = await (await fetch(`${getBaseURL(ctx)}/api/movies?limit=5`)).json();
+    const [moviesReq, bannerReq] = await Promise.all([
+      fetch(`${getBaseURL(ctx)}/api/movies?limit=5`),
+      fetch(`${getBaseURL(ctx)}/api/keystore?name=banner`)
+    ]);
+
+    const [movies, banner] = await Promise.all([
+      moviesReq.json(),
+      bannerReq.json()
+    ]);
 
     let upcomingMovies = [];
     const currentMovies = [];
@@ -65,7 +73,14 @@ class Homepage extends React.Component {
       heroMovie = currentMovies[0];
     }
 
-    return {heroMovie, currentMovies, upcomingMovies};
+    // Set banner
+    let bannerContent = '';
+
+    if (banner.value && banner.value.banner) {
+      bannerContent = banner.value.banner;
+    }
+
+    return {heroMovie, currentMovies, upcomingMovies, bannerContent};
   }
 
   render() {
@@ -88,7 +103,7 @@ class Homepage extends React.Component {
               </Column.Group>
             </Section>
           ) : (
-            <MovieHero {...this.props.heroMovie}/>
+            <MovieHero {...this.props.heroMovie} banner={this.props.bannerContent}/>
           )
         }
         {

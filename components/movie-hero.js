@@ -1,5 +1,5 @@
 import React from 'react';
-import {Column, Block, Level, Container, Title} from 'rbx';
+import {Column, Block, Level, Container, Title, Section} from 'rbx';
 import VideoBackground from './video-background';
 import Poster from './poster';
 import Prices from './movie-prices';
@@ -13,6 +13,18 @@ class MovieHero extends React.Component {
     return (
       <div>
         <VideoBackground path={`/static/bucket/${this.props.Trailer.File.path}`}/>
+
+        {this.props.banner ? (
+          <Section className="banner-container">
+            <Container breakpoint="tablet">
+              <Column.Group centered vcentered>
+                <Column narrow className="has-text-centered has-text-white has-background-info is-size-7-mobile banner">
+                  <span>{this.props.banner}</span>
+                </Column>
+              </Column.Group>
+            </Container>
+          </Section>
+        ) : (<div/>)}
 
         <Container breakpoint="tablet" className="movie-details">
           <Column.Group centered>

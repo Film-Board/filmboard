@@ -57,6 +57,7 @@ class Bar extends React.Component {
                         <div>
                           <Link passHref href="/pages/add"><Navbar.Item>Add a Page</Navbar.Item></Link>
                           <Link passHref href="/movies/add"><Navbar.Item>Add a Movie</Navbar.Item></Link>
+                          <Link passHref href="/banner/edit"><Navbar.Item>Edit Banner</Navbar.Item></Link>
                         </div>
                       ) : (<div/>)
                     }
