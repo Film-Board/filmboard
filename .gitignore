@@ -1,5 +1,5 @@
 .DS_Store
-static/bucket
+public/static/bucket
 
 # Logs
 logs
