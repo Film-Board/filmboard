@@ -15,7 +15,7 @@ export default props => (
         <Column as="a" className="movie-tile" desktop={desktopColumn} tablet={tabletColumn} mobile={mobileColumn}>
           {movie.Poster ? (
             <Block>
-              <Poster key={movie.Poster.id} path={movie.Poster.path}/>
+              <Poster key={movie.Poster.id} path={movie.Poster.path} specialEvent={movie.specialEvent}/>
             </Block>
           ) : (<div/>)}
           <Block>

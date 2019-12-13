@@ -8,9 +8,7 @@ import MoviesContainer from '../components/movies-container';
 
 class Homepage extends React.Component {
   static async getInitialProps(ctx) {
-    const filterPeriod = 14 * 24 * 60 * 60; // In seconds
     const now = new Date();
-    const filterCutoff = new Date(now.getTime() + (filterPeriod * 1000));
 
     const [moviesReq, bannerReq] = await Promise.all([
       fetch(`${getBaseURL(ctx)}/api/movies?limit=5`),
@@ -46,10 +44,6 @@ class Homepage extends React.Component {
         }
       });
 
-      if (earliestShowtime > filterCutoff) {
-        return;
-      }
-
       if (latestShowtime < now) {
         return;
       }
@@ -63,7 +57,7 @@ class Homepage extends React.Component {
 
     let heroMovie = {};
 
-    if (currentMovies.length === 0 && upcomingMovies.length > 0) {
+    if (currentMovies.length === 0 && upcomingMovies.length > 0 && upcomingMovies[0].specialEvent !== true) {
       heroMovie = upcomingMovies[0];
 
       upcomingMovies = upcomingMovies.filter(movie => movie.id !== upcomingMovies[0].id);
@@ -71,6 +65,10 @@ class Homepage extends React.Component {
       heroMovie = currentMovies[0];
     } else if (currentMovies.length > 1) {
       heroMovie = currentMovies[0];
+    }
+
+    if (heroMovie.specialEvent === true) {
+      heroMovie = {};
     }
 
     // Set banner
@@ -87,7 +85,7 @@ class Homepage extends React.Component {
     return (
       <div>
         {
-          Object.keys(this.props.heroMovie).length === 0 ? (
+          this.props.currentMovies.length === 0 && this.props.upcomingMovies.length === 0 ? (
             <Section>
               <Column.Group centered>
                 <Column size="half" className="has-text-centered">
@@ -103,6 +101,13 @@ class Homepage extends React.Component {
               </Column.Group>
             </Section>
           ) : (
+            <div/>
+          )
+        }
+        {
+          Object.keys(this.props.heroMovie).length === 0 ? (
+            <div/>
+          ) : (
             <MovieHero {...this.props.heroMovie} banner={this.props.bannerContent}/>
           )
         }
@@ -111,7 +116,7 @@ class Homepage extends React.Component {
             <Section>
               <Container>
                 <Title className="has-text-white">Now Showing</Title>
-                <MoviesContainer movies={this.props.currentMovies}/>
+                <MoviesContainer movies={this.props.currentMovies} color="white"/>
               </Container>
             </Section>
           ) : (<div/>)

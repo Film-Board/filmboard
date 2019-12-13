@@ -53,6 +53,7 @@ class EditMovie extends React.Component {
     });
 
     data.hidden = this.state.hidden;
+    data.specialEvent = this.state.specialEvent;
 
     // Showtimes are in array, this
     // is not relevent.
@@ -161,7 +162,7 @@ class EditMovie extends React.Component {
                     <Input name="directedBy" placeholder="My pet" defaultValue={this.props.directedBy}/>
                   </Field>
                   <Field>
-                    <Label>Summery</Label>
+                    <Label>Summary</Label>
                     <Textarea placeholder="¯\_(ツ)_/¯" name="summery" defaultValue={this.props.summery}/>
                   </Field>
                 </Block>
@@ -211,6 +212,11 @@ class EditMovie extends React.Component {
                 <Block>
                   <span><b>Hidden? </b></span>
                   <Checkbox name="hidden" checked={this.state.hidden} onChange={e => this.setState({hidden: e.target.checked})}/>
+                </Block>
+
+                <Block>
+                  <span><b>Special event? </b></span>
+                  <Checkbox name="specialEvent" checked={this.state.specialEvent} onChange={e => this.setState({specialEvent: e.target.checked})}/>
                 </Block>
 
                 <Level>

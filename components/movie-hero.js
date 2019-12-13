@@ -33,7 +33,7 @@ class MovieHero extends React.Component {
                 <Column narrow className="poster">
                   <Column.Group>
                     <Column>
-                      <Poster path={this.props.Poster.path}/>
+                      <Poster path={this.props.Poster.path} specialEvent={this.props.specialEvent}/>
                       <Ratings imdb={this.props.imdb} rottenTomatoes={this.props.rottenTomatoes} runtime={this.props.runtime} color="white"/>
                       <Prices ticketPrice={this.props.ticketPrice} concessionPrice={this.props.concessionPrice}/>
                     </Column>

@@ -1,4 +1,21 @@
-.img-poster {
-  border-radius: 10px;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+.poster-container {
+  position: relative;
+
+  .poster-badge {
+    position: absolute;
+    z-index: 10;
+    bottom: -0.15rem;
+    width: 100%;
+    background-color: #FFCD00;
+    color: black;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    padding: 0.3rem 1rem;
+    font-weight: bold;
+  }
+
+  .poster-img {
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  }
 }

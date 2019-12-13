@@ -9,6 +9,10 @@ module.exports = (sequelize, type) => {
     summery: type.STRING,
     ticketPrice: type.FLOAT,
     concessionPrice: type.FLOAT,
+    specialEvent: {
+      type: type.BOOLEAN,
+      defaultValue: false
+    },
     hidden: {
       type: type.BOOLEAN,
       defaultValue: true
