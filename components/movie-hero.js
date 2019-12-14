@@ -12,7 +12,9 @@ class MovieHero extends React.Component {
   render() {
     return (
       <div>
-        <VideoBackground path={`/static/bucket/${this.props.Trailer.File.path}`}/>
+        {this.props.Trailer ? (
+          <VideoBackground path={`/static/bucket/${this.props.Trailer.File.path}`}/>
+        ) : (<div/>)}
 
         {this.props.banner ? (
           <Section className="banner-container">
@@ -26,7 +28,7 @@ class MovieHero extends React.Component {
           </Section>
         ) : (<div/>)}
 
-        <Container breakpoint="tablet" className="movie-details">
+        <Container breakpoint="tablet" className={`movie-details ${this.props.Trailer ? 'has-trailer' : ''}`}>
           <Column.Group centered>
             <Column size="full">
               <Level>
