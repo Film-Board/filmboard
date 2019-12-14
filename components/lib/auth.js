@@ -62,7 +62,7 @@ export const fetchWithAuth = async (url, options, ctx) => {
     Authorization: token
   };
 
-  if (typeof options.body === 'object') {
+  if (typeof options.body === 'object' && !options.rawBody) {
     headers['Content-Type'] = 'application/json';
     options.body = JSON.stringify(options.body);
   }

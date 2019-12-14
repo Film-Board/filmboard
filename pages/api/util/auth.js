@@ -39,8 +39,8 @@ const getToken = req => {
   }
 };
 
-const protect = (req, res, options = {sendResponse: true}) => {
-  const {sendResponse} = options;
+const protect = (req, res, options = {}) => {
+  const {sendResponse = true} = options;
   const token = getToken(req);
 
   return new Promise((resolve, reject) => {

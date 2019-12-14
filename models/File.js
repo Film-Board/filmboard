@@ -7,6 +7,11 @@ module.exports = (sequelize, type) => {
     hash: {
       type: type.STRING,
       unique: true
+    },
+    name: type.STRING,
+    userUploaded: {
+      type: type.BOOLEAN,
+      default: false
     }
   });
 };
