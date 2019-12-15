@@ -1,4 +1,4 @@
-import {Movie, Showtime, Trailer} from '../../../models';
+import {Movie, Trailer} from '../../../models';
 import {protect} from '../util/auth';
 
 export default async (req, res) => {
@@ -15,7 +15,8 @@ export default async (req, res) => {
   if (method === 'PUT') {
     await protect(req, res, {permissions: ['canEditPages']});
 
-    res.json(await updateMovieAndShowtimes(id, body));
+    // Res.json(await updateMovieAndShowtimes(id, body));
+    res.json(await Movie.update(body, {where: {id}}));
   }
 
   if (method === 'DELETE') {
@@ -25,24 +26,6 @@ export default async (req, res) => {
 
     res.json({});
   }
-};
-
-const updateMovieAndShowtimes = async (id, data) => {
-  // Update movie
-  const movie = await Movie.findByPk(id);
-  await movie.update(data);
-
-  // Delete all showtimes
-  await Showtime.destroy({where: {MovieId: id}});
-
-  // Create new showtimes
-  await Showtime.bulkCreate(data.showtimes.map(showtime => ({
-    time: new Date(showtime),
-    MovieId: id
-  })));
-
-  // Return updated movie
-  return movie;
 };
 
 const getMovieById = id => {

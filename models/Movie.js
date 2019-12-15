@@ -6,7 +6,7 @@ module.exports = (sequelize, type) => {
     runtime: type.INTEGER,
     staring: type.STRING,
     directedBy: type.STRING,
-    summery: type.STRING,
+    summary: type.STRING,
     ticketPrice: type.FLOAT,
     concessionPrice: type.FLOAT,
     specialEvent: {

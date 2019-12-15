@@ -5,34 +5,65 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
 class NewMovieSearch extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      inputValue: ''
+      manualTitle: '',
+      autoTitle: ''
     };
+
+    this.addManually = this.addManually.bind(this);
+    this.addAutomatically = this.addAutomatically.bind(this);
   }
 
-  updateInputValue(event) {
-    this.setState({
-      inputValue: event.target.value
-    });
+  addManually(e) {
+    e.preventDefault();
+    this.props.onSubmit({manual: true, title: this.state.manualTitle});
+  }
+
+  addAutomatically(e) {
+    e.preventDefault();
+    this.props.onSubmit({manual: false, title: this.state.autoTitle});
   }
 
   render() {
     return (
-      <Field kind="addons">
-        <Control expanded>
-          <Input value={this.state.inputValue} placeholder="an interesting title..." onChange={event => this.updateInputValue(event)}/>
-        </Control>
-        <Control>
-          <Button color="success">
-            <Icon>
-              <FontAwesomeIcon icon={faSearch}/>
-            </Icon>
-          </Button>
-        </Control>
-      </Field>
+      <div>
+        <Field>
+          <form onSubmit={this.addManually}>
+            <Field kind="addons">
+              <Control expanded>
+                <Input value={this.state.manualTitle} placeholder="an interesting title..." onChange={e => this.setState({manualTitle: e.target.value})}/>
+              </Control>
+              <Control>
+                <Button color="info">
+            add manually
+                </Button>
+              </Control>
+            </Field>
+          </form>
+        </Field>
+
+        <Field className="has-text-centered">
+        or
+        </Field>
+
+        <form onSubmit={this.addAutomatically}>
+          <Field kind="addons">
+            <Control expanded>
+              <Input value={this.state.autoTitle} placeholder="an interesting title..." onChange={e => this.setState({autoTitle: e.target.value})}/>
+            </Control>
+            <Control>
+              <Button color="success">
+                <Icon>
+                  <FontAwesomeIcon icon={faSearch}/>
+                </Icon>
+              </Button>
+            </Control>
+          </Field>
+        </form>
+      </div>
     );
   }
 }

@@ -12,7 +12,6 @@ class AddMovie extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addMovie = this.addMovie.bind(this);
-    this.movieNameInput = React.createRef();
 
     this.state = {
       suggestions: [],
@@ -20,16 +19,24 @@ class AddMovie extends React.Component {
     };
   }
 
-  async handleSubmit(event) {
-    event.preventDefault();
-    const movieName = this.movieNameInput.current.state.inputValue;
+  async handleSubmit({manual, title}) {
+    if (manual) {
+      const movie = await fetchWithAuth('/api/movies', {
+        method: 'POST',
+        body: {
+          name: title
+        }
+      });
 
-    // Get suggestions
-    const suggestions = await (await fetch(`/api/movies/autosuggest/${movieName}`)).json();
+      Router.push(`/movies/${movie.id}/edit`);
+    } else {
+      // Get suggestions
+      const suggestions = await (await fetch(`/api/movies/autosuggest/${title}`)).json();
 
-    this.setState({
-      suggestions
-    });
+      this.setState({
+        suggestions
+      });
+    }
   }
 
   async addMovie(suggestion) {
@@ -53,9 +60,7 @@ class AddMovie extends React.Component {
 
             <Column.Group centered>
               <Column size={4}>
-                <form onSubmit={this.handleSubmit}>
-                  <NewMovieSearch ref={this.movieNameInput}/>
-                </form>
+                <NewMovieSearch onSubmit={this.handleSubmit}/>
               </Column>
             </Column.Group>
 

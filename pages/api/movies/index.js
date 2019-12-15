@@ -4,7 +4,8 @@ import {protect} from '../util/auth';
 export default async (req, res) => {
   const {
     method,
-    query
+    query,
+    body
   } = req;
 
   const limit = Number(query.limit) || 100;
@@ -39,5 +40,11 @@ export default async (req, res) => {
     }
 
     res.json(await Movie.findAll(filters));
+  }
+
+  if (method === 'POST') {
+    await protect(req, res, {permissions: ['canEditPages']});
+
+    res.json(await Movie.create(body));
   }
 };
