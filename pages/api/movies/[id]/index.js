@@ -1,5 +1,5 @@
-import {Movie, Trailer} from '../../../models';
-import {protect} from '../util/auth';
+import {Movie, Trailer} from '../../../../models';
+import {protect} from '../../util/auth';
 
 export default async (req, res) => {
   const {
@@ -15,7 +15,6 @@ export default async (req, res) => {
   if (method === 'PUT') {
     await protect(req, res, {permissions: ['canEditPages']});
 
-    // Res.json(await updateMovieAndShowtimes(id, body));
     res.json(await Movie.update(body, {where: {id}}));
   }
 

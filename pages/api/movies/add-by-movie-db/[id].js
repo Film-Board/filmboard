@@ -7,7 +7,7 @@ import fetchRTdata from 'rottentomatoes-data';
 import download from 'download';
 import hasha from 'hasha';
 import {MOVIE_DB_KEY, BUCKET_PATH} from '../../../../config';
-import {Movie, File, Trailer} from '../../../../models';
+import {Movie, File} from '../../../../models';
 import {protect} from '../../util/auth';
 import {downloadTrailer} from '../helpers';
 
@@ -107,26 +107,10 @@ const addMovieByMovieDBId = async movieId => {
 
   const insertedMovie = await Movie.create(movieToInsert);
 
-  const trailerHash = hasha(youtubeTrailerId);
-  const trailerPath = `${trailerHash}.mp4`;
+  // Kick off trailer download process
+  downloadTrailer(youtubeTrailerId, insertedMovie);
 
-  let trailer;
-  if (fs.existsSync(path.join(BUCKET_PATH, trailerPath))) {
-    const trailerFile = await File.findOne({where: {hash: trailerHash}});
-    trailer = await Trailer.findOne({where: {FileId: trailerFile.id}});
-  } else {
-    const trailerFile = await File.create({hash: trailerHash, path: trailerPath});
-    trailer = await Trailer.create({});
-    await trailer.setFile(trailerFile);
-
-    // Kick off trailer download process
-    downloadTrailer(trailer, youtubeTrailerId, BUCKET_PATH, trailerHash);
-  }
-
-  await Promise.all([
-    insertedMovie.setPoster(poster),
-    insertedMovie.setTrailer(trailer)
-  ]);
+  await insertedMovie.setPoster(poster);
 
   return insertedMovie;
 };

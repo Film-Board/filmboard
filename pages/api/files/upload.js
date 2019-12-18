@@ -1,12 +1,17 @@
-import {renameSync} from 'fs';
+import {renameSync, createReadStream, createWriteStream} from 'fs';
 import {join} from 'path';
 import formidable from 'formidable';
+import sharp from 'sharp';
 import {protect} from '../util/auth';
 import {hash} from '../util/random';
 import {BUCKET_PATH} from '../../../config';
 import {File} from '../../../models';
 
 export default async (req, res) => {
+  const {
+    query: {type}
+  } = req;
+
   await protect(req, res, {permissions: ['canEditPages']});
 
   const form = new formidable.IncomingForm();
@@ -31,21 +36,25 @@ export default async (req, res) => {
 
     const h = hash();
 
-    // Move to bucket
-    renameSync(file.path, join(BUCKET_PATH, `${h}${extension}`));
+    if (type === 'poster') {
+      await new Promise(resolve => createReadStream(file.path).pipe(
+        sharp()
+          .resize(440, 720, {fit: 'inside'})
+          .jpeg()).pipe(createWriteStream(join(BUCKET_PATH, `${h}${extension}`))).on('finish', resolve));
+    } else {
+      // Move to bucket
+      renameSync(file.path, join(BUCKET_PATH, `${h}${extension}`));
+    }
 
     // Add to database
     const savedFile = await File.create({
       path: `${h}${extension}`,
       hash: h,
       name: filename,
-      userUploaded: true
+      userUploaded: type !== 'poster'
     });
 
     res.json(savedFile);
-
-    res.statusCode = 200;
-    res.end();
   });
 };
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import Router from 'next/router';
-import {Section, Container, Column, Title, Button, Block, Progress} from 'rbx';
-import Poster from '../../../components/poster';
+import Link from 'next/link';
+import {Section, Container, Column, Title, Button} from 'rbx';
 import MovieDetailsEditor from '../../../components/movie-details-editor';
 import MovieShowtimeEditor from '../../../components/movie-showtime-editor';
+import MovieMediaEditor from '../../../components/movie-media-editor';
 import {getBaseURL} from '../../../common/helpers';
 import {withAuthSync, fetchWithAuth} from '../../../components/lib/auth';
 
@@ -23,10 +24,13 @@ class EditMovie extends React.Component {
     this.updateField = this.updateField.bind(this);
     this.updateShowtime = this.updateShowtime.bind(this);
     this.deleteShowtime = this.deleteShowtime.bind(this);
+    this.changePoster = this.changePoster.bind(this);
+    this.changeTrailer = this.changeTrailer.bind(this);
+    this.removeTrailer = this.removeTrailer.bind(this);
   }
 
   async updateTrailerProgress() {
-    if (this.state.Trailer === null || this.state.Trailer.progress === 1) {
+    if (this.state.Trailer && this.state.Trailer.progress === 1) {
       return;
     }
 
@@ -36,7 +40,7 @@ class EditMovie extends React.Component {
       Trailer: movie.Trailer
     });
 
-    if (movie.Trailer.progress !== 1) {
+    if (movie.Trailer === null || movie.Trailer.progress !== 1) {
       // Poll again in 2 seconds
       setTimeout(this.updateTrailerProgress, 2000);
     }
@@ -47,7 +51,7 @@ class EditMovie extends React.Component {
       method: 'DELETE'
     });
 
-    Router.push('/');
+    Router.push('/movies');
   }
 
   static async getInitialProps(ctx) {
@@ -140,6 +144,37 @@ class EditMovie extends React.Component {
     this.toggleSaving();
   }
 
+  async changePoster(formData) {
+    this.toggleSaving();
+
+    const poster = await fetchWithAuth('/api/files/upload?type=poster', {
+      method: 'POST',
+      body: formData,
+      rawBody: true
+    });
+
+    await this.updateField('PosterId', poster.id);
+
+    this.setState({Poster: poster, PosterId: poster.id});
+
+    this.toggleSaving();
+  }
+
+  async changeTrailer(url) {
+    await fetchWithAuth(`/api/movies/${this.state.id}/trailer`, {
+      method: 'PUT',
+      body: {url}
+    });
+
+    this.setState({TrailerId: null, Trailer: null}, this.updateTrailerProgress);
+  }
+
+  async removeTrailer() {
+    await this.updateField('TrailerId', null);
+
+    this.setState({TrailerId: null, Trailer: null});
+  }
+
   toggleSaving() {
     this.setState(({saving}) => ({saving: !saving}));
   }
@@ -150,36 +185,39 @@ class EditMovie extends React.Component {
         <Container>
           <Column.Group centered>
             <Column>
-              <Title className="has-text-centered">{this.state.saving ? 'Saving...' : 'Edit Movie'}</Title>
+              <Title className="has-text-centered">
+                {this.state.saving ? 'Saving...' : (
+                  <span>
+                Edit <Link passHref href="/movies/[id]" as={`/movies/${this.state.id}`}>Movie</Link>
+                  </span>
+                )}
+              </Title>
             </Column>
           </Column.Group>
-          <Column.Group centered>
-            <Column size={4}>
+          <Column.Group>
+            <Column size={6}>
               <Title size={4}>Details</Title>
 
-              <Block>
-                <MovieDetailsEditor {...this.state} updateField={this.updateField}/>
-              </Block>
+              <MovieDetailsEditor {...this.state} updateField={this.updateField}/>
 
-              <Block>
-                <MovieShowtimeEditor showtimes={this.state.Showtimes} updateShowtime={this.updateShowtime} addShowtime={this.addShowtime} deleteShowtime={this.deleteShowtime}/>
-              </Block>
+              <Title size={4}>Showtimes</Title>
+              <MovieShowtimeEditor showtimes={this.state.Showtimes} updateShowtime={this.updateShowtime} addShowtime={this.addShowtime} deleteShowtime={this.deleteShowtime}/>
 
-              <Block>
-                <Button color="danger" onClick={e => {
-                  e.preventDefault();
-                  this.handleDelete();
-                }}
-                >Delete Movie
-                </Button>
-              </Block>
             </Column>
-            <Column size={4}>
-              <Block>
-                <Poster generic={this.props.Poster === null} path={this.props.Poster === null ? '' : this.props.Poster.path}/>
-              </Block>
+            <Column size={4} offset={2}>
+              <Title size={4}>Media</Title>
+              <MovieMediaEditor poster={this.state.Poster} trailer={this.state.Trailer} changePoster={this.changePoster} changeTrailer={this.changeTrailer} removeTrailer={this.removeTrailer}/>
+            </Column>
+          </Column.Group>
 
-              <TrailerProgress trailer={this.state.Trailer}/>
+          <Column.Group>
+            <Column size={6}>
+              <Button color="danger" onClick={e => {
+                e.preventDefault();
+                this.handleDelete();
+              }}
+              >Delete Movie
+              </Button>
             </Column>
           </Column.Group>
         </Container>
@@ -187,30 +225,5 @@ class EditMovie extends React.Component {
     );
   }
 }
-
-const TrailerProgress = props => {
-  if (props.trailer === null) {
-    return (
-      <Block>
-        <Title size={5} className="has-text-centered">No trailer.</Title>
-      </Block>
-    );
-  }
-
-  if (props.trailer && props.trailer.progress === 1) {
-    return (
-      <Block>
-        <Title size={5} className="has-text-centered">Trailer processed.</Title>
-      </Block>
-    );
-  }
-
-  return (
-    <Block>
-      <Title size={5} className="has-text-centered">Processing trailer...</Title>
-      <Progress value={props.trailer.progress * 100} max={100} color="warning"/>
-    </Block>
-  );
-};
 
 export default withAuthSync(EditMovie);

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, Label, Button, Table, Icon} from 'rbx';
+import {Field, Button, Table, Icon} from 'rbx';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -120,7 +120,6 @@ class MovieShowtimeEditor extends React.Component {
     return (
       <div>
         <Field>
-          <Label>Showtimes</Label>
           <Button color="info" onClick={this.addDay}>Add Day</Button>
         </Field>
 

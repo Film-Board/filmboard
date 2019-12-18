@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, Control, Button, Input, Icon, Label, Textarea} from 'rbx';
+import {Field, Control, Button, Input, Icon, Label, Textarea, Block} from 'rbx';
 import './styles/new-movie-search.scss';
 
 class MovieDetailsEditor extends React.Component {
@@ -70,6 +70,7 @@ class MovieDetailsEditor extends React.Component {
           <Label>Special event?</Label>
           <Button onClick={() => this.updateField('specialEvent', !this.props.specialEvent)}>{this.props.specialEvent ? 'Yes' : 'No'}</Button>
         </Field>
+        <Block/>
       </div>
     );
   }
