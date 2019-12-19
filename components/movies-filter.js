@@ -1,5 +1,6 @@
 import React from 'react';
 import {Icon, Field, Control, Input, Select, Button, Column} from 'rbx';
+import DatePicker from 'react-datepicker';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFilter, faSearch} from '@fortawesome/free-solid-svg-icons';
 
@@ -16,18 +17,8 @@ class MoviesFilter extends React.Component {
       search: ''
     };
 
-    this.updateFromDate = this.updateFromDate.bind(this);
-    this.updateToDate = this.updateToDate.bind(this);
     this.updateLimit = this.updateLimit.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
-  }
-
-  updateFromDate(event) {
-    this.setState({fromDate: new Date(event.target.value)});
-  }
-
-  updateToDate(event) {
-    this.setState({toDate: new Date(event.target.value)});
   }
 
   updateLimit(event) {
@@ -53,7 +44,7 @@ class MoviesFilter extends React.Component {
           <Column>
             <Column.Group centered vcentered>
               <Column>
-                <Field expanded kind="addons">
+                <Field kind="addons">
                   <Control>
                     <Button static>
                       <Icon size="small" align="left">
@@ -61,7 +52,7 @@ class MoviesFilter extends React.Component {
                       </Icon>
                     </Button>
                   </Control>
-                  <Control>
+                  <Control expanded>
                     <Input placeholder="search" onChange={this.updateSearch}/>
                   </Control>
                 </Field>
@@ -91,7 +82,7 @@ class MoviesFilter extends React.Component {
                     <Button static>from</Button>
                   </Control>
                   <Control>
-                    <Input type="date" onChange={this.updateFromDate}/>
+                    <DatePicker selected={this.state.fromDate} className="input" onChange={day => this.setState({fromDate: day})}/>
                   </Control>
                 </Field>
               </Column>
@@ -101,22 +92,18 @@ class MoviesFilter extends React.Component {
                     <Button static>to</Button>
                   </Control>
                   <Control>
-                    <Input type="date" onChange={this.updateToDate}/>
+                    <DatePicker selected={this.state.toDate} className="input" onChange={day => this.setState({toDate: day})}/>
                   </Control>
                 </Field>
               </Column>
             </Column.Group>
           </Column>
-          <Column>
-            <Column.Group centered vcentered>
-              <Column narrow>
-                <Button size="large" color="black">
-                  <Icon color="warning">
-                    <FontAwesomeIcon icon={faFilter}/>
-                  </Icon>
-                </Button>
-              </Column>
-            </Column.Group>
+          <Column narrow>
+            <Button size="large" color="black">
+              <Icon color="warning">
+                <FontAwesomeIcon icon={faFilter}/>
+              </Icon>
+            </Button>
           </Column>
         </Column.Group>
       </form>

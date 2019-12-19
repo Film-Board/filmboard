@@ -6,7 +6,13 @@ export default async (req, res) => {
 
   const options = {
     where: {},
-    include: {all: true},
+    include: [
+      Movie.associations.Poster,
+      {
+        model: Showtime,
+        duplicating: false
+      }
+    ],
     order: [[Showtime, 'time', 'DESC']]
   };
 
@@ -28,7 +34,7 @@ export default async (req, res) => {
 
   // Limit results
   if (query.limit) {
-    options.limit = query.limit;
+    options.limit = Number(query.limit);
   }
 
   // Select by date range

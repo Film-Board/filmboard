@@ -64,7 +64,7 @@ class MovieDetailsEditor extends React.Component {
         </Field>
         <Field>
           <Label>Published?</Label>
-          <Button onClick={() => this.updateField('hidden', !this.props.hidden)}>{this.props.hidden ? 'Yes' : 'No'}</Button>
+          <Button onClick={() => this.updateField('hidden', !this.props.hidden)}>{this.props.hidden ? 'No' : 'Yes'}</Button>
         </Field>
         <Field>
           <Label>Special event?</Label>
