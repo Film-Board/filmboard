@@ -20,10 +20,16 @@ class Bar extends React.Component {
         <Navbar.Menu>
           <Navbar.Segment align="start">
             {this.props.pages.map(page => {
-              const link = page.href ? page.href : `/pages/${page.name}`;
+              const isPageDynamic = Boolean(page.href);
+
+              if (isPageDynamic) {
+                return (
+                  <Link key={page.name} passHref href="/pages/[name]" as={`/pages/${page.name}`}><Navbar.Item>{page.name}</Navbar.Item></Link>
+                );
+              }
 
               return (
-                <Link key={page.name} passHref href={link}><Navbar.Item>{page.name}</Navbar.Item></Link>
+                <Link key={page.name} passHref href={page.href}><Navbar.Item>{page.name}</Navbar.Item></Link>
               );
             })}
 

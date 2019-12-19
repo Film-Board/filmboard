@@ -53,4 +53,13 @@
       }
     }
   }
+
+  // Fix bug where user icon jumps to top before being clicked on
+  .navbar-link {
+    .image {
+      height: 3.25rem;
+      display: flex;
+      align-items: center;
+    }
+  }
 }
