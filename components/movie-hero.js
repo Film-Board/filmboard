@@ -1,5 +1,5 @@
 import React from 'react';
-import {Column, Block, Level, Container, Title, Section} from 'rbx';
+import {Column, Block, Container, Title, Section} from 'rbx';
 import VideoBackground from './video-background';
 import Poster from './poster';
 import Prices from './movie-prices';
@@ -28,35 +28,34 @@ class MovieHero extends React.Component {
           </Section>
         ) : (<div/>)}
 
-        <Container breakpoint="tablet" className={`movie-details ${this.props.Trailer ? 'has-trailer' : ''}`}>
-          <Column.Group centered>
-            <Column size="full">
-              <Level>
-                <Column narrow className="poster">
-                  <Column.Group>
-                    <Column>
-                      <Poster path={this.props.Poster.path} specialEvent={this.props.specialEvent}/>
-                      <Ratings imdb={this.props.imdb} rottenTomatoes={this.props.rottenTomatoes} runtime={this.props.runtime} color="white"/>
-                      <Prices ticketPrice={this.props.ticketPrice} concessionPrice={this.props.concessionPrice}/>
-                    </Column>
-                  </Column.Group>
+        <Container className={`movie-details ${this.props.Trailer ? 'has-trailer' : ''}`}>
+          <Column.Group>
+            <Column narrow className="poster">
+              <Column.Group>
+                <Column>
+                  <Poster path={this.props.Poster.path} specialEvent={this.props.specialEvent}/>
+                  <Ratings imdb={this.props.imdb} rottenTomatoes={this.props.rottenTomatoes} runtime={this.props.runtime} color="white"/>
+                  <Prices ticketPrice={this.props.ticketPrice} concessionPrice={this.props.concessionPrice}/>
                 </Column>
+              </Column.Group>
+            </Column>
 
-                <Column size="one-third">
-                  <Title className="has-text-white default-capitalization has-text-centered-mobile">{this.props.name}</Title>
-                  <Block className="is-size-5 has-text-grey">{this.props.summary}</Block>
-                  <div className="has-text-grey"><b className="has-text-white">staring</b>: {this.props.staring}</div>
-                  <div className="has-text-grey"><b className="has-text-white">directed by</b>: {this.props.directedBy}</div>
-                </Column>
+            <Column size="one-third" className="title-summary-container">
+              <Title className="has-text-white default-capitalization has-text-centered-mobile">{this.props.name}</Title>
+              <Block className="is-size-5 has-text-grey">{this.props.summary}</Block>
 
-                <Column narrow>
-                  {this.props.Showtimes.map(({time}) => {
-                    const t = new Date(time);
+              <div>
+                <div className="has-text-grey"><b className="has-text-white">staring</b>: {this.props.staring}</div>
+                <div className="has-text-grey"><b className="has-text-white">directed by</b>: {this.props.directedBy}</div>
+              </div>
+            </Column>
 
-                    return (<Showtime key={t} date={t}/>);
-                  })}
-                </Column>
-              </Level>
+            <Column narrow>
+              {this.props.Showtimes.map(({time}) => {
+                const t = new Date(time);
+
+                return (<Showtime key={t} date={t}/>);
+              })}
             </Column>
           </Column.Group>
         </Container>
