@@ -68,12 +68,14 @@ class EditMovie extends React.Component {
   }
 
   async updateField(name, value) {
-    this.toggleSaving();
+    this.setState({saving: true});
+
+    const v = value === '' ? null : value;
 
     await fetchWithAuth(`/api/movies/${this.props.id}`, {
       method: 'PUT',
       body: {
-        [name]: value
+        [name]: v
       }
     });
 
@@ -81,11 +83,11 @@ class EditMovie extends React.Component {
       [name]: value
     });
 
-    this.toggleSaving();
+    this.setState({saving: false});
   }
 
   async updateShowtime(showtimes) {
-    this.toggleSaving();
+    this.setState({saving: true});
 
     const promises = showtimes.map(showtime => fetchWithAuth(`/api/showtimes/${showtime.id}`, {
       method: 'PUT',
@@ -108,11 +110,11 @@ class EditMovie extends React.Component {
       })
     }));
 
-    this.toggleSaving();
+    this.setState({saving: false});
   }
 
   async addShowtime(time) {
-    this.toggleSaving();
+    this.setState({saving: true});
 
     const showtime = await fetchWithAuth('/api/showtimes', {
       method: 'POST',
@@ -127,11 +129,11 @@ class EditMovie extends React.Component {
       Showtimes: [...Showtimes, showtime]
     }));
 
-    this.toggleSaving();
+    this.setState({saving: false});
   }
 
   async deleteShowtime(ids) {
-    this.toggleSaving();
+    this.setState({saving: true});
 
     await Promise.all(ids.map(id => fetchWithAuth(`/api/showtimes/${id}`, {
       method: 'DELETE'
@@ -141,11 +143,11 @@ class EditMovie extends React.Component {
       Showtimes: Showtimes.filter(showtime => !ids.includes(showtime.id))
     }));
 
-    this.toggleSaving();
+    this.setState({saving: false});
   }
 
   async changePoster(formData) {
-    this.toggleSaving();
+    this.setState({saving: true});
 
     const poster = await fetchWithAuth('/api/files/upload?type=poster', {
       method: 'POST',
@@ -157,7 +159,7 @@ class EditMovie extends React.Component {
 
     this.setState({Poster: poster, PosterId: poster.id});
 
-    this.toggleSaving();
+    this.setState({saving: false});
   }
 
   async changeTrailer(url) {
@@ -173,10 +175,6 @@ class EditMovie extends React.Component {
     await this.updateField('TrailerId', null);
 
     this.setState({TrailerId: null, Trailer: null});
-  }
-
-  toggleSaving() {
-    this.setState(({saving}) => ({saving: !saving}));
   }
 
   render() {

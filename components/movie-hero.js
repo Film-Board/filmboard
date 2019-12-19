@@ -42,9 +42,9 @@ class MovieHero extends React.Component {
                   </Column.Group>
                 </Column>
 
-                <Column className="movie-summery" size="one-third">
+                <Column size="one-third">
                   <Title className="has-text-white default-capitalization has-text-centered-mobile">{this.props.name}</Title>
-                  <Block className="is-size-5 has-text-grey">{this.props.summery}</Block>
+                  <Block className="is-size-5 has-text-grey">{this.props.summary}</Block>
                   <div className="has-text-grey"><b className="has-text-white">staring</b>: {this.props.staring}</div>
                   <div className="has-text-grey"><b className="has-text-white">directed by</b>: {this.props.directedBy}</div>
                 </Column>
