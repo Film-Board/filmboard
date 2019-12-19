@@ -101,6 +101,9 @@
       ],
       "react/no-danger": [
         0
+      ],
+      "no-alert": [
+        0
       ]
     }
   }

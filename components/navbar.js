@@ -20,7 +20,7 @@ class Bar extends React.Component {
         <Navbar.Menu>
           <Navbar.Segment align="start">
             {this.props.pages.map(page => {
-              const isPageDynamic = Boolean(page.href);
+              const isPageDynamic = !page.href;
 
               if (isPageDynamic) {
                 return (

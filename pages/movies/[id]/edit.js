@@ -212,7 +212,9 @@ class EditMovie extends React.Component {
             <Column size={6}>
               <Button color="danger" onClick={e => {
                 e.preventDefault();
-                this.handleDelete();
+                if (confirm('Are you sure you want to delete this?')) {
+                  this.handleDelete();
+                }
               }}
               >Delete Movie
               </Button>

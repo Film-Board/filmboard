@@ -38,6 +38,10 @@ class EditPage extends React.Component {
   }
 
   async handleDelete() {
+    if (!confirm('Are you sure you want to delete this?')) {
+      return;
+    }
+
     await fetchWithAuth(`/api/pages/${this.props.name}`, {
       method: 'delete'
     });
