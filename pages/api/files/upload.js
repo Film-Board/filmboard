@@ -1,4 +1,4 @@
-import {renameSync, createReadStream, createWriteStream} from 'fs';
+import {copyFileSync, createReadStream, createWriteStream} from 'fs';
 import {join} from 'path';
 import formidable from 'formidable';
 import sharp from 'sharp';
@@ -43,7 +43,7 @@ export default async (req, res) => {
           .jpeg()).pipe(createWriteStream(join(BUCKET_PATH, `${h}${extension}`))).on('finish', resolve));
     } else {
       // Move to bucket
-      renameSync(file.path, join(BUCKET_PATH, `${h}${extension}`));
+      copyFileSync(file.path, join(BUCKET_PATH, `${h}${extension}`));
     }
 
     // Add to database
