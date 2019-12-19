@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import jwk from 'jwks-rsa';
+import {User} from '../../../models';
 import {SIGNING_SECRET} from '../../../config';
 
 const getGoogleJWK = (header, callback) => {
@@ -44,7 +45,7 @@ const protect = (req, res, options = {}) => {
   const token = getToken(req);
 
   return new Promise((resolve, reject) => {
-    jwt.verify(token, SIGNING_SECRET, {}, (error, decoded) => {
+    jwt.verify(token, SIGNING_SECRET, {}, async (error, decoded) => {
       if (error) {
         if (sendResponse) {
           return reject(res.status(401).json({error: error.message}));
@@ -55,9 +56,16 @@ const protect = (req, res, options = {}) => {
 
       const {user} = decoded;
 
+      // Attempt to find user in database
+      const savedUser = await User.findOne({where: {email: user.email}});
+
+      if (savedUser === null) {
+        return reject(res.status(401).json({error: 'Unauthorized.'}));
+      }
+
       if (options.permissions) {
         options.permissions.forEach(permission => {
-          if (user[permission] === null || !user[permission]) {
+          if (savedUser[permission] === null || !savedUser[permission]) {
             if (sendResponse) {
               return reject(res.status(401).json({error: 'Unauthorized.'}));
             }
