@@ -3,17 +3,16 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 import MovieDB from 'moviedb-promise';
-import fetchRTdata from 'rottentomatoes-data';
 import download from 'download';
 import hasha from 'hasha';
-import {MOVIE_DB_KEY, BUCKET_PATH} from '../../../../config';
+import omdb from 'omdb-client';
+import {MOVIE_DB_KEY, OMDB_KEY, BUCKET_PATH} from '../../../../config';
 import {Movie, File} from '../../../../models';
 import {protect} from '../../util/auth';
 import {downloadTrailer} from '../helpers';
 
-const imdb = promisify(require('imdb'));
-
 const moviedb = new MovieDB(MOVIE_DB_KEY);
+const getOMDBMovie = promisify(omdb.get);
 
 export default async (req, res) => {
   const {
@@ -82,17 +81,25 @@ const addMovieByMovieDBId = async movieId => {
     });
   }
 
-  const [imdbMovie, {results: videos}, tomatoes] = await Promise.all([
-    imdb(movie.imdb_id),
-    moviedb.movieVideos({id: movieId}),
-    fetchRTdata(movie.title)
+  const [omdbMovie, {results: videos}] = await Promise.all([
+    getOMDBMovie({apiKey: OMDB_KEY, id: movie.imdb_id}),
+    moviedb.movieVideos({id: movieId})
   ]);
 
-  if (tomatoes.ok) {
-    movieToInsert.rottenTomatoes = tomatoes.movie.meterScore;
-  } else {
-    movieToInsert.rottenTomatoes = 0;
+  const movieRatings = omdbMovie.Ratings.reduce((accum, value) => {
+    accum[value.Source] = value.Value;
+    return accum;
+  }, {});
+
+  if (movieRatings['Internet Movie Database']) {
+    movieToInsert.imdb = Number(movieRatings['Internet Movie Database'].split('/')[0]);
   }
+
+  if (movieRatings['Rotten Tomatoes']) {
+    movieToInsert.rottenTomatoes = Number(movieRatings['Rotten Tomatoes'].split('%')[0]);
+  }
+
+  movieToInsert.summary = omdbMovie.Plot;
 
   let youtubeTrailerId = '';
 
@@ -101,9 +108,6 @@ const addMovieByMovieDBId = async movieId => {
       youtubeTrailerId = video.key;
     }
   });
-
-  movieToInsert.imdb = Number(imdbMovie.rating);
-  movieToInsert.summery = imdbMovie.description;
 
   const insertedMovie = await Movie.create(movieToInsert);
 
