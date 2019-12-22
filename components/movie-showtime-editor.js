@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faMinusCircle, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
+import {groupShowtimesByDay} from './lib/dates';
 
 class MovieShowtimeEditor extends React.Component {
   constructor(props) {
@@ -85,37 +86,7 @@ class MovieShowtimeEditor extends React.Component {
   }
 
   render() {
-    let groupedTimes = [];
-
-    this.props.showtimes.forEach(showtime => {
-      const date = new Date(showtime.time);
-
-      const day = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
-      if (groupedTimes.filter(time => time.day.getTime() === day.getTime()).length === 0) {
-        groupedTimes.push({
-          day,
-          times: [{
-            id: showtime.id,
-            time: date
-          }]
-        });
-      } else {
-        groupedTimes = groupedTimes.map(time => {
-          if (time.day.getTime() === day.getTime()) {
-            time.times.push({
-              id: showtime.id,
-              time: date
-            });
-          }
-
-          return time;
-        });
-      }
-    });
-
-    // Sort each group
-    groupedTimes = groupedTimes.map(group => ({...group, times: group.times.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime())}));
+    const groupedTimes = groupShowtimesByDay(this.props.showtimes);
 
     return (
       <div>

@@ -4,7 +4,7 @@ import VideoBackground from './video-background';
 import Poster from './poster';
 import Prices from './movie-prices';
 import Ratings from './movie-ratings';
-import Showtime from './showtime';
+import Showtimes from './showtimes';
 import EditButton from './edit-button';
 import './styles/movie-hero.scss';
 
@@ -41,7 +41,7 @@ class MovieHero extends React.Component {
             </Column>
 
             <Column size="one-third" className="title-summary-container">
-              <Title className="has-text-white default-capitalization has-text-centered-mobile">{this.props.name}</Title>
+              <Title className="default-capitalization has-text-centered-mobile">{this.props.name}</Title>
               <Block className="is-size-5 has-text-grey">{this.props.summary}</Block>
 
               <div>
@@ -51,11 +51,7 @@ class MovieHero extends React.Component {
             </Column>
 
             <Column narrow>
-              {this.props.Showtimes.map(({time}) => {
-                const t = new Date(time);
-
-                return (<Showtime key={t} date={t}/>);
-              })}
+              <Showtimes showtimes={this.props.Showtimes}/>
             </Column>
           </Column.Group>
         </Container>
