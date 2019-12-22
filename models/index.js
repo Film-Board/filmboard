@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const {DB_URL} = require('../config');
+const {DB_URL, IS_PRODUCTION} = require('../config');
 
 const fileModel = require('./File');
 const userModel = require('./User');
@@ -11,7 +11,8 @@ const showtimeModel = require('./Showtime');
 const trailerModel = require('./Trailer');
 
 const sequelize = new Sequelize(DB_URL, {
-  dialect: 'postgresql'
+  dialect: 'postgresql',
+  logging: IS_PRODUCTION ? false : console.log
 });
 
 const File = fileModel(sequelize, Sequelize);
