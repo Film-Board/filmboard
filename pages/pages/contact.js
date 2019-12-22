@@ -50,7 +50,7 @@ class Contact extends React.Component {
       case 'sending':
         return '...';
       case 'sent':
-        return 'Sent!';
+        return 'sent!';
       default:
         return (
           <Icon>

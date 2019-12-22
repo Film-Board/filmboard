@@ -34,14 +34,14 @@ export const downloadTrailer = async (url, movie) => {
       const modifiedVideoOutput = path.join(BUCKET_PATH, `${trailerHash}.mp4`);
 
       // Download audio
-      ytdl(url, {quality: 'highestaudio'})
+      ytdl(url, {filter: format => format.mimeType.indexOf('audio/') === 0 && (format.container === 'm4a' || format.container === 'mp4')})
         .pipe(fs.createWriteStream(audioOutput))
         .on('finish', () => {
         // Update progress of download
           trailer.update({progress: 0.25});
 
           // Download video and assemble
-          ffmpeg().input(ytdl(url, {quality: 'highestvideo', filter: format => format.container === 'mp4'}))
+          ffmpeg().input(ytdl(url, {quality: 'highestvideo'}))
             .videoCodec('copy')
             .input(audioOutput)
             .audioCodec('copy')
