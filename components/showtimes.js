@@ -9,12 +9,12 @@ const isFutureDate = date => {
 
 const Day = props => (
   <div>
-    <Title size={4}>{`${getWeekDay(props.group.day)}, ${dayjs(props.group.day).format('MM/DD')}`}</Title>
+    <Title size={4} color="white">{`${getWeekDay(props.group.day)}, ${dayjs(props.group.day).format('MM/DD')}`}</Title>
 
     <Tag.Group>
       {
         props.group.times.map(time => (
-          <Tag key={time.id} color={isFutureDate(time.time) ? 'warning' : 'black'} size="medium">{dayjs(time.time).format('h:mm A')}
+          <Tag key={time.id} color={isFutureDate(time.time) ? 'warning' : 'black'}>{dayjs(time.time).format('h:mm A')}
           </Tag>
         ))
       }

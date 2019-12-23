@@ -6,6 +6,21 @@ import hasha from 'hasha';
 import {Trailer, File} from '../../../models';
 import {BUCKET_PATH} from '../../../config';
 
+const preferredQualities = [299, 137, 298, 136, 135, 134, 133];
+
+const getItag = formats => {
+  let bestIndex = 10;
+
+  formats.forEach(format => {
+    const i = preferredQualities.indexOf(format.itag);
+    if (i !== -1 && i < bestIndex) {
+      bestIndex = i;
+    }
+  });
+
+  return preferredQualities[bestIndex];
+};
+
 export const downloadTrailer = async (url, movie) => {
   const trailerHash = hasha(url);
   const trailerPath = `${trailerHash}.mp4`;
@@ -34,14 +49,16 @@ export const downloadTrailer = async (url, movie) => {
       const modifiedVideoOutput = path.join(BUCKET_PATH, `${trailerHash}.mp4`);
 
       // Download audio
-      ytdl(url, {filter: format => format.mimeType.indexOf('audio/') === 0 && (format.container === 'm4a' || format.container === 'mp4')})
+      ytdl(url, {quality: 'highestaudio'})
         .pipe(fs.createWriteStream(audioOutput))
-        .on('finish', () => {
-        // Update progress of download
+        .on('finish', async () => {
+          // Update progress of download
           trailer.update({progress: 0.25});
 
+          const itag = getItag((await ytdl.getInfo(url)).formats);
+
           // Download video and assemble
-          ffmpeg().input(ytdl(url, {quality: 'highestvideo'}))
+          ffmpeg().input(ytdl(url, {quality: itag}))
             .videoCodec('copy')
             .input(audioOutput)
             .audioCodec('copy')
