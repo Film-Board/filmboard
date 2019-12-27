@@ -3,7 +3,7 @@ import {Icon, Field, Control, Input, Select, Button, Column} from 'rbx';
 import DatePicker from 'react-datepicker';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFilter, faSearch} from '@fortawesome/free-solid-svg-icons';
-
+import 'react-datepicker/dist/react-datepicker.css';
 import './styles/movies-filter.scss';
 
 class MoviesFilter extends React.Component {
@@ -13,6 +13,7 @@ class MoviesFilter extends React.Component {
     this.state = {
       fromDate: undefined,
       toDate: undefined,
+      limitV: 10,
       limit: 10,
       search: ''
     };
@@ -30,7 +31,7 @@ class MoviesFilter extends React.Component {
       limit = Number(event.target.value);
     }
 
-    this.setState({limit});
+    this.setState({limit, limitV: event.target.value});
   }
 
   updateSearch(event) {
@@ -64,7 +65,7 @@ class MoviesFilter extends React.Component {
                   </Control>
                   <Control>
                     <Select.Container>
-                      <Select onChange={this.updateLimit}>
+                      <Select value={this.state.limitV} onChange={this.updateLimit}>
                         <Select.Option>10</Select.Option>
                         <Select.Option>20</Select.Option>
                         <Select.Option>50</Select.Option>

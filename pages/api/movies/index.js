@@ -1,4 +1,4 @@
-import {Movie, Showtime, Trailer} from '../../../models';
+import {Movie, Showtime} from '../../../models';
 import {protect} from '../util/auth';
 
 export default async (req, res) => {
@@ -7,8 +7,6 @@ export default async (req, res) => {
     query,
     body
   } = req;
-
-  const limit = Number(query.limit) || 100;
 
   if (method === 'GET') {
     let getHidden = true;
@@ -23,15 +21,7 @@ export default async (req, res) => {
       where: {
         hidden: false
       },
-      limit,
-      include: [
-        Movie.associations.Poster,
-        Movie.associations.Showtimes,
-        {
-          model: Trailer,
-          include: Trailer.associations.File
-        }
-      ],
+      include: {all: true},
       order: [[Showtime, 'time', 'DESC']]
     };
 
@@ -39,7 +29,13 @@ export default async (req, res) => {
       delete filters.where;
     }
 
-    res.json(await Movie.findAll(filters));
+    let results = await Movie.findAll(filters);
+
+    if (query.limit) {
+      results = results.slice(0, Number(query.limit));
+    }
+
+    res.json(results);
   }
 
   if (method === 'POST') {

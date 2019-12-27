@@ -32,11 +32,6 @@ export default async (req, res) => {
     filteredIds = results.map(result => result.id);
   }
 
-  // Limit results
-  if (query.limit) {
-    options.limit = Number(query.limit);
-  }
-
   // Select by date range
   if (query.fromDate) {
     options.where['$Showtimes.time$'] = {
@@ -61,5 +56,11 @@ export default async (req, res) => {
     options.where.id = filteredIds;
   }
 
-  res.json(await Movie.findAll(options));
+  let results = await Movie.findAll(options);
+
+  if (query.limit) {
+    results = results.slice(0, Number(query.limit));
+  }
+
+  res.json(results);
 };
