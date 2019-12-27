@@ -27,6 +27,12 @@
   }
 }
 
+.showtimes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .poster {
   margin-top: -5rem;
   padding-bottom: 0;

@@ -50,7 +50,7 @@ class MovieHero extends React.Component {
               </div>
             </Column>
 
-            <Column narrow>
+            <Column narrow className="showtimes">
               <Showtimes showtimes={this.props.Showtimes}/>
             </Column>
           </Column.Group>

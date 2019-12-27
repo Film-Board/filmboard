@@ -9,7 +9,7 @@ const isFutureDate = date => {
 
 const Day = props => (
   <div>
-    <Title size={4} color="white">{`${getWeekDay(props.group.day)}, ${dayjs(props.group.day).format('MM/DD')}`}</Title>
+    <Title size={4} color="white">{`${getWeekDay(props.group.day)}, ${props.showYear ? dayjs(props.group.day).format('MM/DD/YY') : dayjs(props.group.day).format('MM/DD')}`}</Title>
 
     <Tag.Group>
       {
@@ -22,8 +22,19 @@ const Day = props => (
   </div>
 );
 
-export default props => groupShowtimesByDay(props.showtimes).map(d => (
-  <Block key={d.day}>
-    <Day group={d}/>
-  </Block>
-));
+export default props => {
+  let stillShowing = false;
+  const now = new Date();
+
+  props.showtimes.forEach(showtime => {
+    if (new Date(showtime.time) > now) {
+      stillShowing = true;
+    }
+  });
+
+  return groupShowtimesByDay(props.showtimes).map(d => (
+    <Block key={d.day}>
+      <Day group={d} showYear={!stillShowing}/>
+    </Block>
+  ));
+};
