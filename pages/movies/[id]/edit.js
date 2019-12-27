@@ -186,7 +186,7 @@ class EditMovie extends React.Component {
               <Title className="has-text-centered">
                 {this.state.saving ? 'Saving...' : (
                   <span>
-                Edit <Link passHref href="/movies/[id]" as={`/movies/${this.state.id}`}><a>Movie</a></Link>
+                    Edit <Link passHref href="/movies/[id]" as={`/movies/${this.state.id}`}><a>Movie</a></Link> {this.state.hidden ? '(unpublished)' : ''}
                   </span>
                 )}
               </Title>
