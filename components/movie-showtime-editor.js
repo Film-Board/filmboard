@@ -45,20 +45,34 @@ class MovieShowtimeEditor extends React.Component {
     this.props.updateShowtime(toUpdate);
   }
 
-  addDay() {
-    if (this.props.showtimes.length === 0) {
-      this.props.addShowtime(new Date());
-    } else {
+  async addDay() {
+    let baseDate = new Date();
+
+    if (this.props.showtimes.length !== 0) {
       // Find latest day in date set
       const sortedTimes = this.props.showtimes.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
 
       const latestTime = sortedTimes[sortedTimes.length - 1];
       const dayInMs = 24 * 60 * 60 * 1000;
 
-      const newTime = new Date(new Date(latestTime.time).getTime() + dayInMs);
-
-      this.props.addShowtime(newTime);
+      baseDate = new Date(new Date(latestTime.time).getTime() + dayInMs);
     }
+
+    const standardTimes = [
+      [14, 30],
+      [17, 30],
+      [20, 30],
+      [23, 30]
+    ];
+
+    await Promise.all(standardTimes.map(standardTime => {
+      const datetime = new Date(baseDate);
+      datetime.setHours(standardTime[0]);
+      datetime.setMinutes(standardTime[1]);
+      datetime.setSeconds(0);
+
+      return this.props.addShowtime(datetime);
+    }));
   }
 
   deleteDay(d) {
