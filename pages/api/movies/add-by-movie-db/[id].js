@@ -112,7 +112,11 @@ const addMovieByMovieDBId = async movieId => {
   const insertedMovie = await Movie.create(movieToInsert);
 
   // Kick off trailer download process
-  downloadTrailer(youtubeTrailerId, insertedMovie);
+  if (youtubeTrailerId !== '') {
+    downloadTrailer(youtubeTrailerId, insertedMovie).catch(async () => {
+      await insertedMovie.update({TrailerId: null});
+    });
+  }
 
   await insertedMovie.setPoster(poster);
 

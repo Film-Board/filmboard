@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import ytdl from 'ytdl-core';
 import ffmpeg from 'fluent-ffmpeg';
+import del from 'del';
 import hasha from 'hasha';
 import {Trailer, File} from '../../../models';
 import {BUCKET_PATH} from '../../../config';
@@ -50,6 +51,7 @@ export const downloadTrailer = async (url, movie) => {
 
       // Download audio
       ytdl(url, {quality: 'highestaudio'})
+        .on('error', reject)
         .pipe(fs.createWriteStream(audioOutput))
         .on('finish', async () => {
           // Update progress of download
@@ -61,14 +63,23 @@ export const downloadTrailer = async (url, movie) => {
           ffmpeg().input(ytdl(url, {quality: itag}))
             .videoCodec('copy')
             .input(audioOutput)
-            .audioCodec('copy')
+            .audioCodec('libmp3lame')
             .save(videoOutput)
+            .on('stderr', console.log)
+            .on('error', reject)
             .on('end', async () => {
             // Update progress of download
               trailer.update({progress: 0.6});
 
               // Crop black bars
-              await cropVideo(videoOutput, modifiedVideoOutput);
+              try {
+                await cropVideo(videoOutput, modifiedVideoOutput);
+              } catch (error) {
+                return reject(error);
+              }
+
+              // Delete temp file
+              await del([videoOutput, audioOutput]);
 
               // Update progress of download
               await trailer.update({progress: 1});
@@ -93,6 +104,7 @@ const cropVideo = (input, out) => {
         .videoFilters('cropdetect')
         .format('null')
         .output('-')
+        .on('error', reject)
         .on('stderr', stdLine => {
           const cropDimensions = /crop=.*/g.exec(stdLine);
 
@@ -108,6 +120,7 @@ const cropVideo = (input, out) => {
             .videoFilters(mode(cropCommands))
             .audioCodec('copy')
             .save(out)
+            .on('error', reject)
             .on('end', () => {
               resolve();
             });

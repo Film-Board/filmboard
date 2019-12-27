@@ -7,7 +7,7 @@ import './styles/all-movies.scss';
 
 class AllMovies extends React.Component {
   static async getInitialProps(ctx) {
-    const movies = await optimisticAuthFetch('/api/movies?limit=20', {}, ctx);
+    const movies = await optimisticAuthFetch('/api/movies?limit=10', {}, ctx);
 
     const upcoming = [];
     const archived = [];
