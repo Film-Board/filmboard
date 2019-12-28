@@ -91,7 +91,7 @@ export default class MyApp extends App {
               <Navbar pages={this.props.pages.pages} folders={this.props.pages.folders} loggedInUser={this.state.loggedInUser ? this.state.loggedInUser.user : undefined} transparent={Component.transparentNav}/>
             </Container>
 
-            <Component {...pageProps} onLoginChange={this.onLoginChange}/>
+            <Component {...pageProps} loggedInUser={this.state.loggedInUser ? this.state.loggedInUser.user : undefined} onLoginChange={this.onLoginChange}/>
           </div>
 
           <footer className="has-text-grey">

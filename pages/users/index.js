@@ -118,14 +118,18 @@ class Users extends React.Component {
               </Table.Row>
             </Table.Head>
             <Table.Body>
-              {this.state.users.map(user => (
-                <Table.Row key={user.id}>
-                  <Table.Cell>{user.email}</Table.Cell>
-                  <Table.Cell><Checkbox defaultChecked={user.canEditPages} onChange={e => this.editUser({email: user.email, canEditPages: e.target.checked})}/></Table.Cell>
-                  <Table.Cell><Checkbox defaultChecked={user.canManageUsers} onChange={e => this.editUser({email: user.email, canManageUsers: e.target.checked})}/></Table.Cell>
-                  <Table.Cell><Button color="danger" onClick={() => this.deleteUser(user.email)}>Remove</Button></Table.Cell>
-                </Table.Row>
-              ))}
+              {this.state.users.map(user => {
+                const disabled = this.props.loggedInUser.email === user.email;
+
+                return (
+                  <Table.Row key={user.id}>
+                    <Table.Cell>{user.email}</Table.Cell>
+                    <Table.Cell><Checkbox disabled={disabled} defaultChecked={user.canEditPages} onChange={e => this.editUser({email: user.email, canEditPages: e.target.checked})}/></Table.Cell>
+                    <Table.Cell><Checkbox disabled={disabled} defaultChecked={user.canManageUsers} onChange={e => this.editUser({email: user.email, canManageUsers: e.target.checked})}/></Table.Cell>
+                    <Table.Cell><Button disabled={disabled} color="danger" onClick={() => this.deleteUser(user.email)}>Remove</Button></Table.Cell>
+                  </Table.Row>
+                );
+              })}
             </Table.Body>
           </Table>
         </Container>
