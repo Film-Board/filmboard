@@ -1,6 +1,6 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
-import {Container, Content, Section} from 'rbx';
+import {Container, Content, Section, Column} from 'rbx';
 import * as Showdown from 'showdown';
 import EditButton from '../../../components/edit-button';
 import {getBaseURL} from '../../../common/helpers';
@@ -16,7 +16,11 @@ class ShowPage extends React.Component {
     return (
       <Section>
         <Container>
-          <Content dangerouslySetInnerHTML={{__html: new Showdown.Converter().makeHtml(this.props.content)}}/>
+          <Column.Group centered>
+            <Column size={6}>
+              <Content dangerouslySetInnerHTML={{__html: new Showdown.Converter({tables: true}).makeHtml(this.props.content)}}/>
+            </Column>
+          </Column.Group>
         </Container>
         <EditButton as={`/pages/${this.props.name}/edit`} href="/pages/[name]/edit"/>
       </Section>

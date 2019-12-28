@@ -1,4 +1,4 @@
-import {Page} from '../../../models';
+import {Page, PageCategory} from '../../../models';
 import {protect} from '../util/auth';
 
 export default async (req, res) => {
@@ -10,12 +10,21 @@ export default async (req, res) => {
   if (method === 'POST') {
     await protect(req, res, {permissions: ['canEditPages']});
 
-    const newPage = await Page.create({
+    const newPage = {
       name: body.name,
       content: body.content
-    });
+    };
 
-    res.json(newPage);
+    if (body.category === 'None') {
+      newPage.PageCategoryId = null;
+    } else if (typeof body.category === 'string') {
+      // Find category
+      const category = await PageCategory.findOne({where: {name: body.category}});
+
+      newPage.PageCategoryId = category.id;
+    }
+
+    res.json(await Page.create(newPage));
   }
 
   if (method === 'GET') {

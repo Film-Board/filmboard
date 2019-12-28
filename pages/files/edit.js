@@ -57,7 +57,7 @@ class Files extends React.Component {
     this.setState(({files}) => ({
       selectedFile: undefined,
       newFileName: '',
-      files: [...files, res]
+      files: [res, ...files]
     }));
 
     this.toggleSaving();

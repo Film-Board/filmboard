@@ -39,7 +39,7 @@ class Bar extends React.Component {
                 <Navbar.Dropdown>
                   {
                     this.props.folders[category].map(page => (
-                      <Link key={page.id} passHref href={`/pages/${page.name}`}><Navbar.Item>{page.name}</Navbar.Item></Link>
+                      <Link key={page.id} passHref href="/pages/[name]" as={`/pages/${page.name}`}><Navbar.Item>{page.name}</Navbar.Item></Link>
                     ))
                   }
                 </Navbar.Dropdown>
