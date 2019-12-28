@@ -84,8 +84,20 @@ export default class MyApp extends App {
             }
           `}}
           />
+          {Component.darkBackground ? (
+            <style type="text/css" dangerouslySetInnerHTML={{__html: `
+              html, body {
+                background-color: #111111;
+              }
+
+              .title {
+                color: white !important;
+              }
+            `}}
+            />
+          ) : (<div/>)}
         </Head>
-        <div className={`page-container ${Component.darkBackground ? 'dark-background' : ''}`}>
+        <div className="page-container">
           <div className="content-wrap">
             <Container>
               <Navbar pages={this.props.pages.pages} folders={this.props.pages.folders} loggedInUser={this.state.loggedInUser ? this.state.loggedInUser.user : undefined} transparent={Component.transparentNav}/>

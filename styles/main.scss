@@ -45,14 +45,6 @@ footer {
   margin: 0;
 }
 
-.dark-background {
-  background-color: #111111;
-
-  .title {
-    color: white;
-  }
-}
-
 .title:not(.default-capitalization) {
   text-transform: lowercase;
 }

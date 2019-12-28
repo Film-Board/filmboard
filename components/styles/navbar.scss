@@ -54,8 +54,10 @@
     }
   }
 
-  // Fix bug where user icon jumps to top before being clicked on
   .navbar-link {
+    color: white;
+
+    // Fix bug where user icon jumps to top before being clicked on
     .image {
       height: 3.25rem;
       display: flex;
