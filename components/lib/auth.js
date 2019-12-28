@@ -64,6 +64,15 @@ export const fetchWithAuth = async (url, options, ctx) => {
 
   if (typeof options.body === 'object' && !options.rawBody) {
     headers['Content-Type'] = 'application/json';
+
+    // Trim strings
+    Object.keys(options.body).forEach(key => {
+      const value = options.body[key];
+
+      if (typeof value === 'string') {
+        options.body[key] = value.trim();
+      }
+    });
     options.body = JSON.stringify(options.body);
   }
 
