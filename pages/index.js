@@ -5,10 +5,11 @@ import {Section, Title, Column, Container} from 'rbx';
 import {getBaseURL} from '../common/helpers';
 import MovieHero from '../components/movie-hero';
 import MoviesContainer from '../components/movies-container';
+import {getNow} from '../components/lib/dates';
 
 class Homepage extends React.Component {
   static async getInitialProps(ctx) {
-    const now = new Date();
+    const now = getNow();
 
     const [moviesReq, bannerReq] = await Promise.all([
       fetch(`${getBaseURL(ctx)}/api/movies?limit=5`),
@@ -44,11 +45,11 @@ class Homepage extends React.Component {
         }
       });
 
-      if (latestShowtime < now) {
+      if (latestShowtime.getTime() < now) {
         return;
       }
 
-      if (earliestShowtime > now) {
+      if (earliestShowtime.getTime() > now) {
         upcomingMovies.push(movie);
       } else {
         currentMovies.push(movie);

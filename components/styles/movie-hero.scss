@@ -11,7 +11,7 @@
 
   &.has-trailer {
     // Subtract navbar and padding
-    margin-top: calc(80vh - 4.25rem);
+    margin-top: 50vh;
   }
 
   @supports ((backdrop-filter: blur(30px))) or (-webkit-backdrop-filter: blur(30px)) {

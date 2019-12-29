@@ -24,7 +24,7 @@ class ArchivedMovies extends React.Component {
       delete state.limit;
     }
 
-    const movies = await (await fetch(`/api/movies/search?${query.stringify(state)}`)).json();
+    const movies = await (await fetch(`/api/movies?${query.stringify(state)}`)).json();
 
     this.setState({movies});
   }

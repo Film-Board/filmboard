@@ -14,6 +14,7 @@ module.exports = (sequelize, type) => {
       type: type.BOOLEAN,
       defaultValue: false
     },
+    latestShowtime: type.DATE,
     hidden: {
       type: type.BOOLEAN,
       defaultValue: true

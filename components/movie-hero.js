@@ -12,7 +12,7 @@ class MovieHero extends React.Component {
   render() {
     return (
       <div>
-        {this.props.Trailer ? (
+        {this.props.Trailer && this.props.Trailer.progress === 1 ? (
           <VideoBackground path={`/static/bucket/${this.props.Trailer.File.path}`}/>
         ) : (<div/>)}
 

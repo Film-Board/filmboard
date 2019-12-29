@@ -1,10 +1,12 @@
 import React from 'react';
 import {Title, Tag, Block} from 'rbx';
 import dayjs from 'dayjs';
-import {groupShowtimesByDay, getWeekDay} from './lib/dates';
+import {groupShowtimesByDay, getWeekDay, getNow} from './lib/dates';
+
+const now = getNow();
 
 const isFutureDate = date => {
-  return date.getTime() > new Date().getTime();
+  return date.getTime() > now;
 };
 
 const Day = props => (
@@ -24,7 +26,6 @@ const Day = props => (
 
 export default props => {
   let stillShowing = false;
-  const now = new Date();
 
   props.showtimes.forEach(showtime => {
     if (new Date(showtime.time) > now) {

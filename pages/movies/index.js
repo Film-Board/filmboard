@@ -1,6 +1,7 @@
 import React from 'react';
 import {Section} from 'rbx';
 import {optimisticAuthFetch} from '../../components/lib/auth';
+import {getNow} from '../../components/lib/dates';
 import UpcomingMovies from '../../components/movies-upcoming';
 import ArchivedMovies from '../../components/movies-archived';
 import './styles/all-movies.scss';
@@ -12,13 +13,13 @@ class AllMovies extends React.Component {
     const upcoming = [];
     const archived = [];
 
-    const now = new Date();
+    const now = getNow();
 
     movies.forEach(movie => {
       let isStillShowing = false;
 
       movie.Showtimes.forEach(showtime => {
-        if (new Date(showtime.time).getTime() > now.getTime()) {
+        if (new Date(showtime.time).getTime() > now) {
           isStillShowing = true;
         }
       });

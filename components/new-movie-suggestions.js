@@ -11,7 +11,7 @@ class Suggestions extends React.Component {
           <Table striped>
             <Table.Body>
               {this.props.suggestions.map(suggestion => (
-                <Table.Row key={suggestion.title}>
+                <Table.Row key={suggestion.id}>
                   <Table.Cell>{suggestion.title}</Table.Cell>
                   <Table.Cell>{new Date(suggestion.release_date).getFullYear()}</Table.Cell>
                   <Table.Cell>

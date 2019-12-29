@@ -1,5 +1,6 @@
 import {Showtime} from '../../../models';
 import {protect} from '../util/auth';
+import {updateLatestShowtimeForMovie} from '../util/showtimes';
 
 export default async (req, res) => {
   const {method, body, query} = req;
@@ -7,7 +8,13 @@ export default async (req, res) => {
   await protect(req, res, {permissions: ['canEditPages']});
 
   if (method === 'PUT') {
-    res.json(await Showtime.update(body, {where: {id: query.id}}));
+    const showtime = await Showtime.update(body, {where: {id: query.id}});
+
+    if (body.MovieId) {
+      await updateLatestShowtimeForMovie(body.MovieId);
+    }
+
+    res.json(showtime);
   }
 
   if (method === 'DELETE') {

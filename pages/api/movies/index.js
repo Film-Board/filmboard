@@ -1,4 +1,5 @@
-import {Movie, Showtime} from '../../../models';
+import {Op} from 'sequelize';
+import {Movie, Trailer, Showtime, sequelize} from '../../../models';
 import {protect} from '../util/auth';
 
 export default async (req, res) => {
@@ -17,23 +18,70 @@ export default async (req, res) => {
       getHidden = false;
     }
 
-    const filters = {
+    const options = {
       where: {
         hidden: false
       },
-      include: {all: true},
-      order: [[Showtime, 'time', 'DESC']]
+      distinct: true,
+      include: [
+        Movie.associations.Poster,
+        {
+          model: Showtime
+        },
+        {
+          model: Trailer,
+          include: Trailer.associations.File
+        }
+      ],
+      order: [['latestShowtime', 'DESC']]
     };
 
     if (getHidden) {
-      delete filters.where;
+      delete options.where.hidden;
     }
-
-    let results = await Movie.findAll(filters);
 
     if (query.limit) {
-      results = results.slice(0, Number(query.limit));
+      options.limit = query.limit;
     }
+
+    // Search by name
+    const isFullTextSearch = query.search && query.search !== '';
+
+    if (isFullTextSearch) {
+      const results = await sequelize.query(`
+        SELECT *
+        FROM "public"."Movies"
+        WHERE name @@ plainto_tsquery('english', :query);
+      `, {
+        model: Movie,
+        replacements: {query: query.search}
+      });
+
+      const filteredIds = results.map(result => result.id);
+
+      options.where.id = filteredIds;
+    }
+
+    // Select by date range
+    if (query.fromDate) {
+      options.where.latestShowtime = {
+        [Op.between]: [new Date(query.fromDate), new Date(10000000000000)]
+      };
+    }
+
+    if (query.toDate) {
+      options.where.latestShowtime = {
+        [Op.between]: [new Date(0), new Date(query.toDate)]
+      };
+    }
+
+    if (query.fromDate && query.toDate) {
+      options.where.latestShowtime = {
+        [Op.between]: [new Date(query.fromDate), new Date(query.toDate)]
+      };
+    }
+
+    const results = await Movie.findAll(options);
 
     res.json(results);
   }

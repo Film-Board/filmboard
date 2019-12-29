@@ -44,3 +44,7 @@ export const getWeekDay = date => {
   // Return the element that corresponds to that index.
   return weekdays[day];
 };
+
+export const getNow = () => {
+  return new Date().getTime() - (5 * 60 * 60 * 1000);
+};
