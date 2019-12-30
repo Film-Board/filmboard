@@ -10,6 +10,7 @@ import {getNow} from '../components/lib/dates';
 class Homepage extends React.Component {
   static async getInitialProps(ctx) {
     const now = getNow();
+    const halfADayMs = 12 * 60 * 60 * 1000;
 
     const [moviesReq, bannerReq] = await Promise.all([
       fetch(`${getBaseURL(ctx)}/api/movies?limit=5`),
@@ -49,12 +50,14 @@ class Homepage extends React.Component {
         return;
       }
 
-      if (earliestShowtime.getTime() > now) {
+      if (earliestShowtime.getTime() - halfADayMs > now) {
         upcomingMovies.push(movie);
       } else {
         currentMovies.push(movie);
       }
     });
+
+    upcomingMovies = upcomingMovies.sort((a, b) => new Date(a.latestShowtime).getTime() - new Date(b.latestShowtime).getTime());
 
     let heroMovie = {};
 
