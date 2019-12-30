@@ -8,6 +8,8 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
+  server.use('/static/bucket', express.static('public/static/bucket'));
+
   server.all('*', (req, res) => {
     return handle(req, res);
   });
