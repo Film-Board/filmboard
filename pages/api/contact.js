@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 
 const {
   SMTP_HOST,
+  SMTP_PORT,
   SMTP_USER,
   SMTP_PASSWORD,
   CONTACT_EMAIL
@@ -12,8 +13,8 @@ export default async (req, res) => {
 
   const transporter = nodemailer.createTransport({
     host: SMTP_HOST,
-    port: 587,
-    secure: false, // True for 465, false for other ports
+    port: SMTP_PORT,
+    secure: SMTP_PORT === 465, // True for 465, false for other ports
     auth: {
       user: SMTP_USER, // Generated ethereal user
       pass: SMTP_PASSWORD // Generated ethereal password
