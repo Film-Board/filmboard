@@ -95,7 +95,7 @@ export default class MyApp extends App {
               }
             `}}
             />
-          ) : (<div/>)}
+          ) : (<style/>)}
         </Head>
         <div className="page-container">
           <div className="content-wrap">
