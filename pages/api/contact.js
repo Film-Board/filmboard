@@ -1,10 +1,7 @@
 import nodemailer from 'nodemailer';
 
 const {
-  SMTP_HOST,
-  SMTP_PORT,
   SMTP_USER,
-  SMTP_PASSWORD,
   CONTACT_EMAIL
 } = require('../../config');
 
@@ -12,13 +9,8 @@ export default async (req, res) => {
   const {method, body} = req;
 
   const transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: SMTP_PORT,
-    secure: SMTP_PORT === 465, // True for 465, false for other ports
-    auth: {
-      user: SMTP_USER, // Generated ethereal user
-      pass: SMTP_PASSWORD // Generated ethereal password
-    }
+    sendmail: true,
+    newline: 'unix'
   });
 
   if (method === 'POST') {
