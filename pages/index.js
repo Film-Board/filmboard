@@ -86,7 +86,7 @@ class Homepage extends React.Component {
     return (
       <div>
         {
-          this.props.currentMovies.length === 0 && this.props.upcomingMovies.length === 0 ? (
+          Object.keys(this.props.heroMovie).length === 0 && this.props.currentMovies.length === 0 && this.props.upcomingMovies.length === 0 ? (
             <Section>
               <Column.Group centered>
                 <Column size="half" className="has-text-centered">

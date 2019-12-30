@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import ytdl from 'ytdl-core';
 import ffmpeg from 'fluent-ffmpeg';
-import del from 'del';
 import hasha from 'hasha';
 import {Trailer, File} from '../../../models';
 import {BUCKET_PATH} from '../../../config';
@@ -55,7 +54,7 @@ export const downloadTrailer = async (url, movie) => {
         .pipe(fs.createWriteStream(audioOutput))
         .on('finish', async () => {
           // Update progress of download
-          trailer.update({progress: 0.25});
+          await trailer.update({progress: 0.25});
 
           const itag = getItag((await ytdl.getInfo(url)).formats);
 
@@ -65,11 +64,12 @@ export const downloadTrailer = async (url, movie) => {
             .input(audioOutput)
             .audioCodec('libmp3lame')
             .save(videoOutput)
-            .on('stderr', console.log)
+            .on('stderr', console.error)
+            .on('start', console.log)
             .on('error', reject)
             .on('end', async () => {
-            // Update progress of download
-              trailer.update({progress: 0.6});
+              // Update progress of download
+              await trailer.update({progress: 0.6});
 
               // Crop black bars
               try {
@@ -77,9 +77,6 @@ export const downloadTrailer = async (url, movie) => {
               } catch (error) {
                 return reject(error);
               }
-
-              // Delete temp file
-              await del([videoOutput, audioOutput]);
 
               // Update progress of download
               await trailer.update({progress: 1});
@@ -105,6 +102,7 @@ const cropVideo = (input, out) => {
         .format('null')
         .output('-')
         .on('error', reject)
+        .on('start', console.log)
         .on('stderr', stdLine => {
           const cropDimensions = /crop=.*/g.exec(stdLine);
 
@@ -117,7 +115,7 @@ const cropVideo = (input, out) => {
         .on('end', () => {
           // Crop video
           ffmpeg(input)
-            .videoFilters(mode(cropCommands))
+            .videoFilters(cropCommands[cropCommands.length - 1])
             .audioCodec('copy')
             .save(out)
             .on('error', reject)
@@ -131,10 +129,3 @@ const cropVideo = (input, out) => {
     }
   });
 };
-
-function mode(arr) {
-  return arr.sort((a, b) =>
-    arr.filter(v => v === a).length -
-        arr.filter(v => v === b).length
-  ).pop();
-}

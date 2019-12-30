@@ -65,7 +65,9 @@ class AddMovie extends React.Component {
             </Column.Group>
 
             <Column.Group centered>
-              <Suggestions suggestions={this.state.suggestions} adding={this.state.movieAdding} onAdd={this.addMovie}/>
+              <Column size={4}>
+                <Suggestions suggestions={this.state.suggestions} adding={this.state.movieAdding} onAdd={this.addMovie}/>
+              </Column>
             </Column.Group>
           </Container>
         </Section>
