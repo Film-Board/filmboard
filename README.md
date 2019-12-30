@@ -4,6 +4,13 @@
 
 Built from scratch with [Next.js](https://nextjs.org/) and React.  Integrates a custom CMS with an easy-to-use interface for adding movies, showtimes, and editing pages.
 
+### This vs. old site
+
+Adding The Lion King on both versions with specific showtimes:
+[![Click to watch](https://img.youtube.com/vi/E2WV9h8Ulh8/0.jpg)](https://www.youtube.com/watch?v=E2WV9h8Ulh8)
+
+(It takes **183** seconds on the WordPress version and **45** on this version.)
+
 ### Developing
 
 1. Clone repository.
