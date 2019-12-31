@@ -87,7 +87,7 @@ class Contact extends React.Component {
                           </Button>
                         </Control>
                         <Control expanded>
-                          <Input type="text" placeholder="name" value={this.state.fromName} onChange={e => this.setState({fromName: e.target.value})}/>
+                          <Input required placeholder="name" value={this.state.fromName} onChange={e => this.setState({fromName: e.target.value})}/>
                         </Control>
                       </Field>
                       <Field kind="addons">
@@ -100,6 +100,7 @@ class Contact extends React.Component {
                         </Control>
                         <Control expanded>
                           <Input
+                            required
                             placeholder="email"
                             type="email"
                             value={this.state.fromEmail} onChange={e => this.setState({fromEmail: e.target.value})}
@@ -120,8 +121,7 @@ class Contact extends React.Component {
                               <Select.Option>Advertising</Select.Option>
                               <Select.Option>Movie Suggestion</Select.Option>
                               <Select.Option>Website Feedback</Select.Option>
-                              <Select.Option>Live Programming</Select.Option>
-                              <Select.Option>3D Glasses</Select.Option>
+                              <Select.Option>Special Event</Select.Option>
                               <Select.Option>Other</Select.Option>
                             </Select>
                           </Select.Container>
@@ -129,7 +129,7 @@ class Contact extends React.Component {
                       </Field>
                       <Field>
                         <Control>
-                          <Input placeholder="booking a 'wear a hat' ad" value={this.state.subjectName} onChange={e => this.setState({subjectName: e.target.value})}/>
+                          <Input required placeholder="booking a 'wear a hat' ad" value={this.state.subjectName} onChange={e => this.setState({subjectName: e.target.value})}/>
                         </Control>
                       </Field>
                     </Field.Body>
