@@ -16,18 +16,6 @@ class MovieHero extends React.Component {
           <VideoBackground path={`/static/bucket/${this.props.Trailer.File.path}`}/>
         ) : (<div/>)}
 
-        {this.props.banner ? (
-          <Section className="banner-container">
-            <Container breakpoint="tablet">
-              <Column.Group centered vcentered>
-                <Column narrow className="has-text-centered has-text-white has-background-info is-size-7-mobile banner">
-                  <span>{this.props.banner}</span>
-                </Column>
-              </Column.Group>
-            </Container>
-          </Section>
-        ) : (<div/>)}
-
         <Section>
           <Container className={`movie-details ${this.props.Trailer ? 'has-trailer' : ''}`}>
             <Column.Group>

@@ -4,6 +4,7 @@ import fetch from 'isomorphic-unfetch';
 import {Section, Title, Column, Container} from 'rbx';
 import {getBaseURL} from '../common/helpers';
 import MovieHero from '../components/movie-hero';
+import Banner from '../components/banner';
 import MoviesContainer from '../components/movies-container';
 import {getNow} from '../components/lib/dates';
 
@@ -88,6 +89,13 @@ class Homepage extends React.Component {
   render() {
     return (
       <div>
+        {
+          this.props.bannerContent === '' ? (
+            <div/>
+          ) : (
+            <Banner content={this.props.bannerContent} absolutePosition={Object.keys(this.props.heroMovie).length !== 0}/>
+          )
+        }
         {
           Object.keys(this.props.heroMovie).length === 0 && this.props.currentMovies.length === 0 && this.props.upcomingMovies.length === 0 ? (
             <Section>
