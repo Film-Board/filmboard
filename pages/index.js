@@ -24,7 +24,7 @@ class Homepage extends React.Component {
     ]);
 
     let upcomingMovies = [];
-    const currentMovies = [];
+    let currentMovies = [];
 
     movies.forEach(movie => {
       if (movie.Showtimes.length === 0) {
@@ -62,18 +62,14 @@ class Homepage extends React.Component {
 
     let heroMovie = {};
 
-    if (currentMovies.length === 0 && upcomingMovies.length > 0 && upcomingMovies[0].specialEvent !== true) {
-      heroMovie = upcomingMovies[0];
+    const heroMovieCandidates = [...currentMovies, ...upcomingMovies].filter(m => m.specialEvent === false);
 
-      upcomingMovies = upcomingMovies.filter(movie => movie.id !== upcomingMovies[0].id);
-    } else if (currentMovies.length === 1) {
-      heroMovie = currentMovies[0];
-    } else if (currentMovies.length > 1) {
-      heroMovie = currentMovies[0];
-    }
+    if (heroMovieCandidates.length > 0) {
+      heroMovie = heroMovieCandidates[0];
 
-    if (heroMovie.specialEvent === true) {
-      heroMovie = {};
+      // Remove from other lists if it exists
+      currentMovies = currentMovies.filter(m => m.id !== heroMovie.id);
+      upcomingMovies = upcomingMovies.filter(m => m.id !== heroMovie.id);
     }
 
     // Set banner
