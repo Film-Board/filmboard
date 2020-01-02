@@ -16,7 +16,7 @@ const Day = props => (
     <Tag.Group>
       {
         props.group.times.map(time => (
-          <Tag key={time.id} color={isFutureDate(time.time) ? 'warning' : 'black'}>{dayjs(time.time).format('h:mm A')}
+          <Tag key={time.id} className={isFutureDate(time.time) ? 'has-text-weight-bold' : ''} color={isFutureDate(time.time) ? 'warning' : 'black'}>{dayjs(time.time).format('h:mm A')}
           </Tag>
         ))
       }
