@@ -12,6 +12,7 @@ class LoginButton extends React.Component {
     super(props);
 
     this.checkLogin = this.checkLogin.bind(this);
+    this.failedLogin = this.failedLogin.bind(this);
 
     this.state = {
       errorMessage: ''
@@ -41,6 +42,10 @@ class LoginButton extends React.Component {
     }
   }
 
+  failedLogin(error) {
+    console.error(error);
+  }
+
   render() {
     return (
       <Section>
@@ -56,6 +61,7 @@ class LoginButton extends React.Component {
               buttonText="Login"
               cookiePolicy="single_host_origin"
               onSuccess={this.checkLogin}
+              onFailure={this.failedLogin}
             />
           </Column>
         </Column.Group>
