@@ -1,36 +1,58 @@
 const path = require('path');
-const withSass = require('@zeit/next-sass');
-const withCSS = require('@zeit/next-css');
+const withPlugins = require('next-compose-plugins');
+const sass = require('@zeit/next-sass');
+const css = require('@zeit/next-css');
+const withTM = require('next-transpile-modules');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
-module.exports = withCSS(
-  withSass({
-    webpack(config) {
-      config.plugins = config.plugins || [];
-
-      config.plugins = [
-        ...config.plugins,
-
-        // Read the .env file
-        new Dotenv({
-          path: path.join(__dirname, '.env')
-        })
-      ];
-
-      const isProduction = config.mode === 'production';
-
-      if (!isProduction) {
-        return config;
-      }
-
-      config.optimization.minimizer.push(
-        new OptimizeCSSAssetsPlugin({})
-      );
-
-      return config;
-    },
+module.exports = withPlugins([
+  [withTM, {
+    transpileModules: ['react-map-gl', 'rbx', 'react-datepicker', 'dayjs']
+  }],
+  [sass, {
     sassLoaderOptions: {
       includePaths: [path.resolve('node_modules')]
     }
-  }));
+  }],
+  [css]
+], {
+  experimental: {
+    modern: true
+  },
+  webpack: config => {
+    config.plugins = config.plugins || [];
+
+    config.plugins = [
+      ...config.plugins,
+
+      // Read the .env file
+      new Dotenv({
+        path: path.join(__dirname, '.env')
+      })
+    ];
+
+    const isProduction = config.mode === 'production';
+
+    if (!isProduction) {
+      return config;
+    }
+
+    config.optimization.minimizer.push(
+      new OptimizeCSSAssetsPlugin({})
+    );
+
+    // Unshift polyfills in main entrypoint.
+    const originalEntry = config.entry;
+    config.entry = async () => {
+      const entries = await originalEntry();
+      if (entries['main.js']) {
+        entries['main.js'].unshift('./components/lib/polyfills.js');
+      }
+
+      return entries;
+    };
+
+    return config;
+  }
+});
