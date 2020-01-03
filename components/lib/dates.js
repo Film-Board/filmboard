@@ -31,6 +31,9 @@ export const groupShowtimesByDay = showtimes => {
   // Sort each group
   groupedTimes = groupedTimes.map(group => ({...group, times: group.times.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime())}));
 
+  // Sort groups
+  groupedTimes = groupedTimes.sort((a, b) => a.day.getTime() - b.day.getTime());
+
   return groupedTimes;
 };
 
