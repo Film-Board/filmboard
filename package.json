@@ -36,7 +36,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.6.0",
     "mapbox-gl": "^1.6.1",
-    "moviedb-promise": "^1.4.2",
+    "moviedb-promise": "^1.5.0",
     "next": "^9.1.7",
     "next-cookies": "^2.0.3",
     "node-sass": "^4.13.0",

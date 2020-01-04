@@ -7125,10 +7125,10 @@ move-concurrently@^1.0.1:
     rimraf "^2.5.4"
     run-queue "^1.0.3"
 
-moviedb-promise@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/moviedb-promise/-/moviedb-promise-1.4.2.tgz#b644b7894b7b67fd0bdbe4ae08f3da3148493301"
-  integrity sha512-X4eQGhf0UYMAv7v/x9Qwu1sJSEzlr0lVLHVP9q4pgLxoXfiixzstxx5X3lqLYx45kzzHz0JQeorMtpacKFpNGg==
+moviedb-promise@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/moviedb-promise/-/moviedb-promise-1.5.0.tgz#425883f904c0d4e2108ae7c88d5f2130ea4a0ed4"
+  integrity sha512-0xjfMAlHzf/+pdMz10Cw9Fi0qgVsjFl06pvfEdfsedFsj54yffnRevuNFUqt2NstTyPtBs7qhV2iSV4EMTA2uQ==
   dependencies:
     superagent "^3.8.3"
 
