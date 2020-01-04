@@ -31,7 +31,7 @@ class MovieHero extends React.Component {
 
               <Column size="one-third" className="title-summary-container">
                 <Title className="default-capitalization has-text-centered-mobile">{this.props.name}</Title>
-                <Block className="is-size-5 has-text-grey">{this.props.summary}</Block>
+                <Block className="is-size-5 has-text-white">{this.props.summary}</Block>
 
                 <div>
                   <div className="has-text-grey"><b className="has-text-white">staring</b>: {this.props.staring}</div>
