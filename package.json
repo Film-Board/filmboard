@@ -37,7 +37,7 @@
     "jwks-rsa": "^1.6.0",
     "mapbox-gl": "^1.6.1",
     "moviedb-promise": "^1.4.2",
-    "next": "^9.1.6",
+    "next": "^9.1.7",
     "next-cookies": "^2.0.3",
     "node-sass": "^4.13.0",
     "nodemailer": "^6.4.2",
