@@ -97,13 +97,13 @@ class Homepage extends React.Component {
             <Section>
               <Column.Group centered>
                 <Column size="half" className="has-text-centered">
-                  <Title size={3} className="has-text-white">We&#39;re not currently showing any movies.</Title>
+                  <Title size={3} className="has-text-white">We&#39;re not currently showing any movies</Title>
                   <Title size={5} className="has-text-white">
                     <Link href="/movies">
                       <a>Here are </a>
                     </Link>
 
-                    some past movies we&#39;ve shown.
+                    some past movies we&#39;ve shown
                   </Title>
                 </Column>
               </Column.Group>
