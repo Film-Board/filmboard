@@ -20,6 +20,14 @@ module.exports = withPlugins([
   experimental: {
     modern: true
   },
+  generateBuildId: async () => {
+    // Get Git commit hash
+    const hash = require('child_process')
+      .execSync('git rev-parse HEAD')
+      .toString().trim().slice(0, 7);
+
+    return hash;
+  },
   webpack: config => {
     config.plugins = config.plugins || [];
 
