@@ -210,12 +210,13 @@ class EditMovie extends React.Component {
 
           <Column.Group>
             <Column size={6}>
-              <Button color="danger" onClick={e => {
-                e.preventDefault();
-                if (confirm('Are you sure you want to delete this?')) {
-                  this.handleDelete();
-                }
-              }}
+              <Button
+                color="danger" onClick={e => {
+                  e.preventDefault();
+                  if (confirm('Are you sure you want to delete this?')) {
+                    this.handleDelete();
+                  }
+                }}
               >Delete Movie
               </Button>
             </Column>

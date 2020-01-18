@@ -71,7 +71,9 @@ export default class MyApp extends App {
           <meta name="msapplication-TileImage" content="/static/images/favicon/ms-icon-144x144.png"/>
           <meta name="theme-color" content="#000000"/>
 
-          <style type="text/css" dangerouslySetInnerHTML={{__html: `
+          <style
+            type="text/css"
+            dangerouslySetInnerHTML={{__html: `
             @font-face {
               font-family: 'Soin Sans Neue';
               src: url('/static/fonts/SoinSansNeue-Bold.otf') format('opentype');
@@ -85,7 +87,9 @@ export default class MyApp extends App {
           `}}
           />
           {Component.darkBackground ? (
-            <style type="text/css" dangerouslySetInnerHTML={{__html: `
+            <style
+              type="text/css"
+              dangerouslySetInnerHTML={{__html: `
               html, body {
                 background-color: #111111;
               }

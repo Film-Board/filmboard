@@ -75,10 +75,11 @@ class PageEditor extends React.Component {
           Save
           </Button>
           {this.props.removable ?
-            <Button color="danger" onClick={e => {
-              e.preventDefault();
-              this.props.onDelete();
-            }}
+            <Button
+              color="danger" onClick={e => {
+                e.preventDefault();
+                this.props.onDelete();
+              }}
             >
         Delete
             </Button> :
