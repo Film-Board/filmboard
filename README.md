@@ -1,5 +1,7 @@
 # 📽 The Michigan Tech Film Board's site
 
+[![Build Status](https://travis-ci.com/Film-Board/filmboard.svg?branch=master)](https://travis-ci.com/Film-Board/filmboard)
+
 ![Screenshot](./.github/screenshots/home.png)
 
 Built from scratch with [Next.js](https://nextjs.org/) and React.  Integrates a custom CMS with an easy-to-use interface for adding movies, showtimes, and editing pages.
