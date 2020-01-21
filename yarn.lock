@@ -6944,10 +6944,13 @@ next-cookies@^2.0.3:
   dependencies:
     universal-cookie "^4.0.2"
 
-next-transpile-modules@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/next-transpile-modules/-/next-transpile-modules-2.3.1.tgz#8977c070912fbc3e927c662431fc4e91ae335b43"
-  integrity sha512-euNOBAk/CXZA6binwL47+QpcxAmK1pzH2zjF7XnRN55f2iuN/ecpUw5p3x4bikFu0yDPtSLS92nv9fcgcCo0vg==
+next-transpile-modules@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/next-transpile-modules/-/next-transpile-modules-3.0.0.tgz#c7f193b47534cec1761a1ad003c8e17abedbffc7"
+  integrity sha512-NwNYdQR02g0BrDTwr1o6aT/4DDacYC4bblEMfN8MkSs+HZjp9OOQFrgBq0kjL2X1uX4NxBOhOz46XLY1HGmd7g==
+  dependencies:
+    micromatch "^4.0.2"
+    slash "^3.0.0"
 
 next@~9.1.7:
   version "9.1.7"
