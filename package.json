@@ -71,7 +71,7 @@
     "eslint-plugin-react-hooks": "^2.3.0",
     "husky": "^4.2.0",
     "next-compose-plugins": "^2.2.0",
-    "next-transpile-modules": "^2.3.1",
+    "next-transpile-modules": "^3.0.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "xo": "^0.25.3"
   },
