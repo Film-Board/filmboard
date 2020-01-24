@@ -1,7 +1,6 @@
 import React from 'react';
 import {Field, Button, Table, Icon} from 'rbx';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faMinusCircle, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import {groupShowtimesByDay} from './lib/dates';

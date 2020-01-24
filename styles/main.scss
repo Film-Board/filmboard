@@ -25,6 +25,10 @@ $navbar-breakpoint: $fullhd;
 @import "custom/box";
 @import "custom/icons";
 
+// External libs
+@import "~react-mde/lib/styles/css/react-mde-all.css";
+@import "~react-datepicker/dist/react-datepicker.css";
+
 html, body {
   font-display: swap;
 }

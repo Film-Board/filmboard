@@ -2,7 +2,6 @@ import React from 'react';
 import ReactMde from 'react-mde';
 import * as Showdown from 'showdown';
 import {Field, Control, Input, Button, Level, Label, Select} from 'rbx';
-import 'react-mde/lib/styles/css/react-mde-all.css';
 
 const converter = new Showdown.Converter({
   tables: true,

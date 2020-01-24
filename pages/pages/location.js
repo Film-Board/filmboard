@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactMapGL, {Popup} from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import './styles/location.scss';
 
 class Location extends React.Component {
