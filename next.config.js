@@ -2,7 +2,7 @@ const path = require('path');
 const withPlugins = require('next-compose-plugins');
 const sass = require('@zeit/next-sass');
 const css = require('@zeit/next-css');
-const withTM = require('next-transpile-modules');
+const withTM = require('next-transpile-modules')(['react-map-gl', 'rbx', 'react-datepicker', 'dayjs']);
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
