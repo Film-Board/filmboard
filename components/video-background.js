@@ -2,6 +2,7 @@ import React from 'react';
 import './styles/video-background.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlay} from '@fortawesome/free-solid-svg-icons';
+import {isMobileDevice} from './lib/device-os';
 
 class VideoBackground extends React.Component {
   constructor(props) {
@@ -113,7 +114,10 @@ class VideoBackground extends React.Component {
 
       video.muted = true;
       video.controls = false;
-      await video.play();
+
+      if (!isMobileDevice()) {
+        await video.play();
+      }
     }
   }
 
@@ -121,7 +125,7 @@ class VideoBackground extends React.Component {
     return (
       <div className={`video-background ${this.state.hover} ${this.state.fullscreen ? 'fullscreen' : ''}`} onMouseEnter={this.showButton}>
         <FontAwesomeIcon icon={faPlay} className="play-button" onClick={this.fullscreen}/>
-        <video autoPlay muted loop id="video-background" onClick={this.fullscreen}>
+        <video autoPlay loop id="video-background" onClick={this.fullscreen}>
           <source src={this.props.path} type="video/mp4"/>
            Your browser does not support the video tag.
         </video>
