@@ -62,7 +62,7 @@ export const downloadTrailer = async (url, movie) => {
           ffmpeg().input(ytdl(url, {quality: itag}))
             .videoCodec('copy')
             .input(audioOutput)
-            .audioCodec('libmp3lame')
+            .audioCodec('aac') // Must be AAC for iOS devices
             .save(videoOutput)
             .on('stderr', console.error)
             .on('start', console.log)
