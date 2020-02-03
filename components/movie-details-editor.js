@@ -49,7 +49,7 @@ class MovieDetailsEditor extends React.Component {
           <Control iconLeft>
             <Input placeholder="3" defaultValue={this.props.ticketPrice} onBlur={e => this.updateField('ticketPrice', e)}/>
             <Icon size="small" align="left">
-            $
+              $
             </Icon>
           </Control>
         </Field>
@@ -58,7 +58,7 @@ class MovieDetailsEditor extends React.Component {
           <Control iconLeft>
             <Input placeholder="1" defaultValue={this.props.concessionPrice} onBlur={e => this.updateField('concessionPrice', e)}/>
             <Icon size="small" align="left">
-            $
+              $
             </Icon>
           </Control>
         </Field>

@@ -127,7 +127,7 @@ class VideoBackground extends React.Component {
         <FontAwesomeIcon icon={faPlay} className="play-button" onClick={this.fullscreen}/>
         <video autoPlay muted loop id="video-background" onClick={this.fullscreen}>
           <source src={this.props.path} type="video/mp4"/>
-           Your browser does not support the video tag.
+          Your browser does not support the video tag.
         </video>
       </div>
     );

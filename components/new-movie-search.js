@@ -38,7 +38,7 @@ class NewMovieSearch extends React.Component {
               </Control>
               <Control>
                 <Button color="info">
-            add manually
+                  add manually
                 </Button>
               </Control>
             </Field>
@@ -46,7 +46,7 @@ class NewMovieSearch extends React.Component {
         </Field>
 
         <Field className="has-text-centered">
-        or
+          or
         </Field>
 
         <form onSubmit={this.addAutomatically}>

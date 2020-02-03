@@ -71,7 +71,7 @@ class PageEditor extends React.Component {
         />
         <Level>
           <Button color="success">
-          Save
+            Save
           </Button>
           {this.props.removable ?
             <Button
@@ -80,7 +80,7 @@ class PageEditor extends React.Component {
                 this.props.onDelete();
               }}
             >
-        Delete
+              Delete
             </Button> :
             <div/>}
         </Level>
