@@ -60,7 +60,7 @@
     "uuid": "^3.4.0",
     "webpack": "^4.41.6",
     "youtube-search": "^1.1.4",
-    "ytdl-core": "^1.0.7"
+    "ytdl-core": "^1.0.9"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
