@@ -73,7 +73,7 @@
     "next-compose-plugins": "^2.2.0",
     "next-transpile-modules": "^3.0.2",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "xo": "^0.25.3"
+    "xo": "^0.28.1"
   },
   "husky": {
     "hooks": {
