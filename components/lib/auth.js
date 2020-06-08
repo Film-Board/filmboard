@@ -93,7 +93,7 @@ export const fetchWithAuth = async (url, options, ctx) => {
     let j = {};
     try {
       j = await res.json();
-    } catch (_) {}
+    } catch {}
 
     throw new Error(Object.keys(j) === 0 ? 'Bad response.' : j.error);
   } catch (error) {

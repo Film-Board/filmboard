@@ -135,7 +135,7 @@ class MovieShowtimeEditor extends React.Component {
                               </Icon>
                             </Button>
                           </Table.Heading>
-                          <Table.Heading></Table.Heading>
+                          <Table.Heading/>
                         </Table.Row>
                       </Table.Head>
                       <Table.Body>

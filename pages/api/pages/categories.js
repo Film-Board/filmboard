@@ -1,11 +1,11 @@
 import {PageCategory} from '../../../models';
 import {protect} from '../util/auth';
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     method,
     body
-  } = req;
+  } = request;
 
   if (method === 'GET') {
     const categories = await PageCategory.findAll();
@@ -14,7 +14,7 @@ export default async (req, res) => {
   }
 
   if (method === 'POST') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     const category = await PageCategory.create({
       name: body.name
@@ -24,7 +24,7 @@ export default async (req, res) => {
   }
 
   if (method === 'DELETE') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     await PageCategory.destroy({where: {name: body.name}});
 

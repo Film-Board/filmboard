@@ -1,19 +1,19 @@
 import {Page, PageCategory} from '../../../models';
 import {protect} from '../util/auth';
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     method,
     body,
     query
-  } = req;
+  } = request;
 
   if (method === 'GET') {
     res.json(await Page.findOne({where: {name: query.name}, include: {all: true}}));
   }
 
   if (method === 'PUT') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     const page = await Page.findOne({where: {name: query.name}});
 
@@ -37,7 +37,7 @@ export default async (req, res) => {
   }
 
   if (method === 'DELETE') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     await Page.destroy({where: {name: query.name}});
 

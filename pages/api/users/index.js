@@ -1,10 +1,10 @@
 import {User} from '../../../models';
 import {protect} from '../util/auth';
 
-export default async (req, res) => {
-  const {method, body} = req;
+export default async (request, res) => {
+  const {method, body} = request;
 
-  await protect(req, res, {permissions: ['canManageUsers']});
+  await protect(request, res, {permissions: ['canManageUsers']});
 
   if (method === 'GET') {
     res.json(await User.findAll());

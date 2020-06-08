@@ -1,9 +1,9 @@
 import {Page} from '../../../models';
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     method
-  } = req;
+  } = request;
 
   if (method === 'GET') {
     const pages = await Page.findAll({attributes: {exclude: ['content']}, include: {all: true}});

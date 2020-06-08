@@ -10,8 +10,8 @@ app.prepare().then(() => {
 
   server.use('/static/bucket', express.static('public/static/bucket'));
 
-  server.all('*', (req, res) => {
-    return handle(req, res);
+  server.all('*', (request, res) => {
+    return handle(request, res);
   });
 
   server.listen(port, err => {

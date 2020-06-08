@@ -1,8 +1,8 @@
 import {Keystore} from '../../models';
 import {protect} from './util/auth';
 
-export default async (req, res) => {
-  const {method, body, query} = req;
+export default async (request, res) => {
+  const {method, body, query} = request;
 
   if (method === 'GET') {
     const model = await Keystore.findOne({where: {name: query.name}});
@@ -15,7 +15,7 @@ export default async (req, res) => {
   }
 
   if (method === 'PUT') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     console.log(query, body);
 

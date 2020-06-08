@@ -1,9 +1,9 @@
 import {File} from '../../../models';
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     method
-  } = req;
+  } = request;
 
   if (method === 'GET') {
     res.json(await File.findAll({where: {userUploaded: true}, order: [['updatedAt', 'DESC']]}));

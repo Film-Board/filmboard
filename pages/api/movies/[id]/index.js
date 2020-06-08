@@ -1,25 +1,25 @@
 import {Movie, Trailer} from '../../../../models';
 import {protect} from '../../util/auth';
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     query: {id},
     body,
     method
-  } = req;
+  } = request;
 
   if (method === 'GET') {
     res.json(await getMovieById(id));
   }
 
   if (method === 'PUT') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     res.json(await Movie.update(body, {where: {id}}));
   }
 
   if (method === 'DELETE') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     await Movie.destroy({where: {id}});
 

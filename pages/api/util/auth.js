@@ -18,12 +18,12 @@ const getGoogleJWK = (header, callback) => {
   });
 };
 
-const getToken = req => {
-  if (req.headers.authorization) {
-    return req.headers.authorization;
+const getToken = request => {
+  if (request.headers.authorization) {
+    return request.headers.authorization;
   }
 
-  const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
+  const cookies = request.headers.cookie.split(';').map(cookie => cookie.trim());
 
   let token = '';
 
@@ -40,9 +40,9 @@ const getToken = req => {
   }
 };
 
-const protect = (req, res, options = {}) => {
+const protect = (request, res, options = {}) => {
   const {sendResponse = true} = options;
-  const token = getToken(req);
+  const token = getToken(request);
 
   return new Promise((resolve, reject) => {
     jwt.verify(token, SIGNING_SECRET, {}, async (error, decoded) => {

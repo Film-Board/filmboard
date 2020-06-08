@@ -13,14 +13,14 @@ class Homepage extends React.Component {
     const now = getNow();
     const halfADayMs = 12 * 60 * 60 * 1000;
 
-    const [moviesReq, bannerReq] = await Promise.all([
+    const [moviesRequest, bannerRequest] = await Promise.all([
       fetch(`${getBaseURL(ctx)}/api/movies?limit=5`),
       fetch(`${getBaseURL(ctx)}/api/keystore?name=banner`)
     ]);
 
     const [movies, banner] = await Promise.all([
-      moviesReq.json(),
-      bannerReq.json()
+      moviesRequest.json(),
+      bannerRequest.json()
     ]);
 
     let upcomingMovies = [];

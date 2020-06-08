@@ -2,19 +2,19 @@ import {Op} from 'sequelize';
 import {Movie, Trailer, Showtime, sequelize} from '../../../models';
 import {protect} from '../util/auth';
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     method,
     query,
     body
-  } = req;
+  } = request;
 
   if (method === 'GET') {
     let getHidden = true;
 
     try {
-      await protect(req, res, {sendResponse: false});
-    } catch (_) {
+      await protect(request, res, {sendResponse: false});
+    } catch {
       getHidden = false;
     }
 
@@ -87,7 +87,7 @@ export default async (req, res) => {
   }
 
   if (method === 'POST') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     res.json(await Movie.create(body));
   }

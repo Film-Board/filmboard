@@ -1,14 +1,14 @@
 import {Page, PageCategory} from '../../../models';
 import {protect} from '../util/auth';
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     method,
     body
-  } = req;
+  } = request;
 
   if (method === 'POST') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     const newPage = {
       name: body.name,

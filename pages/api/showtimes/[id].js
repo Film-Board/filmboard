@@ -2,10 +2,10 @@ import {Showtime} from '../../../models';
 import {protect} from '../util/auth';
 import {updateLatestShowtimeForMovie} from '../util/showtimes';
 
-export default async (req, res) => {
-  const {method, body, query} = req;
+export default async (request, res) => {
+  const {method, body, query} = request;
 
-  await protect(req, res, {permissions: ['canEditPages']});
+  await protect(request, res, {permissions: ['canEditPages']});
 
   if (method === 'PUT') {
     const showtime = await Showtime.update(body, {where: {id: query.id}});

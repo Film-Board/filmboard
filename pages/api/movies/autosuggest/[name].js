@@ -3,10 +3,10 @@ import config from '../../../../config';
 
 const moviedb = new MovieDB(config.MOVIE_DB_KEY);
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     query: {name}
-  } = req;
+  } = request;
 
   const movies = await moviedb.searchMovie({query: name});
 

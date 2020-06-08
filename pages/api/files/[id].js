@@ -1,15 +1,15 @@
 import {File} from '../../../models';
 import {protect} from '../util/auth';
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     query: {id},
     body,
     method
-  } = req;
+  } = request;
 
   if (method === 'PUT') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     await File.update(body, {where: {id}});
 
@@ -17,7 +17,7 @@ export default async (req, res) => {
   }
 
   if (method === 'DELETE') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     await File.destroy({where: {id}});
 

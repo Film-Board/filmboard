@@ -26,7 +26,7 @@ class MovieMediaEditor extends React.Component {
         return this.setState({errorMessage: 'Not a YouTube URL'});
       }
 
-      if (url.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/gi)) {
+      if (url.match(/https?:\/\/(www\.)?[-\w@:%.+~#=]{1,256}\.[a-z\d()]{1,6}\b([-\w()@:%+.~#?&/=]*)/gi)) {
         this.props.changeTrailer(url);
         this.setState({errorMessage: '', showTrailerInput: false});
       } else {

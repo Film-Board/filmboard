@@ -2,15 +2,15 @@ import {Movie} from '../../../../models';
 import {downloadTrailer} from '../helpers';
 import {protect} from '../../util/auth';
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     query: {id},
     body,
     method
-  } = req;
+  } = request;
 
   if (method === 'PUT') {
-    await protect(req, res, {permissions: ['canEditPages']});
+    await protect(request, res, {permissions: ['canEditPages']});
 
     const movie = await Movie.findByPk(id);
 

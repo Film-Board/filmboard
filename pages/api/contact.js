@@ -9,8 +9,8 @@ const {
   IS_PRODUCTION
 } = require('../../config');
 
-export default async (req, res) => {
-  const {method, body} = req;
+export default async (request, res) => {
+  const {method, body} = request;
 
   let transporter;
 

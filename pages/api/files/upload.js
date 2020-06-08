@@ -7,16 +7,16 @@ import {hash} from '../util/random';
 import {BUCKET_PATH} from '../../../config';
 import {File} from '../../../models';
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     query: {type}
-  } = req;
+  } = request;
 
-  await protect(req, res, {permissions: ['canEditPages']});
+  await protect(request, res, {permissions: ['canEditPages']});
 
   const form = new formidable.IncomingForm();
 
-  form.parse(req, async (error, _, files) => {
+  form.parse(request, async (error, _, files) => {
     if (error || Object.keys(files).length === 0) {
       res.statusCode = 500;
       res.end();
@@ -56,7 +56,7 @@ export default async (req, res) => {
       });
 
       res.json(savedFile);
-    } catch (_) {
+    } catch {
       res.statusCode = 500;
       res.end();
     }

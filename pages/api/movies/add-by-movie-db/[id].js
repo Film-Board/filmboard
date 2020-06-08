@@ -14,13 +14,13 @@ import {downloadTrailer} from '../helpers';
 const moviedb = new MovieDB(MOVIE_DB_KEY);
 const getOMDBMovie = promisify(omdb.get);
 
-export default async (req, res) => {
+export default async (request, res) => {
   const {
     query: {id},
     method
-  } = req;
+  } = request;
 
-  await protect(req, res, {permissions: ['canEditPages']});
+  await protect(request, res, {permissions: ['canEditPages']});
 
   if (method === 'POST') {
     res.json(await addMovieByMovieDBId(id));

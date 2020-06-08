@@ -1,18 +1,18 @@
 import {User} from '../../models';
 import {getToken, isGoogleJWTValid, sign} from './util/auth';
 
-export default async (req, res) => {
-  const {method} = req;
+export default async (request, res) => {
+  const {method} = request;
 
   if (method === 'POST') {
     // Verify Google JWT
-    const token = getToken(req);
+    const token = getToken(request);
 
     let decodedToken;
 
     try {
       decodedToken = await isGoogleJWTValid(token);
-    } catch (_) {
+    } catch {
       return res.status(401).json({error: 'Bad JWT.'});
     }
 
