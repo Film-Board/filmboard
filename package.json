@@ -43,7 +43,7 @@
     "nodemailer": "^6.4.8",
     "omdb-client": "^2.0.0",
     "pg": "^8.2.1",
-    "query-string": "^6.13.0",
+    "query-string": "^6.13.1",
     "rbx": "^2.2.0",
     "react": "^16.13.1",
     "react-autosuggest": "^10.0.2",
