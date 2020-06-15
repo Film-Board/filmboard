@@ -52,7 +52,7 @@
     "react-dom": "^16.13.1",
     "react-google-login": "^5.1.20",
     "react-map-gl": "^5.2.7",
-    "react-mde": "^10.0.3",
+    "react-mde": "^10.1.0",
     "react-youtube": "^7.11.2",
     "sequelize": "^5.21.13",
     "sharp": "^0.25.3",
