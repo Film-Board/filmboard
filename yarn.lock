@@ -9516,10 +9516,10 @@ react-map-gl@^5.2.7:
     react-virtualized-auto-sizer "^1.0.2"
     viewport-mercator-project "^6.2.3 || ^7.0.1"
 
-react-mde@^10.0.3:
-  version "10.0.3"
-  resolved "https://registry.yarnpkg.com/react-mde/-/react-mde-10.0.3.tgz#0dea122ee8ba8741eec929d7cabf53b1c27d16ca"
-  integrity sha512-t8c1h6jkXHoCQpHcZ3Ex2cq/sGmsonS+tsoQ/YGUrijO4CL6wnwdIUpcApn2qeFZnkyqr7tyLwZ5GMOfiy8L/w==
+react-mde@^10.2.1:
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/react-mde/-/react-mde-10.2.1.tgz#6debedbbed224155f5f4c025ae0c1655a41d385c"
+  integrity sha512-rq99Y6xQknZRQSzUpkY5KJRl3cE7GpiC+bSG2L10T2m1p6Y90zQxC060TWk1yoeXtGtveao1NXEV1UcpvOhRsQ==
 
 react-onclickoutside@^6.9.0:
   version "6.9.0"
