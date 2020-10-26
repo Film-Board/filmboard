@@ -1,7 +1,7 @@
 import React from 'react';
 import {Column, Control, Tag} from 'rbx';
 
-export default props => (
+const MoviePrices = props => (
   <Column.Group multiline centered breakpoint="mobile">
     <Column narrow>
       <Control>
@@ -21,3 +21,5 @@ export default props => (
     </Column>
   </Column.Group>
 );
+
+export default MoviePrices;

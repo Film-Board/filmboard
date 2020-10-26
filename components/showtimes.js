@@ -24,7 +24,7 @@ const Day = props => (
   </div>
 );
 
-export default props => {
+const Showtimes = props => {
   let stillShowing = false;
 
   props.showtimes.forEach(showtime => {
@@ -39,3 +39,5 @@ export default props => {
     </Block>
   ));
 };
+
+export default Showtimes;

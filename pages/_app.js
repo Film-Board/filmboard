@@ -8,6 +8,9 @@ import fetch from 'isomorphic-unfetch';
 import Navbar from '../components/navbar';
 import {parseToken} from '../components/lib/jwt';
 import {getBaseURL} from '../common/helpers';
+import {config} from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 import '../styles/main.scss';
 
 export default class MyApp extends App {

@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/movie-ratings.scss';
 
-export default props => (
+const MovieRatings = props => (
   <div className="ratings is-size-6">
     {
       props.imdb ? (
@@ -29,3 +29,5 @@ export default props => (
     }
   </div>
 );
+
+export default MovieRatings;

@@ -4,7 +4,7 @@ import {Table, Button, Icon} from 'rbx';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 
-export default props => (
+const DateTime = props => (
   <Table striped fullwidth>
     <Table.Head>
       <Table.Row>
@@ -45,3 +45,5 @@ export default props => (
     </Table.Body>
   </Table>
 );
+
+export default DateTime;

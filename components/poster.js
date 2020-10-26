@@ -2,7 +2,7 @@ import React from 'react';
 import {Image} from 'rbx';
 import './styles/poster.scss';
 
-export default props => (
+const Poster = props => (
   <div className="poster-container">
     {props.specialEvent ? (
       <span className="poster-badge">Special Event</span>
@@ -13,3 +13,5 @@ export default props => (
     </Image.Container>
   </div>
 );
+
+export default Poster;

@@ -2,7 +2,7 @@ import React from 'react';
 import {Column, Container, Section} from 'rbx';
 import './styles/banner.scss';
 
-export default props => (
+const Banner = props => (
   <Section className={`banner-container ${props.absolutePosition ? 'absolutely-positioned' : ''}`}>
     <Container breakpoint="tablet">
       <Column.Group centered vcentered>
@@ -13,3 +13,5 @@ export default props => (
     </Container>
   </Section>
 );
+
+export default Banner;

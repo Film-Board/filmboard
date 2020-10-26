@@ -8,7 +8,7 @@ const mobileColumn = {size: 'three-fifths', offset: 'one-fifth'};
 const tabletColumn = {size: 'one-quarter'};
 const desktopColumn = {size: 'one-fifth'};
 
-export default props => (
+const MoviesContainer = props => (
   <Column.Group multiline centered tablet={{gapSize: 7}}>
     {props.movies.map(movie => (
       <Link key={movie.id} passHref href="/movies/[id]" as={`/movies/${movie.id}`}>
@@ -26,3 +26,5 @@ export default props => (
     ))}
   </Column.Group>
 );
+
+export default MoviesContainer;
