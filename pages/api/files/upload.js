@@ -1,5 +1,5 @@
 import {copyFileSync, createReadStream, createWriteStream} from 'fs';
-import {join} from 'path';
+import path from 'path';
 import formidable from 'formidable';
 import sharp from 'sharp';
 import {protect} from '../util/auth';
@@ -38,13 +38,15 @@ export default async (request, res) => {
       const h = hash();
 
       if (type === 'poster') {
-        await new Promise(resolve => createReadStream(file.path).pipe(
-          sharp()
-            .resize(440, 720, {fit: 'inside'})
-            .jpeg()).pipe(createWriteStream(join(BUCKET_PATH, `${h}${extension}`))).on('finish', resolve));
+        await new Promise(resolve => {
+          createReadStream(file.path).pipe(
+            sharp()
+              .resize(440, 720, {fit: 'inside'})
+              .jpeg()).pipe(createWriteStream(path.join(BUCKET_PATH, `${h}${extension}`))).on('finish', resolve);
+        });
       } else {
       // Move to bucket
-        copyFileSync(file.path, join(BUCKET_PATH, `${h}${extension}`));
+        copyFileSync(file.path, path.join(BUCKET_PATH, `${h}${extension}`));
       }
 
       // Add to database

@@ -21,11 +21,7 @@ export default async (request, res) => {
 
     const model = await Keystore.findOne({where: {name: query.name}});
 
-    if (model === null) {
-      await Keystore.create({name: query.name, value: body.value});
-    } else {
-      await Keystore.update({name: query.name, value: body.value}, {where: {name: query.name}});
-    }
+    await (model === null ? Keystore.create({name: query.name, value: body.value}) : Keystore.update({name: query.name, value: body.value}, {where: {name: query.name}}));
 
     res.json({name: query.name, value: body.value});
   }

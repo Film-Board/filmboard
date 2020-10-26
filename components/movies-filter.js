@@ -22,13 +22,7 @@ class MoviesFilter extends React.Component {
   }
 
   updateLimit(event) {
-    let limit;
-
-    if (event.target.value === 'All') {
-      limit = Infinity;
-    } else {
-      limit = Number(event.target.value);
-    }
+    const limit = event.target.value === 'All' ? Infinity : Number(event.target.value);
 
     this.setState({limit, limitV: event.target.value});
   }

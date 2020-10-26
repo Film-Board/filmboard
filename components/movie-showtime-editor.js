@@ -47,7 +47,7 @@ class MovieShowtimeEditor extends React.Component {
   async addDay() {
     let baseDate = new Date();
 
-    if (this.props.showtimes.length !== 0) {
+    if (this.props.showtimes.length > 0) {
       // Find latest day in date set
       const sortedTimes = this.props.showtimes.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
 

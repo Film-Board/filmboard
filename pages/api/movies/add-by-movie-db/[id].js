@@ -2,7 +2,7 @@ import {promisify} from 'util';
 import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
-import MovieDB from 'moviedb-promise';
+import {MovieDb} from 'moviedb-promise';
 import download from 'download';
 import hasha from 'hasha';
 import omdb from 'omdb-client';
@@ -11,7 +11,7 @@ import {Movie, File} from '../../../../models';
 import {protect} from '../../util/auth';
 import {downloadTrailer} from '../helpers';
 
-const moviedb = new MovieDB(MOVIE_DB_KEY);
+const moviedb = new MovieDb(MOVIE_DB_KEY);
 const getOMDBMovie = promisify(omdb.get);
 
 export default async (request, res) => {

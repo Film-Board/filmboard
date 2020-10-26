@@ -12,24 +12,18 @@ const {
 export default async (request, res) => {
   const {method, body} = request;
 
-  let transporter;
-
-  if (IS_PRODUCTION) {
-    transporter = nodemailer.createTransport({
-      sendmail: true,
-      newline: 'unix'
-    });
-  } else {
-    transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: SMTP_PORT,
-      secure: SMTP_PORT === 465,
-      auth: {
-        user: SMTP_USER,
-        pass: SMTP_PASSWORD
-      }
-    });
-  }
+  const transporter = IS_PRODUCTION ? nodemailer.createTransport({
+    sendmail: true,
+    newline: 'unix'
+  }) : nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: SMTP_PORT,
+    secure: SMTP_PORT === 465,
+    auth: {
+      user: SMTP_USER,
+      pass: SMTP_PASSWORD
+    }
+  });
 
   if (method === 'POST') {
     const email = await transporter.sendMail({

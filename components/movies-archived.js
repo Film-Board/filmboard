@@ -42,7 +42,7 @@ class ArchivedMovies extends React.Component {
           </Column>
         </Column.Group>
 
-        {this.state.movies && this.state.movies.length !== 0 ? (
+        {this.state.movies && this.state.movies.length > 0 ? (
           <MoviesContainer movies={this.state.movies}/>
         ) : (
           <Column.Group centered>
