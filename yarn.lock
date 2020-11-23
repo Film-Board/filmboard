@@ -8912,10 +8912,10 @@ react-dom@^16.6.0:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-google-login@^5.1.23:
-  version "5.1.23"
-  resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-5.1.23.tgz#b50b4d54f23dd1a615232555c61a5683b3837c08"
-  integrity sha512-DjoOJr4L6qf6iVuZn4kxTsGRqcuoqE0HoLEQIUCfuz5J7zuDxXtDSH0gis/HOUd1odLzG1tnJ1YkoQyMN5h3Zg==
+react-google-login@^5.1.24:
+  version "5.1.24"
+  resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-5.1.24.tgz#d68f93dedeebaeb450208ec33a7e952c32ef7352"
+  integrity sha512-1LyPK9FipvDa9FulIQURwOylfhvat14C65pTOcyXS/kaM0lW5flfErTI1RB0bcRDl1xH9gkdgw/Rl28z7sviXQ==
   dependencies:
     "@types/react" "*"
     prop-types "^15.6.0"
