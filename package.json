@@ -53,7 +53,7 @@
     "react-map-gl": "^5.2.10",
     "react-mde": "^11.0.0",
     "react-youtube": "^7.13.0",
-    "sequelize": "^5.21.13",
+    "sequelize": "^6.4.0",
     "sharp": "^0.26.2",
     "showdown": "^1.9.1",
     "uuid": "^8.3.1",
