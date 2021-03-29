@@ -65,7 +65,7 @@
     "@types/youtube": "^0.0.38",
     "babel-eslint": "^10.1.0",
     "del": "^5.1.0",
-    "eslint": "^7.12.1",
+    "eslint": "^7.23.0",
     "eslint-config-xo-react": "^0.23.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
