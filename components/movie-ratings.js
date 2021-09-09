@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles/movie-ratings.scss';
 
 const MovieRatings = props => (
   <div className="ratings is-size-6">

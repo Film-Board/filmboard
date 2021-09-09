@@ -18,7 +18,7 @@ Adding The Lion King on both versions with specific showtimes:
 1. Clone repository.
 2. Run `yarn install`.
 3. Set up a PostgreSQL instance.
-4. Copy `.env.example` to `.env` and fill with values.
+4. Copy `.env.example` to `.env.local` and fill with values.
 5. Run `node modules/dev.js` to populate the database.
 6. Run `yarn run dev` to start the development server.
 

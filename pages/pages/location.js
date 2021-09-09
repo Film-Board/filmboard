@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMapGL, {Popup} from 'react-map-gl';
-import './styles/location.scss';
+import {MAPBOX_ACCESS_TOKEN} from '../../config';
 
 class Location extends React.Component {
   constructor() {
@@ -31,6 +31,7 @@ class Location extends React.Component {
           latitude={47.1179}
           longitude={-88.546}
           zoom={16}
+          mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
           {...viewport}
           onViewportChange={viewport => this.onViewportChange(viewport)}
         >

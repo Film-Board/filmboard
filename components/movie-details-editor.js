@@ -1,6 +1,5 @@
 import React from 'react';
 import {Field, Control, Button, Input, Icon, Label, Textarea, Block} from 'rbx';
-import './styles/new-movie-search.scss';
 
 class MovieDetailsEditor extends React.Component {
   updateField(field, event) {

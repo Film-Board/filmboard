@@ -103,17 +103,19 @@ const addMovieByMovieDBId = async movieId => {
 
   let youtubeTrailerId = '';
 
-  videos.forEach(video => {
+  for (const video of videos) {
     if (video.type === 'Trailer' && video.site === 'YouTube' && youtubeTrailerId === '') {
       youtubeTrailerId = video.key;
+      break;
     }
-  });
+  }
 
   const insertedMovie = await Movie.create(movieToInsert);
 
   // Kick off trailer download process
   if (youtubeTrailerId !== '') {
-    downloadTrailer(youtubeTrailerId, insertedMovie).catch(async () => {
+    downloadTrailer(youtubeTrailerId, insertedMovie).catch(async error => {
+      console.error(error);
       await insertedMovie.update({TrailerId: null});
     });
   }

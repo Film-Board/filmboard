@@ -54,3 +54,6 @@ footer {
 .title:not(.default-capitalization) {
   text-transform: lowercase;
 }
+
+@import '../pages/styles/all';
+@import '../components/styles/all';

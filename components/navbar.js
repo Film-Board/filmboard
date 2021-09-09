@@ -3,7 +3,6 @@ import Link from 'next/link';
 import {Navbar, Icon, Button, Image} from 'rbx';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faInstagram, faTwitter, faFacebookF} from '@fortawesome/free-brands-svg-icons';
-import './styles/navbar.scss';
 
 class Bar extends React.Component {
   render() {

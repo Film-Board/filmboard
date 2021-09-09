@@ -6,7 +6,6 @@ import Prices from './movie-prices';
 import Ratings from './movie-ratings';
 import Showtimes from './showtimes';
 import EditButton from './edit-button';
-import './styles/movie-hero.scss';
 
 class MovieHero extends React.Component {
   render() {

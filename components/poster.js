@@ -1,6 +1,5 @@
 import React from 'react';
 import {Image} from 'rbx';
-import './styles/poster.scss';
 
 const Poster = props => (
   <div className="poster-container">

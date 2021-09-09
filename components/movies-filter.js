@@ -3,7 +3,6 @@ import {Icon, Field, Control, Input, Select, Button, Column} from 'rbx';
 import DatePicker from 'react-datepicker';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFilter, faSearch} from '@fortawesome/free-solid-svg-icons';
-import './styles/movies-filter.scss';
 
 class MoviesFilter extends React.Component {
   constructor() {

@@ -2,7 +2,7 @@
 
 git pull
 
-yarn install
+yarn install --prod
 
 npx next build
 

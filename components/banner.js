@@ -1,6 +1,5 @@
 import React from 'react';
 import {Column, Container, Section} from 'rbx';
-import './styles/banner.scss';
 
 const Banner = props => (
   <Section className={`banner-container ${props.absolutePosition ? 'absolutely-positioned' : ''}`}>

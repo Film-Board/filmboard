@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import {Title, Column, Block} from 'rbx';
 import Poster from './poster';
-import './styles/movies-container.scss';
 
 const mobileColumn = {size: 'three-fifths', offset: 'one-fifth'};
 const tabletColumn = {size: 'one-quarter'};

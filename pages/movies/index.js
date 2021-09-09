@@ -4,7 +4,6 @@ import {optimisticAuthFetch} from '../../components/lib/auth';
 import {getNow} from '../../components/lib/dates';
 import UpcomingMovies from '../../components/movies-upcoming';
 import ArchivedMovies from '../../components/movies-archived';
-import './styles/all-movies.scss';
 
 class AllMovies extends React.Component {
   static async getInitialProps(ctx) {

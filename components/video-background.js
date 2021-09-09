@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles/video-background.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlay} from '@fortawesome/free-solid-svg-icons';
 import {isMobileDevice} from './lib/device-os';
