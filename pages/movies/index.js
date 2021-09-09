@@ -1,4 +1,5 @@
 import React from 'react';
+import {NextSeo} from 'next-seo';
 import {Section} from 'rbx';
 import {optimisticAuthFetch} from '../../components/lib/auth';
 import {getNow} from '../../components/lib/dates';
@@ -42,6 +43,8 @@ class AllMovies extends React.Component {
         <Section>
           {this.props.archived.length > 0 ? (<ArchivedMovies movies={this.props.archived}/>) : ''}
         </Section>
+
+        <NextSeo title="Film Board | All Movies"/>
       </div>
     );
   }
